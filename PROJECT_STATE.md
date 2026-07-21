@@ -3,22 +3,22 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.2.1
-UPDATED_AT_UTC=2026-07-21T02:05:00Z
+STATE_VERSION=0.3.0
+UPDATED_AT_UTC=2026-07-21T02:15:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
-ACTIVE_TASK=LEA-56
-ACTIVE_PR=2
-ACTIVE_BRANCH=docs/fase-0-memory-baseline
-ACTIVE_HEAD_REF=pull/2/head
-ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=adf088ad943adba28dc4497e3d83cc5147fa1357
+ACTIVE_TASK=LEA-57
+ACTIVE_PR=PENDING_CREATION
+ACTIVE_BRANCH=docs/lea-57-rn-00-domain-dictionary
+ACTIVE_HEAD_REF=refs/heads/docs/lea-57-rn-00-domain-dictionary
+ACTIVE_HEAD_SHA=RESOLVE_FROM_BRANCH_METADATA
+LAST_VERIFIED_HEAD=NONE_FOR_LEA_57
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=PASS_PENDING_MERGE_AUTHORIZATION
+REVIEW_DECISION=PENDING
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
-BLOCKERS=MERGE_AUTHORIZATION_REQUIRED
-NEXT_AUTHORIZED_ACTION=OBTER_AUTORIZACAO_EXPLICITA_DE_MERGE_DO_PR_2
+BLOCKERS=REVIEW_AND_MERGE_OF_RN_00_REV1
+NEXT_AUTHORIZED_ACTION=ABRIR_PR_DRAFT_E_EXECUTAR_REVISAO_CRITICA_DA_RN_00_REV1
 ```
 
 ## Identidade
@@ -53,11 +53,13 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - RN-02.3 REV2 — Materiais, catálogo opcional, atributos e patrimônios
 - RN-02.4 REV3 — Estoques, saldos, localizações e WMS leve
 
-## Documento adotado, ainda não congelado
+## Documento ativo
 
-- RN-00/PDD — vocabulário oficial em construção
-- Tarefa de consolidação: LEA-57
-- `RN-00_BASELINE=NO`
+- RN-00 REV1 — PredixAI Domain Dictionary
+- Estado: EM REVISÃO
+- Baseline: NÃO
+- Tarefa: LEA-57
+- Branch: `docs/lea-57-rn-00-domain-dictionary`
 
 ## Documentos normativos integrais
 
@@ -66,6 +68,7 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - `docs/fase-0/regras-negocio/RN-02.2-REV1-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.3-REV2-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.4-REV3-COMPLETA.md`
+- `docs/fase-0/RN-00-PREDIXAI-DOMAIN-DICTIONARY.md`
 
 ## Decisões críticas
 
@@ -77,35 +80,49 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 6. Todo saldo pertence a Centro Operacional.
 7. O razão imutável de movimentações é a fonte de verdade do saldo.
 8. Snapshot de saldo, quando existir, deve ser reconstruível e conciliável.
-9. Estado Físico, Situação Operacional, Situação Cadastral e Disponibilidade são dimensões distintas.
+9. Estado Físico, Situação Operacional, Situação Cadastral, Disponibilidade e Ocupação são dimensões distintas.
 10. Material pode existir sem Item de Catálogo.
-11. Transferência é operação coordenadora de lançamentos imutáveis de origem, trânsito e destino.
-12. IA sugere, consulta e resume; não executa operação crítica sem confirmação.
-13. Baseline e atualização deste arquivo devem integrar o mesmo PR.
+11. Transferência é Operação de Negócio coordenadora de Lançamentos de Movimentação imutáveis.
+12. Devolução é o ato físico; Retorno é a operação registrada.
+13. Usuário, Perfil, Papel Operacional e Responsabilidade são conceitos distintos.
+14. IA sugere, consulta e resume; não executa operação crítica sem confirmação.
+15. Baseline e atualização deste arquivo devem integrar o mesmo PR.
 
-## Reteste LEA-56
+## LEA-56 concluída
 
-- Primeiro HEAD revisado: `339ecdf150829a7b7438b42710a3cc52c062d7e1`
-- Decisão inicial: FAIL
-- Achados: LEA-56-F01 a LEA-56-F07
-- HEAD de remediação testado: `adf088ad943adba28dc4497e3d83cc5147fa1357`
-- Resultado do reteste: PASS
-- F01: documentos normativos completos e numerados publicados
-- F02: Estado Físico separado de Situação Operacional
-- F03: vínculo Material–Item de Catálogo explicitamente opcional
-- F04: metadados operacionais adicionados ao estado
-- F05: RN-00 removida das baselines e marcada em construção
-- F06: Transferência definida como operação coordenadora
-- F07: baseline e estado obrigatórios no mesmo PR
+- PR: #2
+- Reteste final: PASS
+- HEAD revisado: `63535faf33e14bc43e147adeba2a5e26bd486a9f`
+- Merge commit: `f302b854505e50496eddf0ba718723301b3bf915`
+- Estado Linear: Done
+
+## LEA-57 em execução
+
+### Objetivo
+
+Consolidar o vocabulário oficial, eliminar ambiguidades e estabelecer governança semântica para documentação, código, banco, APIs, interface, testes e IA.
+
+### Entrega atual
+
+- RN-00 elevada para REV1;
+- regras de governança semântica numeradas;
+- aproximadamente 140 termos oficiais organizados por domínio;
+- termos ambíguos e proibidos explicitados;
+- critérios de aceite definidos;
+- separação entre Operação de Negócio e Lançamento de Movimentação;
+- separação entre dimensões de estado;
+- separação entre Material, Patrimônio e Item de Catálogo;
+- separação entre Usuário, Perfil, Papel Operacional e Responsabilidade.
 
 ## Próximas ações
 
-1. verificar o HEAD final gerado pela atualização deste estado;
-2. obter autorização explícita para merge do PR #2;
-3. após o merge, encerrar LEA-56;
-4. liberar LEA-57;
-5. concluir RN-00/PDD;
-6. depois liberar RN-02.5.
+1. abrir PR Draft da LEA-57;
+2. executar revisão crítica independente no HEAD exato;
+3. corrigir achados no mesmo branch;
+4. executar reteste final;
+5. somente com PASS e autorização explícita realizar merge;
+6. encerrar LEA-57;
+7. liberar LEA-58 — RN-02.5 Movimentações.
 
 ## Fora do escopo
 
@@ -118,4 +135,4 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Regra de leitura do HEAD
 
-O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver `ACTIVE_HEAD_SHA` consultando `pull/2/head`. `LAST_VERIFIED_HEAD` registra o último HEAD completo revisado antes desta atualização de estado; o parecer final no PR e no Linear deve registrar o HEAD exato atual.
+O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando a branch ou o PR ativo. `LAST_VERIFIED_HEAD` só deve ser atualizado após revisão concluída sobre um SHA exato.
