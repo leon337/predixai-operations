@@ -1,9 +1,11 @@
 # RN-01 REV2.1 — Cadastro e Classificação de Materiais
 
-## Status
+## Metadados
 
 - Estado: **APROVADA**
 - Baseline: Fase 0
+- Natureza deste arquivo: resumo executivo
+- Documento normativo integral: [`regras-negocio/RN-01-REV2.1-COMPLETA.md`](regras-negocio/RN-01-REV2.1-COMPLETA.md)
 - Alteração futura: somente por nova revisão
 
 ## Objetivo
@@ -12,12 +14,7 @@ Definir a governança de identificação, classificação, rastreabilidade, edi�
 
 ## Tipos de controle
 
-Todo Material possui exatamente um tipo principal:
-
-1. Consumível — controlado por quantidade.
-2. Patrimonial — cada unidade possui identidade própria.
-3. Mensurável — controlado por medida.
-4. Kit — agrupamento operacional de componentes.
+Todo Material possui exatamente um tipo principal: Consumível, Patrimonial, Mensurável ou Kit.
 
 ## Classificação
 
@@ -28,133 +25,56 @@ Grupo
         └── Material
 ```
 
-- Grupo e Categoria são obrigatórios.
-- Classificações vinculadas a históricos não podem ser apagadas.
-- Classificações podem ser inativadas.
-- Alterações relevantes são versionadas.
-
-## Campos mínimos
-
-- nome padronizado;
-- tipo de controle;
-- grupo e categoria;
-- unidade de medida;
-- código interno único;
-- situação cadastral;
-- indicador de controle de estoque;
-- autoria e data de cadastro.
+Grupo e Categoria são obrigatórios. Classificações com histórico não são apagadas e alterações estruturais são versionadas.
 
 ## Identificadores
 
-- Código interno automático, permanente e nunca reutilizado.
-- UUID interno para APIs, sincronização e integrações.
-- Código legado opcional e pesquisável.
-- Código patrimonial individual para cada Patrimônio.
-- QR Code contém apenas identificador interno seguro.
-- Reimpressão não cria nova identidade e gera auditoria.
+Código interno e código patrimonial são automáticos, únicos, permanentes e não reutilizáveis. Todo registro possui UUID interno. Código legado é opcional. QR Code contém somente identificador seguro e sua reimpressão gera auditoria.
 
-### Prefixos normativos iniciais
+## Estado, situação e disponibilidade
 
-`MAT`, `PAT`, `CAT`, `GRP`, `SUB`, `FOR`, `USR`, `SET`, `LOC`, `ENT`, `SAI`, `TRF`, `INV`, `MAN`, `COM`, `COT`, `ROM`, `EVT`, `RSV`, `AUD`, `ANX`, `QR`, `BKP`.
-
-## Unidades de medida
-
-Cada Material possui uma unidade principal. Ela não pode ser alterada após movimentações, salvo processo formal de migração. Conversões futuras podem relacionar caixas, unidades, rolos, metros e outras medidas compatíveis.
-
-## Estoque e reposição
-
-- Estoque mínimo, máximo e ponto de reposição são configuráveis.
-- Material físico controlado gera saldo; serviços e despesas não geram saldo.
-- Localização padrão não substitui a posição física real derivada das movimentações.
-- Estoque negativo no cadastro ou operação normal é proibido.
-
-## Estados
-
-### Situação cadastral
+### Situação Cadastral
 
 - ativo;
 - inativo;
 - bloqueado;
 - descontinuado.
 
-### Estado físico patrimonial
+### Estado Físico
 
 - novo;
 - bom;
 - regular;
 - avariado;
+- inutilizado.
+
+### Situação Operacional
+
+- disponível;
+- reservado;
+- separado;
+- em trânsito;
+- em uso;
+- em conferência;
 - em manutenção;
-- inutilizado;
 - extraviado;
 - baixado.
 
-Situação cadastral e estado físico são conceitos independentes.
+### Disponibilidade
 
-## Fotos, anexos e evidências
+Indica se o item pode participar de uma nova operação. As quatro dimensões são independentes.
 
-Materiais e Patrimônios podem possuir fotos e documentos. Evidências também podem ser vinculadas a entrada, saída, retorno, avaria, manutenção e baixa. Evidências históricas não devem ser substituídas.
+## Governança resumida
 
-## Duplicidade e qualidade
+- estoque negativo é proibido;
+- Material pode possuir Lotes, Patrimônios, Kits, sinônimos, tags e atributos;
+- Material pode possuir vários Fornecedores;
+- preços formam histórico imutável;
+- evidências históricas não são substituídas;
+- registros com histórico não são excluídos;
+- IA somente sugere e nunca altera estoque ou cadastro autonomamente;
+- toda alteração relevante é auditada e versionada.
 
-Antes de concluir o cadastro, o sistema verifica:
+## Autoridade normativa
 
-- código interno;
-- código de barras;
-- nome semelhante;
-- marca, modelo e referência;
-- número de série;
-- descrição técnica.
-
-Código duplicado é bloqueado. Nome semelhante gera alerta e exige decisão de usuário autorizado.
-
-## Lotes
-
-Materiais configurados para rastreabilidade por lote armazenam origem, fornecedor, nota fiscal, fabricação, validade, quantidade inicial e saldo remanescente. Movimentações preservam o lote. Lotes vencidos podem ser bloqueados.
-
-## Fornecedores e preços
-
-- Um Material pode possuir vários fornecedores.
-- O vínculo guarda código comercial, prazo, homologação e condições.
-- Preços formam histórico e não são sobrescritos.
-
-## Pesquisa
-
-A busca aceita nome, código oficial, código legado, patrimônio, QR Code, código de barras, marca, modelo, série, categoria, localização, sinônimo e tag. Diferenças simples de caixa, acentuação e espaços devem ser normalizadas.
-
-## Sinônimos, tags e atributos
-
-- Sinônimos facilitam busca e não substituem o nome oficial.
-- Tags podem ser oficiais ou sugeridas por IA.
-- Categorias podem definir atributos dinâmicos tipados e obrigatórios.
-
-## Kits
-
-- Componentes obrigatórios e opcionais.
-- Quantidades previstas.
-- Patrimônios mantêm identidade individual.
-- Ausência de componente gera divergência.
-- Composição é versionada.
-
-## Vida útil e saúde
-
-Materiais podem possuir vida útil por anos, horas ou ciclos. O índice de saúde patrimonial deve ser calculado por regras objetivas; a IA apenas explica ou sugere ações.
-
-## Edição, inativação e exclusão
-
-- Campos estruturais ficam protegidos após movimentações.
-- Toda alteração relevante preserva valor anterior, valor novo, autor e motivo.
-- Material com saldo, reserva, empréstimo ou manutenção não pode ser inativado normalmente.
-- Registros com histórico não são excluídos.
-- Cadastro criado por engano e sem vínculos só pode ser removido por administrador, preservando log.
-
-## IA assistiva
-
-A IA pode sugerir nome, descrição, categoria, unidade, tags, atributos e possíveis duplicidades. Não pode cadastrar, fundir, excluir ou alterar estoque autonomamente.
-
-## Auditoria e versionamento
-
-Toda ação registra usuário, data, sessão ou dispositivo, origem, registro afetado, valor anterior, valor posterior, justificativa e anexos quando aplicáveis. Alterações estruturais criam nova versão lógica.
-
-## Critérios de aceite
-
-A regra será considerada implementada quando o sistema conseguir cadastrar os quatro tipos de controle, gerar identificadores e QR Codes, detectar duplicidades, associar classificação e localização, registrar evidências, controlar permissões, versionar alterações, inativar sem perder histórico e pesquisar por todos os identificadores válidos.
+Em qualquer conflito ou omissão, prevalece o documento integral com regras numeradas `RN-01.001` a `RN-01.099` e seus critérios de aceite.
