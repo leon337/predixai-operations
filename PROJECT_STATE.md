@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.3.2
-UPDATED_AT_UTC=2026-07-21T02:30:00Z
+STATE_VERSION=0.3.3
+UPDATED_AT_UTC=2026-07-21T04:06:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-57
@@ -12,13 +12,13 @@ ACTIVE_PR=3
 ACTIVE_BRANCH=docs/lea-57-rn-00-domain-dictionary
 ACTIVE_HEAD_REF=pull/3/head
 ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=59a808af816d19982bc7b4fd215d0d14aea0feba
+LAST_VERIFIED_HEAD=61701817ee6d42010561957145ddfbc2fc217cd7
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=PENDING_RETEST
+REVIEW_DECISION=PASS_PENDING_MERGE_AUTHORIZATION
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
-BLOCKERS=RETEST_LEA_57_F01_F04
-NEXT_AUTHORIZED_ACTION=EXECUTAR_RETESTE_INDEPENDENTE_NO_HEAD_EXATO_DO_PR_3
+BLOCKERS=MERGE_AUTHORIZATION_REQUIRED
+NEXT_AUTHORIZED_ACTION=OBTER_AUTORIZACAO_EXPLICITA_DE_MERGE_DO_PR_3
 ```
 
 ## Identidade
@@ -56,8 +56,8 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 ## Documento ativo
 
 - RN-00 REV1 — PredixAI Domain Dictionary
-- Estado: EM REVISÃO
-- Baseline: NÃO
+- Estado: APROVADA TECNICAMENTE, AGUARDANDO MERGE
+- Baseline: NÃO, até o merge
 - Tarefa: LEA-57
 - Pull Request: #3
 - Branch: `docs/lea-57-rn-00-domain-dictionary`
@@ -104,7 +104,7 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - Merge commit: `f302b854505e50496eddf0ba718723301b3bf915`
 - Estado Linear: Done
 
-## LEA-57 em execução
+## LEA-57 — revisão e reteste
 
 ### Revisão inicial
 
@@ -112,22 +112,22 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - Decisão: FAIL
 - Achados: LEA-57-F01 a LEA-57-F04
 
-### Remediações aplicadas
+### Reteste
 
+- HEAD de remediação testado: `61701817ee6d42010561957145ddfbc2fc217cd7`
+- Resultado: PASS
 - F01: Operação e Lançamento de Entrada/Saída separados.
 - F02: Baixa Patrimonial e Baixa de Quantidade separadas.
 - F03: Inativação, Reativação e Exclusão Física definidas.
 - F04: estados operacionais definidos individualmente com matriz mínima de aplicabilidade.
-- Documento de remediação publicado no mesmo branch e com precedência normativa explícita.
 
 ## Próximas ações
 
-1. resolver o HEAD atual do PR #3;
-2. executar reteste independente dos achados F01–F04;
-3. registrar PASS ou FAIL no GitHub e Linear;
-4. somente com PASS solicitar autorização explícita de merge;
-5. após merge, encerrar LEA-57;
-6. liberar LEA-58 — RN-02.5 Movimentações.
+1. verificar o HEAD final gerado por esta atualização de estado;
+2. obter autorização explícita para merge do PR #3;
+3. após merge, encerrar LEA-57;
+4. liberar LEA-58 — RN-02.5 Movimentações;
+5. manter implementação bloqueada até encerramento da Fase 0 e nova autorização.
 
 ## Fora do escopo
 
@@ -140,4 +140,4 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Regra de leitura do HEAD
 
-O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando `pull/3/head`. `LAST_VERIFIED_HEAD` só deve ser atualizado após revisão concluída sobre um SHA exato.
+O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando `pull/3/head`. `LAST_VERIFIED_HEAD` registra o último HEAD normativo integralmente retestado; atualizações posteriores exclusivamente de estado devem ser verificadas por comparação.
