@@ -3,24 +3,24 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.6.0
-UPDATED_AT_UTC=2026-07-21T08:05:00Z
+STATE_VERSION=0.6.1
+UPDATED_AT_UTC=2026-07-21T10:40:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-64
-ACTIVE_PR=PENDING_CREATION
+ACTIVE_PR=6
 ACTIVE_BRANCH=docs/lea-64-rn-02-6-obras-eventos-romaneios
-ACTIVE_HEAD_REF=docs/lea-64-rn-02-6-obras-eventos-romaneios
+ACTIVE_HEAD_REF=pull/6/head
 ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=NONE_FOR_LEA_64
+LAST_VERIFIED_HEAD=e4cb7dfef104bd06a8fd60d57f22eaf6fa4e2de7
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=PENDING
+REVIEW_DECISION=FAIL_REMEDIATED_PENDING_RETEST
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
 SQL_AUTHORIZED=NO
 MIGRATIONS_AUTHORIZED=NO
-BLOCKERS=REVIEW_AND_MERGE_OF_RN_02_6_REV1
-NEXT_AUTHORIZED_ACTION=ABRIR_PR_DRAFT_E_EXECUTAR_REVISAO_CRITICA
+BLOCKERS=RETEST_LEA_64_F01_TO_F05
+NEXT_AUTHORIZED_ACTION=EXECUTAR_RETESTE_INDEPENDENTE_DO_PR_6
 ```
 
 ## Identidade
@@ -59,25 +59,29 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 ## Documento ativo
 
 - RN-02.6 REV1 — Obras, Eventos e Romaneios
-- Estado: EM ELABORAÇÃO
+- Estado: EM RETESTE
 - Baseline: NÃO
 - Tarefa: LEA-64
+- Pull Request: #6
 - Branch: `docs/lea-64-rn-02-6-obras-eventos-romaneios`
-- Documento: `docs/fase-0/regras-negocio/RN-02.6-REV1-COMPLETA.md`
+- Documento principal: `docs/fase-0/regras-negocio/RN-02.6-REV1-COMPLETA.md`
+- Complemento normativo: `docs/fase-0/regras-negocio/RN-02.6-REV1-ERRATA-LEA-64-F01-F05.md`
 
-## Escopo da LEA-64
+## Revisão e remediação da LEA-64
 
-- Obras, Eventos e Centros Operacionais associados;
-- Demanda Operacional e itens planejados;
-- Reservas vinculadas ao planejamento;
-- Romaneio e versionamento imutável;
-- separação, conferência, expedição e transporte;
-- recebimento total, parcial ou com divergência;
-- uso, guarda, retorno e devolução;
-- perdas, avarias e pendências;
-- encerramento operacional e administrativo;
-- integração conceitual com RN-02.5;
-- responsabilidades, autorizações e IA assistiva.
+### Revisão inicial
+
+- HEAD revisado: `e4cb7dfef104bd06a8fd60d57f22eaf6fa4e2de7`
+- Decisão: FAIL
+- Achados: LEA-64-F01 a LEA-64-F05
+
+### Correções aplicadas
+
+- F01: Romaneio pertence exclusivamente a Obra ou Evento;
+- F02: Situação Documental, Situação da Versão e Situação Operacional do Item foram separadas;
+- F03: Vínculo Logístico passou a correlacionar versão, item, quantidade, lotes, patrimônios e Operação de Negócio;
+- F04: fórmulas de reconciliação foram definidas sem dupla contagem;
+- F05: Pendências Logísticas Bloqueadoras foram separadas das Pendências Administrativas Não Bloqueadoras.
 
 ## Decisões críticas vigentes
 
@@ -86,21 +90,24 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 3. Contexto do chat não substitui documento versionado.
 4. O Razão de Movimentações é a fonte oficial do saldo.
 5. Romaneio é documento versionado e não substitui Operação de Negócio.
-6. Planejamento não altera saldo; Reserva confirmada compromete Saldo Disponível.
-7. Versão aprovada de Romaneio é imutável.
-8. Expedição, Recebimento e Retorno exigem Operações de Negócio confirmadas.
-9. Obra ou Evento não pode ser encerrado com saldo sem destinação formal.
-10. IA não executa operação crítica sem confirmação humana.
-11. Baseline e atualização deste arquivo integram o mesmo PR.
+6. Todo Romaneio pertence exatamente a uma Obra ou a um Evento.
+7. Planejamento não altera saldo; Reserva confirmada compromete Saldo Disponível.
+8. Versão aprovada de Romaneio é imutável.
+9. Situação documental, situação da versão e situação operacional do item são independentes.
+10. Expedição, Recebimento e Retorno exigem Operações de Negócio confirmadas e vínculos granulares.
+11. Quantidades derivadas devem ser conciliáveis com a RN-02.5 sem dupla contagem.
+12. Obra ou Evento não pode ser encerrado com Pendência Logística Bloqueadora.
+13. Pendência Administrativa pode sobreviver ao encerramento apenas mediante aceite formal.
+14. IA não executa operação crítica sem confirmação humana.
+15. Baseline e atualização deste arquivo integram o mesmo PR.
 
 ## Próximas ações
 
-1. abrir PR Draft da RN-02.6 REV1;
-2. executar revisão crítica independente no HEAD exato;
-3. corrigir achados no mesmo branch;
-4. executar reteste final;
-5. somente com PASS e autorização explícita realizar merge;
-6. encerrar LEA-64 e liberar a próxima etapa normativa.
+1. resolver o novo HEAD do PR #6;
+2. executar reteste independente dos achados F01–F05;
+3. atualizar este estado com o resultado;
+4. somente com PASS e autorização explícita realizar merge;
+5. encerrar LEA-64 e liberar a próxima etapa normativa.
 
 ## Limites
 
@@ -111,4 +118,4 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Regra de leitura do HEAD
 
-O SHA do próprio commit não deve ser gravado autorreferencialmente. O agente deve resolver o HEAD pelo PR ativo e registrar separadamente o último HEAD integralmente revisado.
+O SHA do próprio commit não deve ser gravado autorreferencialmente. O agente deve resolver o HEAD pelo PR ativo e registrar separadamente o último HEAD normativo integralmente revisado.
