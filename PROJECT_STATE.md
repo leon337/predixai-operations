@@ -3,14 +3,14 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.5.0
-UPDATED_AT_UTC=2026-07-21T05:00:00Z
+STATE_VERSION=0.5.1
+UPDATED_AT_UTC=2026-07-21T06:09:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-58
-ACTIVE_PR=PENDING_CREATION
+ACTIVE_PR=5
 ACTIVE_BRANCH=docs/lea-58-rn-02-5-movimentacoes
-ACTIVE_HEAD_REF=docs/lea-58-rn-02-5-movimentacoes
+ACTIVE_HEAD_REF=pull/5/head
 ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
 LAST_VERIFIED_HEAD=NONE_FOR_LEA_58
 GITHUB_LINEAR_SYNC=PASS
@@ -18,7 +18,7 @@ REVIEW_DECISION=PENDING
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
 BLOCKERS=REVIEW_AND_MERGE_OF_RN_02_5_REV1
-NEXT_AUTHORIZED_ACTION=EXECUTAR_REVISAO_CRITICA_INDEPENDENTE_DA_RN_02_5
+NEXT_AUTHORIZED_ACTION=EXECUTAR_REVISAO_CRITICA_INDEPENDENTE_DO_PR_5
 ```
 
 ## Identidade
@@ -35,16 +35,6 @@ Construir uma plataforma de inteligência operacional, inicialmente executada em
 
 O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito ao banco e sem autonomia para operações críticas.
 
-## Infraestrutura inicial prevista
-
-- servidor: ASUS N43SM com Linux Mint;
-- backend: Python + FastAPI;
-- banco: PostgreSQL;
-- frontend: aplicação web mobile-first/PWA;
-- IA local: Ollama com modelo pequeno quantizado;
-- IA externa: conector opcional e contingencial;
-- operação inicial: rede local, com evolução futura para nuvem.
-
 ## Baselines aprovadas
 
 - RN-00 REV1 — PredixAI Domain Dictionary
@@ -57,9 +47,10 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 ## Documento ativo
 
 - RN-02.5 REV1 — Movimentações e Integridade do Estoque
-- Estado: EM ELABORAÇÃO
+- Estado: EM REVISÃO
 - Baseline: NÃO
 - Tarefa: LEA-58
+- Pull Request: #5
 - Branch: `docs/lea-58-rn-02-5-movimentacoes`
 - Documento: `docs/fase-0/regras-negocio/RN-02.5-REV1-COMPLETA.md`
 
@@ -79,7 +70,7 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 12. Baixa Patrimonial e Baixa de Quantidade são distintas.
 13. Correções usam compensação ou reversão, nunca edição do histórico.
 14. IA não executa operação crítica sem confirmação humana.
-15. Baseline e atualização deste arquivo devem integrar o mesmo PR.
+15. Baseline e atualização deste arquivo integram o mesmo PR.
 
 ## Histórico recente
 
@@ -114,12 +105,11 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Próximas ações
 
-1. abrir PR Draft da RN-02.5 REV1;
-2. executar revisão crítica independente sobre o HEAD exato;
-3. corrigir achados no mesmo branch;
-4. executar reteste final;
-5. somente com PASS e autorização explícita realizar merge;
-6. encerrar LEA-58 e liberar a próxima etapa normativa.
+1. executar revisão crítica independente do PR #5 no HEAD exato;
+2. corrigir achados no mesmo branch;
+3. executar reteste final;
+4. somente com PASS e autorização explícita realizar merge;
+5. encerrar LEA-58 e liberar a próxima etapa normativa.
 
 ## Regra de leitura do HEAD
 
