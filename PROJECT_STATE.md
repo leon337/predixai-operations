@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.5.2
-UPDATED_AT_UTC=2026-07-21T06:15:00Z
+STATE_VERSION=0.5.3
+UPDATED_AT_UTC=2026-07-21T06:35:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-58
@@ -12,13 +12,13 @@ ACTIVE_PR=5
 ACTIVE_BRANCH=docs/lea-58-rn-02-5-movimentacoes
 ACTIVE_HEAD_REF=pull/5/head
 ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=1ffe82bf47de420e021dfdeb1c4f38e04c4c0b8d
+LAST_VERIFIED_HEAD=bd823a2d77dec123a72eeda9957de2bb6407284c
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=FAIL_REMEDIATED_PENDING_RETEST
+REVIEW_DECISION=PASS_PENDING_MERGE_AUTHORIZATION
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
-BLOCKERS=RETEST_LEA_58_F01_TO_F05
-NEXT_AUTHORIZED_ACTION=EXECUTAR_RETESTE_INDEPENDENTE_DO_PR_5
+BLOCKERS=MERGE_AUTHORIZATION_REQUIRED
+NEXT_AUTHORIZED_ACTION=OBTER_AUTORIZACAO_EXPLICITA_DE_MERGE_DO_PR_5
 ```
 
 ## Identidade
@@ -47,8 +47,8 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 ## Documento ativo
 
 - RN-02.5 REV1 — Movimentações e Integridade do Estoque
-- Estado: EM RETESTE
-- Baseline: NÃO
+- Estado: APROVADA TECNICAMENTE, AGUARDANDO MERGE
+- Baseline: NÃO, até o merge
 - Tarefa: LEA-58
 - Pull Request: #5
 - Branch: `docs/lea-58-rn-02-5-movimentacoes`
@@ -89,7 +89,7 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - Merge commit do estado: `4a68089a0280803464b99cdc1da06ce97cf40c6b`
 - Resultado: RN-00 REV1 congelada como baseline
 
-## LEA-58 — revisão e remediação
+## LEA-58 — revisão e reteste
 
 ### Revisão inicial
 
@@ -97,21 +97,23 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - Decisão: FAIL
 - Achados: LEA-58-F01 a LEA-58-F05
 
-### Correções aplicadas
+### Reteste final
 
-- F01: separação entre Situação da Operação e Situação do Item, com agregação definida;
-- F02: entidade Alocação de Lote com suporte a múltiplos lotes por item;
-- F03: Centro Operacional de Trânsito e custódia operacional definidos;
-- F04: confirmação atômica e exclusividade concorrente de Reservas;
-- F05: limites da Reversão e uso obrigatório de Operação Compensatória quando necessário.
+- HEAD normativo retestado: `bd823a2d77dec123a72eeda9957de2bb6407284c`
+- Resultado: PASS
+- F01: Situação da Operação e Situação do Item separadas, com agregação definida;
+- F02: Alocação de Lote suporta múltiplos lotes por item;
+- F03: Centro Operacional de Trânsito e custódia definidos;
+- F04: Reservas concorrentes são atomicamente exclusivas;
+- F05: Reversão e Operação Compensatória possuem limites distintos.
 
 ## Próximas ações
 
-1. resolver o novo HEAD do PR #5;
-2. executar reteste independente dos achados F01–F05;
-3. atualizar este estado com o resultado;
-4. somente com PASS e autorização explícita realizar merge;
-5. encerrar LEA-58 e liberar a próxima etapa normativa.
+1. resolver o HEAD final gerado por esta atualização de estado;
+2. obter autorização explícita para merge do PR #5;
+3. após merge, encerrar LEA-58;
+4. liberar a próxima etapa normativa;
+5. manter implementação, SQL e migrations bloqueados.
 
 ## Limites
 
@@ -122,4 +124,4 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Regra de leitura do HEAD
 
-O SHA do próprio commit não deve ser gravado autorreferencialmente. O agente deve resolver o HEAD pelo PR ativo e registrar separadamente o último HEAD normativo integralmente revisado.
+O SHA do próprio commit não deve ser gravado autorreferencialmente. O agente deve resolver o HEAD pelo PR ativo. `LAST_VERIFIED_HEAD` registra o último HEAD normativo integralmente retestado; atualizações posteriores exclusivamente de estado devem ser verificadas por comparação.
