@@ -3,22 +3,22 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.4.0
-UPDATED_AT_UTC=2026-07-21T04:41:00Z
+STATE_VERSION=0.5.3
+UPDATED_AT_UTC=2026-07-21T06:35:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-58
-ACTIVE_PR=NONE
-ACTIVE_BRANCH=NONE
-ACTIVE_HEAD_REF=main
-ACTIVE_HEAD_SHA=72b63e21703f9803eb141512817682948b85cf2b
-LAST_VERIFIED_HEAD=515d86c306778ed9cd4d1d48e308d5a4b3268bf3
+ACTIVE_PR=5
+ACTIVE_BRANCH=docs/lea-58-rn-02-5-movimentacoes
+ACTIVE_HEAD_REF=pull/5/head
+ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
+LAST_VERIFIED_HEAD=bd823a2d77dec123a72eeda9957de2bb6407284c
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=LEA_57_PASS_AND_MERGED
+REVIEW_DECISION=PASS_PENDING_MERGE_AUTHORIZATION
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
-BLOCKERS=NONE_FOR_LEA_58_MODELING
-NEXT_AUTHORIZED_ACTION=MODELAR_RN_02_5_MOVIMENTACOES
+BLOCKERS=MERGE_AUTHORIZATION_REQUIRED
+NEXT_AUTHORIZED_ACTION=OBTER_AUTORIZACAO_EXPLICITA_DE_MERGE_DO_PR_5
 ```
 
 ## Identidade
@@ -35,16 +35,6 @@ Construir uma plataforma de inteligência operacional, inicialmente executada em
 
 O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito ao banco e sem autonomia para operações críticas.
 
-## Infraestrutura inicial prevista
-
-- servidor: ASUS N43SM com Linux Mint;
-- backend: Python + FastAPI;
-- banco: PostgreSQL;
-- frontend: aplicação web mobile-first/PWA;
-- IA local: Ollama com modelo pequeno quantizado;
-- IA externa: conector opcional e contingencial;
-- operação inicial: rede local, com evolução futura para nuvem.
-
 ## Baselines aprovadas
 
 - RN-00 REV1 — PredixAI Domain Dictionary
@@ -54,82 +44,84 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - RN-02.3 REV2 — Materiais, catálogo opcional, atributos e patrimônios
 - RN-02.4 REV3 — Estoques, saldos, localizações e WMS leve
 
-## Documentos normativos integrais
+## Documento ativo
 
-- `docs/fase-0/RN-00-PREDIXAI-DOMAIN-DICTIONARY.md`
-- `docs/fase-0/RN-00-REV1-ERRATA-LEA-57-F01-F04.md`
-- `docs/fase-0/regras-negocio/RN-01-REV2.1-COMPLETA.md`
-- `docs/fase-0/regras-negocio/RN-02.1-REV1-COMPLETA.md`
-- `docs/fase-0/regras-negocio/RN-02.2-REV1-COMPLETA.md`
-- `docs/fase-0/regras-negocio/RN-02.3-REV2-COMPLETA.md`
-- `docs/fase-0/regras-negocio/RN-02.4-REV3-COMPLETA.md`
+- RN-02.5 REV1 — Movimentações e Integridade do Estoque
+- Estado: APROVADA TECNICAMENTE, AGUARDANDO MERGE
+- Baseline: NÃO, até o merge
+- Tarefa: LEA-58
+- Pull Request: #5
+- Branch: `docs/lea-58-rn-02-5-movimentacoes`
+- Documento principal: `docs/fase-0/regras-negocio/RN-02.5-REV1-COMPLETA.md`
+- Complemento normativo: `docs/fase-0/regras-negocio/RN-02.5-REV1-ERRATA-LEA-58-F01-F05.md`
 
-## Decisões críticas
+## Decisões críticas vigentes
 
 1. GitHub é a fonte documental e técnica oficial.
 2. Linear acompanha tarefas, aprovações, dependências e próxima ação.
 3. Contexto do chat não substitui documento versionado.
 4. Nenhuma movimentação histórica é apagada.
 5. Estoque negativo é proibido.
-6. Todo saldo pertence a Centro Operacional.
-7. O razão imutável de movimentações é a fonte de verdade do saldo.
-8. Snapshot de saldo, quando existir, deve ser reconstruível e conciliável.
-9. Estado Físico, Situação Operacional, Situação Cadastral, Disponibilidade e Ocupação são dimensões distintas.
-10. Material pode existir sem Item de Catálogo.
-11. Transferência é Operação de Negócio coordenadora de Lançamentos de Movimentação imutáveis.
-12. Operação de Entrada e Lançamento de Entrada são conceitos distintos.
-13. Operação de Saída e Lançamento de Saída são conceitos distintos.
-14. Baixa Patrimonial e Baixa de Quantidade são conceitos distintos.
-15. Inativação preserva histórico; Exclusão Física é excepcional e restrita a registro sem vínculos.
-16. Cada Situação Operacional possui definição e aplicabilidade mínima.
-17. Devolução é o ato físico; Retorno é a operação registrada.
-18. Usuário, Perfil, Papel Operacional e Responsabilidade são conceitos distintos.
-19. IA sugere, consulta e resume; não executa operação crítica sem confirmação.
-20. Baseline e atualização deste arquivo devem integrar o mesmo PR.
+6. Todo saldo pertence a Centro Operacional, inclusive em trânsito.
+7. O Razão de Movimentações é a fonte de verdade do saldo.
+8. Snapshots são derivados, reconstruíveis e conciliáveis.
+9. Operação de Negócio e Lançamento de Movimentação são conceitos distintos.
+10. Situação da Operação e Situação do Item da Operação são dimensões distintas.
+11. Transferência coordena lançamentos de origem, trânsito e destino.
+12. Saldo em trânsito reside em Centro Operacional de Trânsito.
+13. Um Item da Operação pode ser atendido por múltiplas Alocações de Lote.
+14. Reserva confirmada consome Saldo Disponível de forma atômica.
+15. Entrada/Saída como operações são distintas de seus lançamentos.
+16. Baixa Patrimonial e Baixa de Quantidade são distintas.
+17. Reversão possui elegibilidade restrita; efeitos não reversíveis exigem Operação Compensatória.
+18. Correções nunca editam ou apagam o histórico confirmado.
+19. IA não executa operação crítica sem confirmação humana.
+20. Baseline e atualização deste arquivo integram o mesmo PR.
 
-## LEA-56 concluída
+## Histórico recente
 
-- PR: #2
-- Reteste final: PASS
-- Merge commit: `f302b854505e50496eddf0ba718723301b3bf915`
-- Estado Linear: Done
+### LEA-57 concluída
 
-## LEA-57 concluída
-
-- PR: #3
-- Revisão inicial: FAIL
-- Achados corrigidos: LEA-57-F01 a LEA-57-F04
-- Reteste final: PASS
-- HEAD final aprovado: `515d86c306778ed9cd4d1d48e308d5a4b3268bf3`
+- PR normativo: #3
+- HEAD aprovado: `515d86c306778ed9cd4d1d48e308d5a4b3268bf3`
 - Merge commit: `72b63e21703f9803eb141512817682948b85cf2b`
-- Estado Linear: Done
+- PR de sincronização: #4
+- Merge commit do estado: `4a68089a0280803464b99cdc1da06ce97cf40c6b`
 - Resultado: RN-00 REV1 congelada como baseline
 
-## Tarefa ativa — LEA-58
+## LEA-58 — revisão e reteste
 
-### Objetivo
+### Revisão inicial
 
-Modelar a RN-02.5 — Movimentações e Integridade do Estoque.
+- HEAD revisado: `1ffe82bf47de420e021dfdeb1c4f38e04c4c0b8d`
+- Decisão: FAIL
+- Achados: LEA-58-F01 a LEA-58-F05
 
-### Escopo autorizado
+### Reteste final
 
-- Operações de Entrada, Saída, Retorno e Transferência;
-- Reserva, Separação, Expedição e Recebimento;
-- Inventário, Ajuste, Baixa e Reversão;
-- Lançamentos imutáveis e correlação;
-- origem, destino, lotes e patrimônios;
-- cadeia de responsabilidade e autorizações;
-- idempotência e integridade transacional;
-- estoque em trânsito;
-- critérios de aceite.
+- HEAD normativo retestado: `bd823a2d77dec123a72eeda9957de2bb6407284c`
+- Resultado: PASS
+- F01: Situação da Operação e Situação do Item separadas, com agregação definida;
+- F02: Alocação de Lote suporta múltiplos lotes por item;
+- F03: Centro Operacional de Trânsito e custódia definidos;
+- F04: Reservas concorrentes são atomicamente exclusivas;
+- F05: Reversão e Operação Compensatória possuem limites distintos.
 
-### Limites
+## Próximas ações
+
+1. resolver o HEAD final gerado por esta atualização de estado;
+2. obter autorização explícita para merge do PR #5;
+3. após merge, encerrar LEA-58;
+4. liberar a próxima etapa normativa;
+5. manter implementação, SQL e migrations bloqueados.
+
+## Limites
 
 - nenhuma implementação de backend ou frontend;
 - nenhum SQL ou migration;
 - nenhuma integração real de IA;
-- modelagem conceitual e documentação apenas.
+- documentação e modelagem conceitual apenas.
 
-## Próxima ação
+## Regra de leitura do HEAD
 
-Iniciar a elaboração da RN-02.5 em branch e PR próprios, mantendo revisão crítica, reteste e autorização explícita antes de merge.
+O SHA do próprio commit não deve ser gravado autorreferencialmente. O agente deve resolver o HEAD pelo PR ativo. `LAST_VERIFIED_HEAD` registra o último HEAD normativo integralmente retestado; atualizações posteriores exclusivamente de estado devem ser verificadas por comparação.
