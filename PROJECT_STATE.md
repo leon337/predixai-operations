@@ -3,22 +3,22 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.3.3
-UPDATED_AT_UTC=2026-07-21T04:06:00Z
+STATE_VERSION=0.4.0
+UPDATED_AT_UTC=2026-07-21T04:41:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
-ACTIVE_TASK=LEA-57
-ACTIVE_PR=3
-ACTIVE_BRANCH=docs/lea-57-rn-00-domain-dictionary
-ACTIVE_HEAD_REF=pull/3/head
-ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=61701817ee6d42010561957145ddfbc2fc217cd7
+ACTIVE_TASK=LEA-58
+ACTIVE_PR=NONE
+ACTIVE_BRANCH=NONE
+ACTIVE_HEAD_REF=main
+ACTIVE_HEAD_SHA=72b63e21703f9803eb141512817682948b85cf2b
+LAST_VERIFIED_HEAD=515d86c306778ed9cd4d1d48e308d5a4b3268bf3
 GITHUB_LINEAR_SYNC=PASS
-REVIEW_DECISION=PASS_PENDING_MERGE_AUTHORIZATION
+REVIEW_DECISION=LEA_57_PASS_AND_MERGED
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
-BLOCKERS=MERGE_AUTHORIZATION_REQUIRED
-NEXT_AUTHORIZED_ACTION=OBTER_AUTORIZACAO_EXPLICITA_DE_MERGE_DO_PR_3
+BLOCKERS=NONE_FOR_LEA_58_MODELING
+NEXT_AUTHORIZED_ACTION=MODELAR_RN_02_5_MOVIMENTACOES
 ```
 
 ## Identidade
@@ -47,31 +47,22 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 ## Baselines aprovadas
 
+- RN-00 REV1 — PredixAI Domain Dictionary
 - RN-01 REV2.1 — Cadastro e classificação de materiais
 - RN-02.1 REV1 — Núcleo organizacional
 - RN-02.2 REV1 — Usuários, perfis, permissões e responsabilidades
 - RN-02.3 REV2 — Materiais, catálogo opcional, atributos e patrimônios
 - RN-02.4 REV3 — Estoques, saldos, localizações e WMS leve
 
-## Documento ativo
-
-- RN-00 REV1 — PredixAI Domain Dictionary
-- Estado: APROVADA TECNICAMENTE, AGUARDANDO MERGE
-- Baseline: NÃO, até o merge
-- Tarefa: LEA-57
-- Pull Request: #3
-- Branch: `docs/lea-57-rn-00-domain-dictionary`
-- Complemento normativo: `docs/fase-0/RN-00-REV1-ERRATA-LEA-57-F01-F04.md`
-
 ## Documentos normativos integrais
 
+- `docs/fase-0/RN-00-PREDIXAI-DOMAIN-DICTIONARY.md`
+- `docs/fase-0/RN-00-REV1-ERRATA-LEA-57-F01-F04.md`
 - `docs/fase-0/regras-negocio/RN-01-REV2.1-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.1-REV1-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.2-REV1-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.3-REV2-COMPLETA.md`
 - `docs/fase-0/regras-negocio/RN-02.4-REV3-COMPLETA.md`
-- `docs/fase-0/RN-00-PREDIXAI-DOMAIN-DICTIONARY.md`
-- `docs/fase-0/RN-00-REV1-ERRATA-LEA-57-F01-F04.md`
 
 ## Decisões críticas
 
@@ -100,44 +91,45 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 
 - PR: #2
 - Reteste final: PASS
-- HEAD revisado: `63535faf33e14bc43e147adeba2a5e26bd486a9f`
 - Merge commit: `f302b854505e50496eddf0ba718723301b3bf915`
 - Estado Linear: Done
 
-## LEA-57 — revisão e reteste
+## LEA-57 concluída
 
-### Revisão inicial
+- PR: #3
+- Revisão inicial: FAIL
+- Achados corrigidos: LEA-57-F01 a LEA-57-F04
+- Reteste final: PASS
+- HEAD final aprovado: `515d86c306778ed9cd4d1d48e308d5a4b3268bf3`
+- Merge commit: `72b63e21703f9803eb141512817682948b85cf2b`
+- Estado Linear: Done
+- Resultado: RN-00 REV1 congelada como baseline
 
-- HEAD revisado: `59a808af816d19982bc7b4fd215d0d14aea0feba`
-- Decisão: FAIL
-- Achados: LEA-57-F01 a LEA-57-F04
+## Tarefa ativa — LEA-58
 
-### Reteste
+### Objetivo
 
-- HEAD de remediação testado: `61701817ee6d42010561957145ddfbc2fc217cd7`
-- Resultado: PASS
-- F01: Operação e Lançamento de Entrada/Saída separados.
-- F02: Baixa Patrimonial e Baixa de Quantidade separadas.
-- F03: Inativação, Reativação e Exclusão Física definidas.
-- F04: estados operacionais definidos individualmente com matriz mínima de aplicabilidade.
+Modelar a RN-02.5 — Movimentações e Integridade do Estoque.
 
-## Próximas ações
+### Escopo autorizado
 
-1. verificar o HEAD final gerado por esta atualização de estado;
-2. obter autorização explícita para merge do PR #3;
-3. após merge, encerrar LEA-57;
-4. liberar LEA-58 — RN-02.5 Movimentações;
-5. manter implementação bloqueada até encerramento da Fase 0 e nova autorização.
+- Operações de Entrada, Saída, Retorno e Transferência;
+- Reserva, Separação, Expedição e Recebimento;
+- Inventário, Ajuste, Baixa e Reversão;
+- Lançamentos imutáveis e correlação;
+- origem, destino, lotes e patrimônios;
+- cadeia de responsabilidade e autorizações;
+- idempotência e integridade transacional;
+- estoque em trânsito;
+- critérios de aceite.
 
-## Fora do escopo
+### Limites
 
-- implementação de backend ou frontend;
-- SQL, migrations ou tabelas físicas;
-- integração real com IA externa;
-- Digital Twin funcional;
-- RFID, NFC ou BLE;
-- hospedagem em produção.
+- nenhuma implementação de backend ou frontend;
+- nenhum SQL ou migration;
+- nenhuma integração real de IA;
+- modelagem conceitual e documentação apenas.
 
-## Regra de leitura do HEAD
+## Próxima ação
 
-O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando `pull/3/head`. `LAST_VERIFIED_HEAD` registra o último HEAD normativo integralmente retestado; atualizações posteriores exclusivamente de estado devem ser verificadas por comparação.
+Iniciar a elaboração da RN-02.5 em branch e PR próprios, mantendo revisão crítica, reteste e autorização explícita antes de merge.
