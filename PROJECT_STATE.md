@@ -3,22 +3,22 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.3.0
-UPDATED_AT_UTC=2026-07-21T02:15:00Z
+STATE_VERSION=0.3.1
+UPDATED_AT_UTC=2026-07-21T02:24:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 ACTIVE_TASK=LEA-57
-ACTIVE_PR=PENDING_CREATION
+ACTIVE_PR=3
 ACTIVE_BRANCH=docs/lea-57-rn-00-domain-dictionary
-ACTIVE_HEAD_REF=refs/heads/docs/lea-57-rn-00-domain-dictionary
-ACTIVE_HEAD_SHA=RESOLVE_FROM_BRANCH_METADATA
+ACTIVE_HEAD_REF=pull/3/head
+ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
 LAST_VERIFIED_HEAD=NONE_FOR_LEA_57
 GITHUB_LINEAR_SYNC=PASS
 REVIEW_DECISION=PENDING
 IMPLEMENTATION_AUTHORIZED=NO
 MERGE_AUTHORIZED=NO
 BLOCKERS=REVIEW_AND_MERGE_OF_RN_00_REV1
-NEXT_AUTHORIZED_ACTION=ABRIR_PR_DRAFT_E_EXECUTAR_REVISAO_CRITICA_DA_RN_00_REV1
+NEXT_AUTHORIZED_ACTION=EXECUTAR_REVISAO_CRITICA_INDEPENDENTE_DO_PR_3
 ```
 
 ## Identidade
@@ -59,6 +59,7 @@ O sistema deve funcionar sem IA. A IA é camada assistiva, sem acesso irrestrito
 - Estado: EM REVISÃO
 - Baseline: NÃO
 - Tarefa: LEA-57
+- Pull Request: #3
 - Branch: `docs/lea-57-rn-00-domain-dictionary`
 
 ## Documentos normativos integrais
@@ -116,13 +117,12 @@ Consolidar o vocabulário oficial, eliminar ambiguidades e estabelecer governan�
 
 ## Próximas ações
 
-1. abrir PR Draft da LEA-57;
-2. executar revisão crítica independente no HEAD exato;
-3. corrigir achados no mesmo branch;
-4. executar reteste final;
-5. somente com PASS e autorização explícita realizar merge;
-6. encerrar LEA-57;
-7. liberar LEA-58 — RN-02.5 Movimentações.
+1. executar revisão crítica independente do PR #3 no HEAD exato;
+2. corrigir achados no mesmo branch;
+3. executar reteste final;
+4. somente com PASS e autorização explícita realizar merge;
+5. encerrar LEA-57;
+6. liberar LEA-58 — RN-02.5 Movimentações.
 
 ## Fora do escopo
 
@@ -135,4 +135,4 @@ Consolidar o vocabulário oficial, eliminar ambiguidades e estabelecer governan�
 
 ## Regra de leitura do HEAD
 
-O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando a branch ou o PR ativo. `LAST_VERIFIED_HEAD` só deve ser atualizado após revisão concluída sobre um SHA exato.
+O SHA do próprio commit não pode ser gravado autorreferencialmente dentro deste arquivo. O agente deve resolver o HEAD consultando `pull/3/head`. `LAST_VERIFIED_HEAD` só deve ser atualizado após revisão concluída sobre um SHA exato.
