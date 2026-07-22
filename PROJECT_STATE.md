@@ -3,20 +3,20 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=0.9.0
-UPDATED_AT_UTC=2026-07-22T18:49:00Z
+STATE_VERSION=0.9.1
+UPDATED_AT_UTC=2026-07-22T18:57:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 PRIMARY_ACTIVE_TASK=LEA-117
-GOVERNANCE_ACTIVE_TASK=LEA-134
+GOVERNANCE_ACTIVE_TASK=NONE
 INFRA_BLOCKED_TASK=LEA-122
-ACTIVE_PR=RESOLVE_FROM_PR_METADATA
-ACTIVE_BRANCH=docs/lea-134-checklist-roadmap
-ACTIVE_HEAD_REF=docs/lea-134-checklist-roadmap
-ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_MAIN=1e01b21d35d8ff20f0200eb1160aca88a3525ab2
-GITHUB_LINEAR_SYNC=IN_PROGRESS
-REVIEW_DECISION=PENDING_REVIEW
+ACTIVE_PR=13
+ACTIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
+ACTIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
+ACTIVE_HEAD_SHA=2fe6db17e1424203ed4c46000dbd1871f6990aa0
+LAST_VERIFIED_MAIN=067dca8742f62638644950169df590fe9562aefd
+GITHUB_LINEAR_SYNC=PASS_PENDING_STATE_SYNC_MERGE
+REVIEW_DECISION=LEA_134_PASS_AND_MERGED
 IMPLEMENTATION_AUTHORIZED=FOUNDATION_ONLY
 MERGE_AUTHORIZED=NO
 SQL_AUTHORIZED=NO
@@ -24,7 +24,7 @@ MIGRATIONS_AUTHORIZED=NO
 PRODUCTION_DEPLOY_AUTHORIZED=NO
 SUPABASE_CONNECTED=NO
 BLOCKERS=SUPABASE_FREE_PROJECT_LIMIT_AND_NOMINAL_PAUSE_DECISION
-NEXT_AUTHORIZED_ACTION=REVIEW_GOVERNANCE_PR_AND_CONTINUE_RN_02_7_SUBTASK_LEA_138
+NEXT_AUTHORIZED_ACTION=CONTINUE_LEA_138_AND_OBTAIN_NOMINAL_SUPABASE_PAUSE_DECISION
 ```
 
 ## Identidade
@@ -63,6 +63,7 @@ Toda resposta operacional deve terminar com checklist por estado, tarefas e subt
 - RN-02.6 REV1 — Obras, Eventos e Romaneios
 - ADR-001 — Estratégia Vercel e Supabase
 - Histórico Auditável da Fase 0
+- GOV-02 — Checklist permanente e roadmap executável
 
 ## Fundação técnica concluída
 
@@ -76,21 +77,25 @@ Toda resposta operacional deve terminar com checklist por estado, tarefas e subt
 - Preview: `https://predixai-operations-pmypc9dur-predix-ai-br.vercel.app`
 - Produção: não promovida
 
-## Governança ativa
+## Governança concluída
 
 ### LEA-134 — GOV-02
 
-- LEA-135 — política de checklist e próxima ação: In Progress
-- LEA-136 — roadmap mestre: In Progress
-- LEA-137 — atualização de estado e rastreabilidade: In Progress
-- Branch: `docs/lea-134-checklist-roadmap`
-- Merge: não autorizado
+- PR: #12
+- HEAD aprovado: `1d9ac36ebadce436082e5ca4c381e1fbfdc3d987`
+- Merge commit: `067dca8742f62638644950169df590fe9562aefd`
+- LEA-135 — política de checklist e próxima ação: Done
+- LEA-136 — roadmap mestre: Done
+- LEA-137 — atualização de estado e rastreabilidade: Done, com sincronização pós-merge pendente neste PR
 
 ## Documento normativo ativo
 
 ### LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial
 
 - Estado: In Progress
+- PR Draft: #13
+- Branch: `docs/lea-117-rn-02-7-manutencao`
+- HEAD atual: `2fe6db17e1424203ed4c46000dbd1871f6990aa0`
 - LEA-138 — entidades e ciclos de estado: In Progress
 - LEA-139 — execução, peças, serviços, custos e garantias: Todo
 - LEA-140 — falhas, reincidência e ciclo de vida: Todo
@@ -140,9 +145,9 @@ Toda resposta operacional deve terminar com checklist por estado, tarefas e subt
 
 ## Próximas ações autorizadas
 
-1. revisar o PR da LEA-134;
-2. continuar a LEA-138 e publicar a primeira versão da RN-02.7;
-3. obter autorização nominal para pausar `predixai-academy` ou `predixai-brand-site`;
+1. continuar a LEA-138 no PR #13;
+2. obter autorização nominal para pausar `predixai-academy` ou `predixai-brand-site`;
+3. após liberação de capacidade, executar LEA-144 e LEA-145;
 4. manter produção, SQL e migrations bloqueados.
 
 ## Regra de leitura do HEAD
