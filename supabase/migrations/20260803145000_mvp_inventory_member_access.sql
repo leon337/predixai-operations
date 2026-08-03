@@ -13,12 +13,8 @@ create table if not exists public.operations_members (
 alter table public.operations_members enable row level security;
 revoke all on public.operations_members from anon, authenticated;
 
-insert into public.operations_members (email, role, active)
-values ('leonpcsn@gmail.com', 'owner', true)
-on conflict (email) do update
-set role = excluded.role,
-    active = excluded.active,
-    updated_at = now();
+-- Os e-mails autorizados são provisionados fora do repositório.
+-- Nenhum dado pessoal deve ser versionado nesta migração.
 
 create or replace function public.is_operations_member()
 returns boolean
