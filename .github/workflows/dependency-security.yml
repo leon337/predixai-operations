@@ -32,8 +32,8 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Record Sharp dependency tree
-        run: npm ls sharp --all > sharp-tree.txt
+      - name: Record dependency tree
+        run: npm ls sharp postcss --all > dependency-tree.txt
 
       - name: Generate audit report
         run: npm audit --json > npm-audit.json || true
@@ -61,6 +61,6 @@ jobs:
           path: |
             package-lock.json
             npm-audit.json
-            sharp-tree.txt
+            dependency-tree.txt
           if-no-files-found: error
           retention-days: 14
