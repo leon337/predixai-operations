@@ -9,7 +9,7 @@ on:
       - main
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   audit-and-build:
@@ -24,26 +24,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
           registry-url: https://registry.npmjs.org
-
-      - name: Generate lockfile
-        run: npm install --package-lock-only --ignore-scripts
-
-      - name: Persist validated lockfile
-        if: github.event_name == 'push'
-        run: |
-          if [ -n "$(git status --porcelain -- package-lock.json)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add package-lock.json
-            git commit -m "chore(deps): versionar lockfile validado"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          else
-            echo "Lockfile já está versionado e atualizado."
-          fi
 
       - name: Install locked dependencies
         run: npm ci
+
+      - name: Verify lockfile is unchanged
+        run: git diff --exit-code -- package-lock.json
 
       - name: Record dependency tree
         run: npm ls sharp postcss --all > dependency-tree.txt
