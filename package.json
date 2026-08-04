@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm install --include=dev && next build",
-    "start": "next start"
+    "build": "next build",
+    "start": "next start",
+    "audit:security": "npm audit --audit-level=high"
   },
   "dependencies": {
     "next": "16.2.11",
@@ -17,5 +18,8 @@
     "@types/react": "19",
     "@types/react-dom": "19",
     "typescript": "5"
+  },
+  "overrides": {
+    "sharp": "0.35.3"
   }
 }
