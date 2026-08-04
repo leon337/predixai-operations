@@ -1,0 +1,66 @@
+name: Dependency Security
+
+on:
+  push:
+    branches:
+      - feat/mvp-01-online-almoxarifado
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  audit-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Generate lockfile
+        run: npm install --package-lock-only --ignore-scripts
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Record Sharp dependency tree
+        run: npm ls sharp --all > sharp-tree.txt
+
+      - name: Generate audit report
+        run: npm audit --json > npm-audit.json || true
+
+      - name: Enforce high-severity security gate
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('npm-audit.json', 'utf8'));
+          const counts = report.metadata?.vulnerabilities ?? {};
+          console.log('Vulnerability counts:', counts);
+          if ((counts.high ?? 0) > 0 || (counts.critical ?? 0) > 0) {
+            process.exit(1);
+          }
+          NODE
+
+      - name: Build production application
+        run: npm run build
+
+      - name: Upload security evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-security-evidence
+          path: |
+            package-lock.json
+            npm-audit.json
+            sharp-tree.txt
+          if-no-files-found: error
+          retention-days: 14
