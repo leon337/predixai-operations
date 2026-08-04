@@ -1,0 +1,105 @@
+/* Correções de responsividade validadas no UAT móvel. */
+
+@media (max-width: 640px) {
+  /* Exibe todas as áreas sem rolagem horizontal ou aba cortada. */
+  .tabNav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    overflow: visible;
+    padding: 6px;
+  }
+
+  .tabNav button {
+    min-width: 0;
+    width: 100%;
+    padding: 12px 8px;
+    white-space: nowrap;
+  }
+
+  /* No celular, o histórico deixa de ser uma tabela larga e vira cartões. */
+  .tableWrap {
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .tableWrap table,
+  .tableWrap tbody,
+  .tableWrap tr,
+  .tableWrap td {
+    display: block;
+    width: 100%;
+  }
+
+  .tableWrap table {
+    min-width: 0;
+  }
+
+  .tableWrap thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .tableWrap tbody {
+    display: grid;
+    gap: 12px;
+  }
+
+  .tableWrap tr {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  .tableWrap td {
+    display: grid;
+    grid-template-columns: minmax(88px, 0.75fr) minmax(0, 1.25fr);
+    align-items: start;
+    gap: 12px;
+    padding: 11px 0;
+    border: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .tableWrap td + td {
+    border-top: 1px solid rgba(158, 193, 221, 0.1);
+  }
+
+  .tableWrap td::before {
+    color: #8ca5bc;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .tableWrap td:nth-child(1)::before { content: "Data"; }
+  .tableWrap td:nth-child(2)::before { content: "Tipo"; }
+  .tableWrap td:nth-child(3)::before { content: "Material"; }
+  .tableWrap td:nth-child(4)::before { content: "Quantidade"; }
+  .tableWrap td:nth-child(5)::before { content: "Setor"; }
+  .tableWrap td:nth-child(6)::before { content: "Motivo"; }
+
+  .tableWrap td strong,
+  .tableWrap td small {
+    min-width: 0;
+  }
+
+  .tableWrap .moveType {
+    justify-self: start;
+  }
+
+  /* Mantém o botão de atualização fácil de tocar no cabeçalho empilhado. */
+  .contentPanel > .sectionHeader > .ghostButton {
+    width: 100%;
+  }
+}
