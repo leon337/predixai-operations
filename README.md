@@ -14,16 +14,19 @@ Estado técnico resumido:
 - Supabase utilizado pelo MVP-01: `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
 - UAT desktop: PASS;
 - UAT móvel final: PASS;
-- segurança de dependências no gate final do MVP-01: 0 vulnerabilidades registradas;
+- segurança de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento;
+- segurança atual em 2026-08-16: **BLOCKED** pela SEC-02 / Issue #22, após o `npm audit` detectar `nanoid@3.3.17` com severidade alta;
 - promoção para produção: autorizada por Leandro em 2026-08-04, mas a promoção efetiva não está tecnicamente comprovada no repositório e não deve ser inferida.
 
 A frente normativa ativa permanece a **LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial**, no PR Draft #13. LEA-138, LEA-139 e LEA-140 estão concluídas; LEA-141 e LEA-142 permanecem pendentes.
+
+A reconciliação de estado está no **PR Draft #21** e não deve ser mesclada enquanto o gate de segurança estiver vermelho.
 
 ## Inicialização obrigatória
 
 1. Leia [`PROJECT_STATE.md`](PROJECT_STATE.md).
 2. Leia [`PREDIXAI_OPERATIONS_PROJECT_INSTRUCTIONS.md`](PREDIXAI_OPERATIONS_PROJECT_INSTRUCTIONS.md).
-3. Verifique ao vivo `main`, PRs e Issues antes de afirmar estado volátil.
+3. Verifique ao vivo `main`, PRs, Issues e CI antes de afirmar estado volátil.
 4. Consulte o [`PREDIXAI_OPERATIONS_TRONCO_MULTICHAT.md`](PREDIXAI_OPERATIONS_TRONCO_MULTICHAT.md) apenas como histórico auxiliar.
 5. Consulte as baselines em [`docs/fase-0`](docs/fase-0).
 6. Consulte o roadmap em [`docs/roadmap/ROADMAP-MESTRE-EXECUTAVEL.md`](docs/roadmap/ROADMAP-MESTRE-EXECUTAVEL.md).
@@ -34,6 +37,18 @@ A frente normativa ativa permanece a **LEA-117 — RN-02.7 Manutenção e Ciclo 
 - [Guia do MVP Online](docs/mvp/MVP-ONLINE-GUIA-DE-USO.md)
 
 O MVP-01 não representa a conclusão do produto inteiro. Patrimônio completo, manutenção, obras/eventos completos, romaneios completos, relatórios avançados e IA operacional permanecem fora dessa entrega.
+
+## Segurança atual
+
+A GitHub Issue #22 (`SEC-02`) registra a vulnerabilidade alta descoberta no reteste da reconciliação:
+
+- `nanoid@3.3.17`;
+- transitivo de `postcss@8.5.23`;
+- advisory `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`;
+- versão 3.x corrigida indicada pelo advisory: `3.3.18`;
+- workflow run que bloqueou o PR #21: `31936473582`.
+
+O gate de segurança não deve ser relaxado. A remediação e o reteste são obrigatórios antes de PASS e merge do PR #21.
 
 ## Documentação principal
 
