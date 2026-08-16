@@ -4,7 +4,7 @@
 
 ```text
 STATE_VERSION=1.0.0
-UPDATED_AT_UTC=2026-08-16T08:25:00Z
+UPDATED_AT_UTC=2026-08-16T08:27:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -50,6 +50,15 @@ NEXT_AUTHORIZED_ACTION=REVIEW_PR_21_THEN_CONTINUE_LEA_141
 Construir um sistema operacional de almoxarifado inteligente, auditável e seguro, com controle de materiais, patrimônios, estoques, movimentações, obras, eventos, romaneios, manutenção e relatórios.
 
 O sistema deve funcionar sem IA. A IA é camada assistiva e não possui autorização irrestrita para operações críticas.
+
+## Políticas obrigatórias
+
+- `docs/governanca/POLITICA-CHECKLIST-E-PROXIMA-ACAO.md`
+- `docs/roadmap/ROADMAP-MESTRE-EXECUTAVEL.md`
+- `docs/governanca/HISTORICO-AUDITAVEL-FASE-0.md`
+- `docs/arquitetura/ADR-001-VERCEL-SUPABASE.md`
+
+Toda resposta operacional deve terminar com checklist por estado, tarefas e subtarefas Linear, evidências GitHub e uma única ação sugerida.
 
 ## Nota de reconciliação — 2026-08-16
 
