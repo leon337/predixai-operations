@@ -4,7 +4,7 @@
 
 ```text
 STATE_VERSION=1.0.0
-UPDATED_AT_UTC=2026-08-16T08:27:00Z
+UPDATED_AT_UTC=2026-08-16T08:31:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -26,13 +26,18 @@ SUPABASE_PROJECT_REF=gotzykqvpgjzmzsyvufx
 SUPABASE_USAGE=MVP01_REUSED_EXISTING_PROJECT
 PRODUCTION_PROMOTION_AUTHORIZED=YES
 PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN_NO_PROVIDER_EVIDENCE_IN_REPOSITORY
+SECURITY_ACTIVE_ISSUE=22
+SECURITY_STATUS=BLOCKED_HIGH_NANOID_3_3_17
+SECURITY_ADVISORY=GHSA-2v37-7h3g-55p8
+SECURITY_REQUIRED_FIXED_VERSION=NANOID_3_3_18_OR_COMPATIBLE_PATCHED
+RECONCILIATION_REVIEW_DECISION=BLOCKED_BY_SEC_02
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-MERGE_AUTHORIZED=NO_FOR_PR13
+MERGE_AUTHORIZED=NO_FOR_PR13_AND_NO_FOR_PR21_WHILE_CI_RED
 GITHUB_LINEAR_SYNC=LINEAR_SUPERSESSION_APPLIED_PR21_PENDING_MERGE
 RECONCILIATION_PR=21
-BLOCKERS=RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=REVIEW_PR_21_THEN_CONTINUE_LEA_141
+BLOCKERS=SEC_02_HIGH_NANOID_AND_RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=REMEDIATE_SEC_02_THEN_RETEST_PR_21
 ```
 
 ## Identidade
@@ -72,6 +77,8 @@ Essa autorização histórica não constitui autorização geral para novas impl
 
 A reconciliação atual está registrada no PR Draft #21. O caminho Linear antigo de criação de um novo Supabase foi sincronizado como cancelado por supersessão.
 
+Durante o reteste do PR #21, o workflow `Dependency Security` detectou uma vulnerabilidade alta em `nanoid@3.3.17`, transitivamente utilizado por `postcss@8.5.23`. O problema está registrado na GitHub Issue #22 e bloqueia o PASS da reconciliação enquanto o CI permanecer vermelho.
+
 ## Baselines normativas aprovadas
 
 - RN-00 REV1 — PredixAI Domain Dictionary
@@ -107,7 +114,7 @@ A RN-02.7 ainda não é baseline concluída.
 - UAT móvel final: PASS
 - testes transacionais de estoque: 6/6 PASS
 - testes de autorização: 6/6 PASS
-- auditoria final registrada: 0 vulnerabilidades
+- auditoria de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento
 - lockfile: versionado
 - CI de segurança e build: integrado
 
@@ -134,6 +141,32 @@ Fora do MVP-01:
 - relatórios avançados;
 - IA operacional.
 
+## Segurança atual
+
+### SEC-02 — `nanoid@3.3.17`
+
+- GitHub Issue: #22 — Open
+- origem da descoberta: PR #21, workflow `Dependency Security`
+- workflow run: `31936473582`
+- job: `95139095635`
+- `npm ci`: PASS
+- lockfile imutável: PASS
+- `npm audit`: 1 high, 0 critical
+- pacote afetado: `nanoid@3.3.17`
+- dependência pai: `postcss@8.5.23` com faixa `nanoid ^3.3.16`
+- advisory: `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`
+- linha 3.x afetada: `<3.3.18`
+- versão corrigida indicada pelo advisory: `3.3.18`
+
+O advisory foi atualizado em 2026-08-13, depois do PASS histórico de 2026-08-04. Portanto, o resultado antigo não deve ser reinterpretado como estado de segurança atual.
+
+Enquanto SEC-02 estiver aberta e o gate de severidade alta falhar:
+
+- PR #21 permanece Draft;
+- merge da reconciliação permanece bloqueado;
+- nenhuma promoção para produção deve ser declarada ou executada com base neste estado;
+- o gate de segurança não deve ser relaxado ou desabilitado.
+
 ## Frente normativa ativa
 
 ### LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial
@@ -148,7 +181,7 @@ Fora do MVP-01:
 - LEA-141 — Todo
 - LEA-142 — Todo
 
-O próximo trabalho normativo é a LEA-141. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo gate aplicável.
+O próximo trabalho normativo é a LEA-141, mas a reconciliação deve primeiro sair do estado de segurança bloqueado. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo gate aplicável.
 
 ## Infraestrutura
 
@@ -202,19 +235,21 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 6. O MVP-01 está incorporado ao `main`; isso não libera automaticamente o restante do roadmap.
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
-9. A RN-02.7 permanece como frente normativa principal.
-10. IA não executa operação crítica sem confirmação humana compatível com o risco.
-11. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
+9. Vulnerabilidade alta conhecida bloqueia PASS, merge relacionado e promoção enquanto não houver remediação e reteste.
+10. A RN-02.7 permanece como frente normativa principal após a remoção do blocker de segurança da reconciliação.
+11. IA não executa operação crítica sem confirmação humana compatível com o risco.
+12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. revisar o PR #21 de reconciliação e integrá-lo somente após PASS e gate aplicável;
-2. após a reconciliação, retomar LEA-141 no PR #13;
-3. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
-4. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel.
+1. remediar SEC-02 com a menor alteração de dependência possível e retestar `npm ci`, `npm audit` e build;
+2. retestar o HEAD resultante do PR #21 e somente então decidir PASS da reconciliação;
+3. após PASS e gate aplicável da reconciliação, retomar LEA-141 no PR #13;
+4. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
+5. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel e sem estado de segurança compatível.
 
 ## Regra de leitura de HEAD e provider
 
 O SHA do próprio commit não deve ser gravado autorreferencialmente. Para PR ativo, resolver o HEAD ao vivo e registrar separadamente o último HEAD validado.
 
-Deployment, promoção, saúde do provider e aliases são estados voláteis. Uma autorização humana ou um snapshot documental não substitui evidência atual do provider.
+Deployment, promoção, saúde do provider, advisories e aliases são estados voláteis. Uma autorização humana ou um snapshot documental não substitui evidência atual do provider ou dos gates de segurança.
