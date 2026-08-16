@@ -105,7 +105,7 @@ O MVP-01 não libera automaticamente as demais funcionalidades do produto e não
 - CI de dependências/build: parcialmente materializado para o MVP-01;
 - Supabase exclusivo novo: **não criado**;
 - decisão operacional aplicada: reutilização do `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
-- LEA-122/143/144/145: caminho original superado e sujeito a cancelamento formal por supersessão;
+- LEA-122/143/144/145: caminho original superado e formalmente cancelado por supersessão em 2026-08-16;
 - política completa de ambientes, backups e recuperação: ainda não concluída para o produto inteiro.
 
 ### Critério de saída da fase completa
@@ -270,12 +270,11 @@ Nenhuma documentação deve converter autorização em confirmação técnica se
 
 ## Próxima sequência canônica após a reconciliação
 
-1. concluir a reconciliação documental e operacional;
-2. cancelar formalmente LEA-122/143/144/145 como caminho superado pelo reaproveitamento do `potiguarbd`;
-3. retomar LEA-141 no PR #13;
-4. executar LEA-142 com revisão crítica sobre HEAD exato;
-5. solicitar novo gate antes de merge do PR #13;
-6. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01.
+1. revisar e integrar o PR #21 somente após PASS e gate aplicável;
+2. retomar LEA-141 no PR #13 após a reconciliação;
+3. executar LEA-142 com revisão crítica sobre HEAD exato;
+4. solicitar novo gate antes de merge do PR #13;
+5. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01.
 
 ## Gates permanentes
 
