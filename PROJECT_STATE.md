@@ -4,7 +4,7 @@
 
 ```text
 STATE_VERSION=1.0.0
-UPDATED_AT_UTC=2026-08-16T08:20:00Z
+UPDATED_AT_UTC=2026-08-16T08:25:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -29,10 +29,10 @@ PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN_NO_PROVIDER_EVIDENCE_IN_REPOSITORY
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
 MERGE_AUTHORIZED=NO_FOR_PR13
-GITHUB_LINEAR_SYNC=RECONCILIATION_PR_PENDING_MERGE
-RECONCILIATION_PR=PENDING_CREATION
+GITHUB_LINEAR_SYNC=LINEAR_SUPERSESSION_APPLIED_PR21_PENDING_MERGE
+RECONCILIATION_PR=21
 BLOCKERS=RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=COMPLETE_RECONCILIATION_THEN_CONTINUE_LEA_141
+NEXT_AUTHORIZED_ACTION=REVIEW_PR_21_THEN_CONTINUE_LEA_141
 ```
 
 ## Identidade
@@ -60,6 +60,8 @@ A solicitação direta de Leandro originou o MVP-01 para colocar o Almoxarifado 
 O PR #18 foi aprovado por Leandro e mesclado por squash no `main` em `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`. Portanto, não é mais verdadeiro afirmar que somente a fundação técnica está implementada ou que SQL/migrations nunca foram autorizados: eles foram autorizados e executados especificamente dentro do escopo do MVP-01.
 
 Essa autorização histórica não constitui autorização geral para novas implementações, SQL ou migrations de domínio.
+
+A reconciliação atual está registrada no PR Draft #21. O caminho Linear antigo de criação de um novo Supabase foi sincronizado como cancelado por supersessão.
 
 ## Baselines normativas aprovadas
 
@@ -162,7 +164,14 @@ O plano original da LEA-122 previa criar um projeto exclusivo chamado `predixai-
 - RLS: aplicado ao escopo do MVP-01
 - migrations: executadas e versionadas no PR #18
 
-As tarefas LEA-122, LEA-143, LEA-144 e LEA-145 devem ser tratadas como caminho original superado pelo reaproveitamento do `potiguarbd`, e não como bloqueio vigente para o MVP-01.
+Estado Linear reconciliado em 2026-08-16:
+
+- LEA-122 — Canceled;
+- LEA-143 — Canceled;
+- LEA-144 — Canceled;
+- LEA-145 — Canceled.
+
+Essas tarefas representam o caminho original superado pelo reaproveitamento do `potiguarbd` e não são bloqueio vigente para o MVP-01.
 
 ## Governança concluída
 
@@ -190,11 +199,10 @@ As tarefas LEA-122, LEA-143, LEA-144 e LEA-145 devem ser tratadas como caminho o
 
 ## Próximas ações autorizadas
 
-1. concluir e revisar a reconciliação documental deste estado;
-2. sincronizar no Linear o cancelamento/supersessão do caminho antigo LEA-122/143/144/145;
-3. após a reconciliação, retomar LEA-141 no PR #13;
-4. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
-5. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel.
+1. revisar o PR #21 de reconciliação e integrá-lo somente após PASS e gate aplicável;
+2. após a reconciliação, retomar LEA-141 no PR #13;
+3. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
+4. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel.
 
 ## Regra de leitura de HEAD e provider
 
