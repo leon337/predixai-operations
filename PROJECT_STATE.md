@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.0
-UPDATED_AT_UTC=2026-08-16T08:31:00Z
+STATE_VERSION=1.0.1
+UPDATED_AT_UTC=2026-08-17T04:38:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -15,7 +15,7 @@ ACTIVE_NORMATIVE_PR=13
 ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_SHA=c122fa84e096d49ede3ccad805d0059a47f22ac6
-LAST_VERIFIED_MAIN=5dfb29d345d30a32eac0da70ee1b94d9dd6127f8
+LAST_VERIFIED_MAIN=e19da0f3e71b582d9422f65f0bf21cbb80885989
 MVP01_ISSUE=17
 MVP01_PR=18
 MVP01_APPROVED_HEAD=5388b01883b9198b60be57c1e275cdd9c0d993d6
@@ -26,29 +26,31 @@ SUPABASE_PROJECT_REF=gotzykqvpgjzmzsyvufx
 SUPABASE_USAGE=MVP01_REUSED_EXISTING_PROJECT
 PRODUCTION_PROMOTION_AUTHORIZED=YES
 PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN_NO_PROVIDER_EVIDENCE_IN_REPOSITORY
-SECURITY_ACTIVE_ISSUE=22
-SECURITY_STATUS=BLOCKED_HIGH_NANOID_3_3_17
+SECURITY_LAST_ISSUE=22
+SECURITY_LAST_PR=23
+SECURITY_LAST_VALIDATED_HEAD=e6d54340ceb71a2237cfb2260fc46a216246099e
+SECURITY_MAIN_COMMIT=e19da0f3e71b582d9422f65f0bf21cbb80885989
+SECURITY_STATUS=PASS_SEC_02_MERGED_NANOID_3_3_18
 SECURITY_ADVISORY=GHSA-2v37-7h3g-55p8
-SECURITY_REQUIRED_FIXED_VERSION=NANOID_3_3_18_OR_COMPATIBLE_PATCHED
-RECONCILIATION_REVIEW_DECISION=BLOCKED_BY_SEC_02
+RECONCILIATION_REVIEW_DECISION=PENDING_RETEST_AFTER_SEC_02_MERGE
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-MERGE_AUTHORIZED=NO_FOR_PR13_AND_NO_FOR_PR21_WHILE_CI_RED
+MERGE_AUTHORIZED=NO_FOR_PR13_AND_NO_FOR_PR21_PENDING_RETEST_GATE
 GITHUB_LINEAR_SYNC=LINEAR_SUPERSESSION_APPLIED_PR21_PENDING_MERGE
 RECONCILIATION_PR=21
-BLOCKERS=SEC_02_HIGH_NANOID_AND_RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=REMEDIATE_SEC_02_THEN_RETEST_PR_21
+BLOCKERS=RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=RETEST_PR_21_THEN_REQUEST_HUMAN_GATE
 ```
 
 ## Identidade
 
-- Produto: PredixAI Operations
-- Primeiro módulo operacional: Almoxarifado Inteligente
-- Fonte documental e técnica oficial: GitHub
+- Produto: PredixAI Operations.
+- Primeiro módulo operacional: Almoxarifado Inteligente.
+- Fonte documental e técnica oficial: GitHub.
 - Controle operacional: Linear; quando o limite do workspace impedir nova issue, GitHub Issue/PR pode registrar o ciclo e o Linear existente recebe a evidência de sincronização.
-- Frontend: Next.js com TypeScript
-- Backend utilizado pelo MVP-01: Supabase `potiguarbd`
-- Hospedagem utilizada: Vercel
+- Frontend: Next.js com TypeScript.
+- Backend utilizado pelo MVP-01: Supabase `potiguarbd`.
+- Hospedagem utilizada: Vercel.
 
 ## Objetivo final
 
@@ -65,19 +67,17 @@ O sistema deve funcionar sem IA. A IA é camada assistiva e não possui autoriza
 
 Toda resposta operacional deve terminar com checklist por estado, tarefas e subtarefas Linear, evidências GitHub e uma única ação sugerida.
 
-## Nota de reconciliação — 2026-08-16
+## Nota de reconciliação — 2026-08-16/17
 
 O estado anterior, versão `0.9.1`, refletia corretamente o projeto em 2026-07-22, mas deixou de acompanhar uma execução acelerada iniciada em 2026-08-03.
 
 A solicitação direta de Leandro originou o MVP-01 para colocar o Almoxarifado Inteligente online. O ciclo foi executado no GitHub Issue #17 e PR #18, incluindo autenticação, materiais, entradas, saídas, saldo, estoque mínimo, histórico, RLS, migrations e interface responsiva.
 
-O PR #18 foi aprovado por Leandro e mesclado por squash no `main` em `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`. Portanto, não é mais verdadeiro afirmar que somente a fundação técnica está implementada ou que SQL/migrations nunca foram autorizados: eles foram autorizados e executados especificamente dentro do escopo do MVP-01.
+O PR #18 foi aprovado por Leandro e mesclado por squash no `main` em `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`. Essa autorização histórica não constitui autorização geral para novas implementações, SQL ou migrations de domínio.
 
-Essa autorização histórica não constitui autorização geral para novas implementações, SQL ou migrations de domínio.
+A reconciliação está registrada no PR Draft #21. O caminho Linear antigo de criação de um novo Supabase foi sincronizado como cancelado por supersessão.
 
-A reconciliação atual está registrada no PR Draft #21. O caminho Linear antigo de criação de um novo Supabase foi sincronizado como cancelado por supersessão.
-
-Durante o reteste do PR #21, o workflow `Dependency Security` detectou uma vulnerabilidade alta em `nanoid@3.3.17`, transitivamente utilizado por `postcss@8.5.23`. O problema está registrado na GitHub Issue #22 e bloqueia o PASS da reconciliação enquanto o CI permanecer vermelho.
+Durante o primeiro reteste do PR #21, o workflow `Dependency Security` detectou uma vulnerabilidade alta em `nanoid@3.3.17`, registrada como SEC-02 / Issue #22. A remediação foi executada no PR #23, validada pelo workflow oficial no HEAD `e6d54340ceb71a2237cfb2260fc46a216246099e` com `npm ci`, lockfile imutável, auditoria e build em PASS. O PR #23 foi autorizado por Leandro e mesclado por squash no `main` em `e19da0f3e71b582d9422f65f0bf21cbb80885989`; a Issue #22 foi fechada automaticamente como concluída.
 
 ## Baselines normativas aprovadas
 
@@ -99,24 +99,23 @@ A RN-02.7 ainda não é baseline concluída.
 
 ### Fundação Next.js — LEA-123
 
-- PR: #10
-- HEAD aprovado: `3da8a244cd076c2aeeb6c28d57296acc3b14e5fa`
-- Merge commit: `3c7f1ff686e01d7b8198d540e8b455f5f37e2b79`
-- Projeto Vercel: `prj_58FHK84iho6Dh24fPqq6HTGQy1ds`
+- PR: #10.
+- HEAD aprovado: `3da8a244cd076c2aeeb6c28d57296acc3b14e5fa`.
+- Merge commit: `3c7f1ff686e01d7b8198d540e8b455f5f37e2b79`.
+- Projeto Vercel: `prj_58FHK84iho6Dh24fPqq6HTGQy1ds`.
 
 ### MVP-01 — Almoxarifado Inteligente online
 
-- GitHub Issue: #17 — concluída
-- PR: #18 — merged
-- HEAD aprovado: `5388b01883b9198b60be57c1e275cdd9c0d993d6`
-- Commit no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`
-- UAT desktop: PASS
-- UAT móvel final: PASS
-- testes transacionais de estoque: 6/6 PASS
-- testes de autorização: 6/6 PASS
-- auditoria de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento
-- lockfile: versionado
-- CI de segurança e build: integrado
+- GitHub Issue: #17 — concluída.
+- PR: #18 — merged.
+- HEAD aprovado: `5388b01883b9198b60be57c1e275cdd9c0d993d6`.
+- Commit MVP no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`.
+- UAT desktop: PASS.
+- UAT móvel final: PASS.
+- Testes transacionais de estoque: 6/6 PASS.
+- Testes de autorização: 6/6 PASS.
+- Lockfile: versionado.
+- CI de segurança e build: integrado.
 
 Escopo implementado:
 
@@ -143,68 +142,63 @@ Fora do MVP-01:
 
 ## Segurança atual
 
-### SEC-02 — `nanoid@3.3.17`
+### SEC-02 — remediada e integrada
 
-- GitHub Issue: #22 — Open
-- origem da descoberta: PR #21, workflow `Dependency Security`
-- workflow run: `31936473582`
-- job: `95139095635`
-- `npm ci`: PASS
-- lockfile imutável: PASS
-- `npm audit`: 1 high, 0 critical
-- pacote afetado: `nanoid@3.3.17`
-- dependência pai: `postcss@8.5.23` com faixa `nanoid ^3.3.16`
-- advisory: `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`
-- linha 3.x afetada: `<3.3.18`
-- versão corrigida indicada pelo advisory: `3.3.18`
+- GitHub Issue #22 — Closed / Completed.
+- PR #23 — merged por squash.
+- Vulnerabilidade original: `nanoid@3.3.17`, high.
+- Advisory: `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`.
+- Correção: `nanoid@3.3.18` no `package-lock.json`.
+- HEAD validado do PR #23: `e6d54340ceb71a2237cfb2260fc46a216246099e`.
+- Workflow `Dependency Security` run `31994973803`: SUCCESS.
+- `npm ci`: PASS.
+- Lockfile inalterado após instalação: PASS.
+- `npm audit`: 0 vulnerabilidades.
+- Gate High/Critical: PASS.
+- `npm run build`: PASS.
+- Commit integrado ao `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
+- `main` verificado contém `nanoid@3.3.18`.
 
-O advisory foi atualizado em 2026-08-13, depois do PASS histórico de 2026-08-04. Portanto, o resultado antigo não deve ser reinterpretado como estado de segurança atual.
-
-Enquanto SEC-02 estiver aberta e o gate de severidade alta falhar:
-
-- PR #21 permanece Draft;
-- merge da reconciliação permanece bloqueado;
-- nenhuma promoção para produção deve ser declarada ou executada com base neste estado;
-- o gate de segurança não deve ser relaxado ou desabilitado.
+O workflow permanente é acionado por Pull Request; não existe evidência de run separado por `push` no `main`. A validação pós-integração deve, portanto, distinguir o CI verde do PR #23 da verificação direta do conteúdo efetivamente mesclado no `main`.
 
 ## Frente normativa ativa
 
 ### LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial
 
-- Estado Linear: In Progress
-- PR Draft: #13
-- Branch: `docs/lea-117-rn-02-7-manutencao`
-- HEAD observado na reconciliação: `c122fa84e096d49ede3ccad805d0059a47f22ac6`
-- LEA-138 — Done
-- LEA-139 — Done
-- LEA-140 — Done
-- LEA-141 — Todo
-- LEA-142 — Todo
+- Estado Linear: In Progress.
+- PR Draft: #13.
+- Branch: `docs/lea-117-rn-02-7-manutencao`.
+- HEAD observado na reconciliação: `c122fa84e096d49ede3ccad805d0059a47f22ac6`.
+- LEA-138 — Done.
+- LEA-139 — Done.
+- LEA-140 — Done.
+- LEA-141 — Todo.
+- LEA-142 — Todo.
 
-O próximo trabalho normativo é a LEA-141, mas a reconciliação deve primeiro sair do estado de segurança bloqueado. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo gate aplicável.
+O próximo trabalho normativo é a LEA-141, após a reconciliação PR #21 sair do gate. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo gate aplicável.
 
 ## Infraestrutura
 
 ### Vercel
 
-- Equipe registrada: PREDIX AI BR
-- Projeto: `prj_58FHK84iho6Dh24fPqq6HTGQy1ds`
-- deployment seguro registrado no ciclo MVP-01: `dpl_GKJixBbe9irjqkVddsKPKQu6UmH7`
-- estado registrado naquele gate: `READY`
-- promoção para produção: autorizada por Leandro em 2026-08-04
-- confirmação técnica de promoção: não comprovada no repositório; não deve ser inferida
+- Equipe registrada: PREDIX AI BR.
+- Projeto: `prj_58FHK84iho6Dh24fPqq6HTGQy1ds`.
+- Deployment seguro registrado no ciclo MVP-01: `dpl_GKJixBbe9irjqkVddsKPKQu6UmH7`.
+- Estado registrado naquele gate: `READY`.
+- Promoção para produção: autorizada por Leandro em 2026-08-04.
+- Confirmação técnica de promoção: não comprovada no repositório; não deve ser inferida.
 
 ### Supabase
 
 O plano original da LEA-122 previa criar um projeto exclusivo chamado `predixai-operations`, mas o ciclo MVP-01 adotou uma solução diferente: reaproveitar o projeto existente `potiguarbd`.
 
-- projeto: `potiguarbd`
-- project ref: `gotzykqvpgjzmzsyvufx`
-- região registrada: `sa-east-1`
-- estado registrado durante o MVP-01: `ACTIVE_HEALTHY`
-- Auth: utilizado pelo MVP-01
-- RLS: aplicado ao escopo do MVP-01
-- migrations: executadas e versionadas no PR #18
+- projeto: `potiguarbd`;
+- project ref: `gotzykqvpgjzmzsyvufx`;
+- região registrada: `sa-east-1`;
+- estado registrado durante o MVP-01: `ACTIVE_HEALTHY`;
+- Auth: utilizado pelo MVP-01;
+- RLS: aplicado ao escopo do MVP-01;
+- migrations: executadas e versionadas no PR #18.
 
 Estado Linear reconciliado em 2026-08-16:
 
@@ -219,11 +213,11 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 
 ### LEA-134 — GOV-02
 
-- PR: #12
-- merge commit: `067dca8742f62638644950169df590fe9562aefd`
-- LEA-135: Done
-- LEA-136: Done
-- LEA-137: Done
+- PR: #12.
+- Merge commit: `067dca8742f62638644950169df590fe9562aefd`.
+- LEA-135: Done.
+- LEA-136: Done.
+- LEA-137: Done.
 
 ## Decisões críticas vigentes
 
@@ -235,18 +229,18 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 6. O MVP-01 está incorporado ao `main`; isso não libera automaticamente o restante do roadmap.
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
-9. Vulnerabilidade alta conhecida bloqueia PASS, merge relacionado e promoção enquanto não houver remediação e reteste.
-10. A RN-02.7 permanece como frente normativa principal após a remoção do blocker de segurança da reconciliação.
+9. Vulnerabilidade alta conhecida bloqueia PASS até remediação e reteste; SEC-02 já cumpriu esse ciclo e está encerrada.
+10. A RN-02.7 permanece como frente normativa principal após a reconciliação.
 11. IA não executa operação crítica sem confirmação humana compatível com o risco.
 12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. remediar SEC-02 com a menor alteração de dependência possível e retestar `npm ci`, `npm audit` e build;
-2. retestar o HEAD resultante do PR #21 e somente então decidir PASS da reconciliação;
-3. após PASS e gate aplicável da reconciliação, retomar LEA-141 no PR #13;
+1. retestar o HEAD atualizado do PR #21 contra o `main` já corrigido pela SEC-02;
+2. somente após PASS, solicitar HUMAN_GATE para merge do PR #21;
+3. após a integração da reconciliação, retomar LEA-141 no PR #13;
 4. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
-5. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel e sem estado de segurança compatível.
+5. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel.
 
 ## Regra de leitura de HEAD e provider
 
