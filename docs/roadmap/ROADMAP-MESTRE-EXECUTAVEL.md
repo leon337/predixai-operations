@@ -8,33 +8,34 @@ Entregar um sistema operacional de almoxarifado inteligente, auditável e seguro
 
 Este é o **único roadmap operacional mestre**.
 
-O arquivo `docs/fase-0/ROADMAP-E-STATUS.md` é histórico e não deve comandar execução.
+`docs/fase-0/ROADMAP-E-STATUS.md` é histórico. Estados voláteis de `main`, PR, Issue, CI, provider e deploy devem ser verificados ao vivo.
 
-Estados voláteis de `main`, PR, Issue, CI, provider e deploy devem ser verificados ao vivo.
+## Estado consolidado — 2026-08-17
 
-## Estado consolidado em 2026-08-17
-
-- Fase 0: **em gate formal de saída — GOV-03**;
+- Fase 0: **CONCLUÍDA — GOV-03 merged e verificado**;
 - RN-00 a RN-02.7: baselines concluídas;
-- RN-02.7 REV1: integrada pelo PR #13;
+- ADR-002: arquitetura vigente pós-MVP integrada;
+- GOV-03: C01–C20 PASS;
+- PR #28: merged por squash;
+- commit do evento de encerramento no `main`: `c2608693af2023acb05624fe35845db1d25758ad`;
+- GitHub Issue #27: closed/completed;
+- evidência pós-merge: sincronizada na LEA-117;
 - MVP-01: concluído e integrado;
 - SEC-02: concluída e integrada;
-- PRs #21/#24: reconciliação pós-MVP concluída;
-- PRs #25/#26: sincronização pós-RN-02.7 concluída;
-- arquitetura executável materializada: Next.js + TypeScript + Vercel + Supabase;
-- Supabase utilizado pelo MVP-01: `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
-- arquitetura vigente pós-MVP: ADR-002, quando integrada;
+- arquitetura materializada: Next.js + TypeScript + Vercel + Supabase `potiguarbd`;
 - produção: autorização humana histórica existe, mas promoção efetiva permanece sem comprovação técnica no repositório;
 - nenhuma nova implementação, SQL, migration, alteração de dados ou produção está autorizada de forma geral.
 
+O commit acima é snapshot auditável do evento GOV-03. O HEAD corrente da `main` deve ser resolvido ao vivo.
+
 ## Execução acelerada — MVP-01
 
-Em agosto de 2026 ocorreu uma execução acelerada autorizada que antecipou uma fatia vertical originalmente distribuída por fases técnicas posteriores.
+Em agosto de 2026 uma execução acelerada autorizada antecipou uma fatia vertical originalmente distribuída por fases técnicas posteriores.
 
 ### Entregue
 
 - autenticação por e-mail e senha;
-- membros/perfis `owner`, `operator`, `viewer`;
+- perfis `owner`, `operator`, `viewer`;
 - cadastro/edição de materiais;
 - entradas e saídas;
 - saldo atual;
@@ -46,17 +47,15 @@ Em agosto de 2026 ocorreu uma execução acelerada autorizada que antecipou uma 
 - CI de dependências/build;
 - UAT desktop/mobile.
 
-### Não implica
-
-O MVP-01 não encerra automaticamente as fases técnicas completas e não libera o restante do produto.
+O MVP-01 não encerra as fases técnicas completas e não libera automaticamente o restante do produto.
 
 ## Fase 0 — Domínio, governança e arquitetura suficiente
 
 ### Estado
 
-`GOV-03 — GATE FORMAL DE SAÍDA`
+`COMPLETED — GOV-03`
 
-### Baselines concluídas
+### Baselines congeladas
 
 - RN-00 REV1 — PredixAI Domain Dictionary;
 - RN-01 REV2.1 — Cadastro e Classificação de Materiais;
@@ -69,25 +68,24 @@ O MVP-01 não encerra automaticamente as fases técnicas completas e não libera
 - RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial;
 - histórico auditável e política de governança;
 - ADR-001 como decisão arquitetural histórica;
-- ADR-002 como consolidação arquitetural pós-MVP quando integrada.
+- ADR-002 como arquitetura vigente pós-MVP-01.
 
-### Critério de saída
+### Critério de saída — resultado
 
-1. RN-02.7 integrada — **ATENDIDO**;
-2. checklist formal GOV-03 aprovado — **EM RETESTE**;
-3. arquitetura e limites da etapa seguinte confirmados — **ADR-002 EM CONSOLIDAÇÃO**;
-4. zero drift bloqueador conhecido entre fontes de alta autoridade — **EM RETESTE**;
-5. merge GOV-03 mediante HUMAN_GATE separado — **PENDENTE**.
+1. RN-02.7 integrada — **PASS**;
+2. checklist GOV-03 — **C01–C20 PASS**;
+3. arquitetura e limites da etapa seguinte — **PASS / ADR-002**;
+4. zero drift bloqueador conhecido no gate — **PASS**;
+5. HUMAN_GATE e merge do GOV-03 — **PASS**;
+6. verificação pós-merge e sincronização — **PASS**.
 
-### Documento de gate
+Documento auditável: `docs/governanca/CHECKLIST-ENCERRAMENTO-FASE-0-2026-08-17.md`.
 
-`docs/governanca/CHECKLIST-ENCERRAMENTO-FASE-0-2026-08-17.md`
+## Regra pós-Fase 0
 
-## Limites pós-Fase 0
+Encerrar a Fase 0 significa congelar uma baseline documental suficiente para avançar. **Não significa que todo o domínio esteja implementado.**
 
-Encerrar a Fase 0 significa congelar uma baseline documental suficiente para avançar. Não significa que todo o domínio esteja implementado.
-
-Após a saída da Fase 0, cada frente futura deve ter escopo próprio e respeitar gates de risco.
+Nenhuma fase abaixo é selecionada automaticamente. A escolha do próximo escopo exige decisão explícita e novo controle operacional.
 
 Não existe autorização automática para:
 
@@ -112,68 +110,42 @@ Não existe autorização automática para:
 
 ### Pendente para a fase completa
 
-- consolidar política real de LOCAL/PREVIEW/PRODUÇÃO;
-- verificar isolamento e risco de dados entre ambientes;
-- consolidar secrets/variáveis por ambiente;
-- definir backup, retenção e restore;
-- testar recuperação proporcional ao risco;
-- confirmar tecnicamente produção somente com evidência do provider;
-- documentar observabilidade e rollback aplicáveis.
-
-### Critério de saída
-
-- infraestrutura alvo e ambientes documentados com evidência;
-- secrets protegidos;
-- backup/recovery definidos e testáveis;
-- preview reproduzível;
-- produção declarada apenas quando comprovada.
+- política real de LOCAL/PREVIEW/PRODUÇÃO;
+- isolamento e risco de dados entre ambientes;
+- secrets/variáveis por ambiente;
+- backup, retenção e restore;
+- teste de recuperação proporcional ao risco;
+- confirmação técnica de produção por evidência do provider;
+- observabilidade e rollback aplicáveis.
 
 ## Fase 2 — Modelo físico, dados e segurança completos
 
-### Já antecipado parcialmente
+Já antecipado parcialmente pelo MVP-01: migrations, autenticação, perfis básicos, RLS, movimentações básicas e histórico.
 
-- migrations do MVP-01;
-- autenticação;
-- perfis básicos;
-- RLS do escopo;
-- movimentações básicas e histórico.
-
-### Pendente
+Pendente:
 
 - modelo físico do domínio completo;
-- constraints/índices necessários;
-- políticas RLS para todos os módulos aplicáveis;
+- constraints e índices necessários;
+- políticas RLS para módulos ampliados;
 - auditoria transversal;
-- seed mínimo não sensível quando necessário;
-- testes de autorização e integridade do domínio ampliado.
-
-### Critério de saída
-
-- migrations completas do escopo autorizado revisadas;
-- RLS testada;
-- integridade e auditoria verificadas;
-- nenhuma alteração de dados sem gate correspondente.
+- seeds não sensíveis quando necessários;
+- testes ampliados de autorização e integridade.
 
 ## Fase 3 — Experiência e estrutura completa da aplicação
 
-### Já antecipado parcialmente
+Já antecipado parcialmente: layout autenticado, dashboard de estoque, navegação responsiva e UAT desktop/mobile do MVP-01.
 
-- layout autenticado funcional;
-- dashboard de estoque;
-- navegação responsiva;
-- desktop/mobile validados no MVP-01.
-
-### Pendente
+Pendente:
 
 - arquitetura de informação dos módulos ampliados;
 - estados vazios/loading/error consistentes;
 - acessibilidade transversal;
 - design system consolidado;
-- tratamento de sessão e permissões em todos os módulos.
+- sessão e permissões em todos os módulos.
 
 ## Fase 4 — Operação ampliada
 
-### Capacidades pendentes principais
+Capacidades pendentes principais:
 
 1. empresas/unidades e responsabilidades completas;
 2. catálogo e patrimônios completos;
@@ -189,7 +161,7 @@ As regras normativas da Fase 0 orientam essas implementações, mas não as auto
 
 ## Fase 5 — Qualidade e homologação
 
-### Pendente
+Pendente:
 
 - testes unitários/integração para escopo ampliado;
 - testes RLS/permissões;
@@ -204,7 +176,7 @@ A evidência do MVP-01 é válida somente para sua fatia entregue.
 
 ## Fase 6 — Produção controlada
 
-### Pendente
+Pendente:
 
 - confirmar provider/plano/domínio aplicáveis;
 - backup inicial e restore testado;
@@ -213,23 +185,11 @@ A evidência do MVP-01 é válida somente para sua fatia entregue.
 - promoção comprovada;
 - operação assistida e critérios de rollback.
 
-### Regra permanente
-
 `PRODUCTION_PROMOTION_AUTHORIZED=YES` histórico não equivale a `PRODUCTION_PROMOTION_CONFIRMED=YES`.
 
 ## IA assistiva
 
-IA é camada auxiliar. O produto deve continuar operável sem IA.
-
-IA não recebe autoridade irrestrita para:
-
-- alterar estoque;
-- dar baixa patrimonial;
-- aprovar saída;
-- alterar causa/resultado técnico crítico;
-- liberar patrimônio para uso;
-- confirmar movimentação/custódia;
-- executar ação destrutiva.
+IA é camada auxiliar e não recebe autoridade irrestrita para alterar estoque, dar baixa, aprovar saída, liberar patrimônio, confirmar movimentação/custódia ou executar ação destrutiva.
 
 ## Governança executável
 
@@ -237,10 +197,10 @@ Toda entrega relevante segue, quando aplicável:
 
 `controle operacional → branch → PR → HEAD revisado → achados → remediação → reteste → CI → HUMAN_GATE → merge → verificação pós-merge → sincronização`
 
-GitHub é a fonte documental/técnica. Linear é o controle operacional; quando o limite do workspace impedir nova issue, GitHub Issue/PR pode controlar o ciclo e uma issue Linear existente recebe a evidência.
+GitHub é a fonte documental/técnica. Linear é o controle operacional; quando o workspace impedir nova issue, GitHub Issue/PR pode controlar o ciclo com evidência registrada no Linear existente.
 
 ## Próxima transição
 
-Enquanto GOV-03 não estiver integrado, a única transição permitida é concluir o gate de saída da Fase 0.
+**Nenhuma frente técnica foi selecionada automaticamente.**
 
-Depois do merge verificado do GOV-03, a próxima frente deve ser escolhida e autorizada explicitamente a partir das fases técnicas acima. Nenhum escopo funcional é escolhido automaticamente por este roadmap.
+A próxima ação canônica é escolher explicitamente um próximo escopo entre as fases acima, definir seus limites e somente então abrir a tarefa/issue correspondente.

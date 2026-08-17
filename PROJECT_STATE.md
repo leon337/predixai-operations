@@ -3,98 +3,89 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.1.2
-UPDATED_AT_UTC=2026-08-17T07:03:30Z
+STATE_VERSION=1.2.0
+UPDATED_AT_UTC=2026-08-17T07:12:33Z
 REPOSITORY=leon337/predixai-operations
-CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
-PHASE_GATE=GOV_03_FORMAL_EXIT_REVIEW
+CURRENT_PHASE=POST_PHASE0_TRANSITION
+PHASE0_EXIT_STATUS=COMPLETED_GOV03_MERGED_AND_VERIFIED
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
-ACTIVE_TASK=GOV_03_PHASE0_EXIT_CHECKLIST
-PRIMARY_ACTIVE_TASK=GOV_03_PHASE0_EXIT_CHECKLIST
-PRIMARY_ACTIVE_SUBTASK=FINAL_GATE_AWAITING_HUMAN_MERGE_AUTHORIZATION
-GOVERNANCE_ACTIVE_TASK=GOV_03_PHASE0_EXIT_CHECKLIST
-CONTROL_GITHUB_ISSUE=27
-ACTIVE_PR=28
-ACTIVE_BRANCH=docs/gov-03-phase0-exit-checklist
-ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
-LAST_VERIFIED_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
-LAST_VERIFIED_HEAD_SEMANTICS=FINAL_SUBSTANTIVE_GOV03_RETEST_HEAD
-LAST_VERIFIED_MAIN=a76f53a925d9587f9f7a83b1238f071c8416e9b6
-LAST_VERIFIED_MAIN_SEMANTICS=SNAPSHOT_BEFORE_GOV03_PR28
-ACTIVE_BASELINE=PHASE0_GOV03_EXIT_CANDIDATE
-APPROVED_BASELINES=RN00_REV1;RN01_REV2_1;RN021_REV1;RN022_REV1;RN023_REV2;RN024_REV3;RN025_REV1_PLUS_ERRATA;RN026_REV1_PLUS_ERRATA;RN027_REV1
-INITIAL_GOV03_REVIEW_HEAD=a76f53a925d9587f9f7a83b1238f071c8416e9b6
-INITIAL_GOV03_DECISION=FAIL_REMEDIABLE
+ACTIVE_TASK=NONE
+PRIMARY_ACTIVE_TASK=NONE
+PRIMARY_ACTIVE_SUBTASK=NONE
+GOVERNANCE_ACTIVE_TASK=NONE
+CONTROL_GITHUB_ISSUE=27_COMPLETED
+ACTIVE_PR=NONE
+ACTIVE_BRANCH=NONE
+ACTIVE_HEAD_SHA=NONE
+LAST_VERIFIED_HEAD=2a09f58a2a55a7dbbc9b6a23ced48b5e7e827e6a
+LAST_VERIFIED_HEAD_SEMANTICS=AUTHORIZED_PR28_HEAD
+LAST_VERIFIED_MAIN=c2608693af2023acb05624fe35845db1d25758ad
+LAST_VERIFIED_MAIN_SEMANTICS=GOV03_INTEGRATION_EVENT_SNAPSHOT_RESOLVE_CURRENT_MAIN_LIVE
+ACTIVE_BASELINE=PHASE0_BASELINE_FROZEN
+APPROVED_BASELINES=RN00_REV1;RN01_REV2_1;RN021_REV1;RN022_REV1;RN023_REV2;RN024_REV3;RN025_REV1_PLUS_ERRATA;RN026_REV1_PLUS_ERRATA;RN027_REV1;ADR002_POST_MVP01
+GOV03_INITIAL_DECISION=FAIL_REMEDIABLE
 GOV03_FINDINGS=GOV_03_F01_TO_F09
 GOV03_REMEDIATION_STRATEGY=B_CONTROLLED_CONSOLIDATION
-GOV03_DESIGN_HUMAN_GATE=APPROVED
-GOV03_FIRST_REMEDIATION_HEAD=3cffcf6c0f32e081f3e1b0ee56fca57d4fb5d589
-GOV03_FIRST_REMEDIATION_CI_RUN=32003899554
-GOV03_FIRST_REMEDIATION_CI=PASS_TECHNICAL_BUT_F09_FOUND
-GOV03_F09_STATUS=REMEDIATED_AND_RETESTED
-GOV03_FINAL_SUBSTANTIVE_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
-GOV03_FINAL_CI_RUN=32004060411
-GOV03_FINAL_SECURITY_ARTIFACT=9279392534
-GOV03_FINAL_REVIEW_THREADS=0
-GOV03_FINAL_RETEST=PASS
 GOV03_CRITERIA=C01_TO_C20_PASS
-GOV03_FINAL_DECISION=PASS_AWAITING_HUMAN_GATE
-REVIEW_DECISION=PASS_AWAITING_HUMAN_GATE
-PHASE0_EXIT_STATUS=PASS_AWAITING_HUMAN_GATE
-GITHUB_LINEAR_SYNC=PASS_FALLBACK_GITHUB_ISSUE_27_WITH_EVIDENCE_IN_LEA117
-IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
+GOV03_SUBSTANTIVE_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
+GOV03_SUBSTANTIVE_CI_RUN=32004060411
+GOV03_FINAL_PR_HEAD=2a09f58a2a55a7dbbc9b6a23ced48b5e7e827e6a
+GOV03_FINAL_CI_RUN=32004213895
+GOV03_FINAL_SECURITY_ARTIFACT=9279441855
+GOV03_REVIEW_THREADS=0
+GOV03_PR=28
+GOV03_MAIN_COMMIT=c2608693af2023acb05624fe35845db1d25758ad
+GOV03_ISSUE=27_COMPLETED
+GOV03_LINEAR_SYNC=PASS_EVIDENCE_RECORDED_IN_LEA117
+REVIEW_DECISION=PASS_MERGED_VERIFIED
+GITHUB_LINEAR_SYNC=PASS_GOV03_COMPLETED
+IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_NO_FUTURE_SCOPE_AUTHORIZED
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
 DATA_CHANGE_AUTHORIZED=NO
 SUPABASE_CHANGE_AUTHORIZED=NO
 PRODUCTION_CHANGE_AUTHORIZED=NO
-MERGE_AUTHORIZED=NO_FOR_PR28_UNTIL_EXPLICIT_HUMAN_GATE
-BLOCKERS=HUMAN_GATE_FOR_PR28_MERGE
-KNOWN_PENDING=PR28_MERGE_POST_MERGE_PHASE0_VERIFICATION_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=REQUEST_EXPLICIT_HUMAN_GATE_TO_MERGE_PR28
+MERGE_AUTHORIZED=NO_OPEN_MERGE_AUTHORIZATION
+BLOCKERS=NONE_FOR_NEXT_SCOPE_SELECTION
+KNOWN_PENDING=NEXT_SCOPE_SELECTION_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=SELECT_NEXT_SCOPE_FROM_ROADMAP
 ```
 
-## Identidade
+## Identidade e autoridade
 
 - Produto: PredixAI Operations.
 - Primeiro módulo operacional: Almoxarifado Inteligente.
-- Repositório oficial: `leon337/predixai-operations`.
-- GitHub: fonte documental e técnica oficial.
-- Linear: controle operacional oficial; quando o limite do workspace impedir nova issue, GitHub Issue/PR pode controlar o ciclo e uma issue Linear existente recebe a evidência de sincronização.
-- Frontend materializado: Next.js com TypeScript.
-- Backend/plataforma de dados utilizada no MVP-01: Supabase.
-- Hospedagem utilizada: Vercel.
-
-## Autoridade documental
+- GitHub é a fonte documental e técnica oficial.
+- Linear é o controle operacional; quando o workspace impedir nova issue, o fallback GitHub deve ser registrado no Linear existente.
+- Estado volátil de branch, PR, Issue, CI, provider e deploy deve ser verificado ao vivo.
 
 Ordem de precedência:
 
 1. código e arquivos reais da branch padrão;
 2. este `PROJECT_STATE.md`;
-3. regra/plano/missão ativa;
+3. regra, plano ou missão ativa;
 4. baselines normativas aprovadas;
 5. Linear ou fallback operacional auditável;
 6. resumos/histórico;
 7. contexto do chat.
 
-Estado volátil de branch, PR, Issue, CI, provider ou deploy deve ser verificado ao vivo.
+## Fase 0 — encerramento formal
 
-## Políticas obrigatórias
+A Fase 0 — Concepção e Modelagem do Domínio foi encerrada pelo GOV-03 após:
 
-- `PREDIXAI_OPERATIONS_PROJECT_INSTRUCTIONS.md`;
-- `docs/governanca/POLITICA-CHECKLIST-E-PROXIMA-ACAO.md`;
-- `docs/roadmap/ROADMAP-MESTRE-EXECUTAVEL.md`;
-- `docs/governanca/HISTORICO-AUDITAVEL-FASE-0.md`;
-- `docs/arquitetura/ADR-002-ARQUITETURA-VIGENTE-POS-MVP01.md` quando integrada.
+- revisão inicial `FAIL_REMEDIABLE`;
+- achados GOV-03-F01 a F09 registrados e remediados;
+- critérios C01 a C20 em PASS;
+- ADR-002 consolidada como arquitetura vigente pós-MVP-01;
+- HEAD final do PR #28 validado com CI `32004213895` em SUCCESS e zero threads;
+- HUMAN_GATE explícito de Leandro para o merge do PR #28;
+- squash merge do PR #28;
+- verificação pós-merge do `main` em `c2608693af2023acb05624fe35845db1d25758ad`;
+- GitHub Issue #27 encerrado como `completed`;
+- evidência pós-merge sincronizada na LEA-117.
 
-Toda resposta operacional deve terminar com checklist de estado/controle/evidência e uma única próxima ação sugerida.
+O SHA acima é o snapshot auditável do evento de integração do GOV-03. Para o HEAD corrente da `main`, consultar o GitHub ao vivo.
 
-## Objetivo final
-
-Construir um sistema operacional de almoxarifado inteligente, auditável e seguro, cobrindo materiais, patrimônios, estoques, movimentações, obras, eventos, romaneios, manutenção e relatórios.
-
-O sistema deve continuar operável sem IA. IA é camada assistiva e não recebe autoridade irrestrita para operações críticas.
-
-## Baselines da Fase 0
+## Baselines congeladas da Fase 0
 
 - RN-00 REV1 — PredixAI Domain Dictionary;
 - RN-01 REV2.1 — Cadastro e Classificação de Materiais;
@@ -105,183 +96,57 @@ O sistema deve continuar operável sem IA. IA é camada assistiva e não recebe 
 - RN-02.5 REV1 + errata LEA-58 F01–F05 — Movimentações e Integridade do Estoque;
 - RN-02.6 REV1 + errata LEA-64 F01–F05 — Obras, Eventos e Romaneios;
 - RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial;
-- política permanente de checklist e próxima ação;
-- histórico auditável da Fase 0;
-- ADR-001 — decisão arquitetural histórica inicial;
-- ADR-002 — arquitetura vigente pós-MVP-01, em consolidação no GOV-03.
+- ADR-002 — Arquitetura Vigente Pós-MVP-01;
+- políticas e histórico auditável da Fase 0.
 
-## RN-02.7 — estado consolidado
+A conclusão normativa de um domínio não significa que sua funcionalidade esteja implementada.
 
-```text
-RN027_PR=13
-RN027_AUTHORIZED_HEAD=bf279b7ca395608fe6283bfadf7081b6d9e929c9
-RN027_MAIN_COMMIT=8fbd006a2b49f810adaf0d2d3f18b6be25421d6c
-RN027_STATUS=BASELINE_MERGED
-LEA117_STATUS=DONE
-LEA142_STATUS=PASS_DONE
-LEA142_FINAL_CI_RUN=32000471638
-LEA142_FINAL_SECURITY_ARTIFACT=9278204797
-```
-
-A RN-02.7 é baseline vigente. Seu cabeçalho processual pré-merge registra o instante da revisão e deve ser lido como snapshot histórico; o estado atual é controlado pelo GitHub real, por este arquivo e pelo registro pós-merge.
-
-A conclusão normativa da RN-02.7 não significa que manutenção patrimonial esteja implementada.
-
-## Sincronizações pós-RN-02.7
-
-### PR #25
-
-```text
-HEAD=2c79656cb87f0cd83f491d9141ed7d31d782a696
-CI_RUN=32001611306
-ARTIFACT=9278583724
-MAIN_COMMIT=21d3dc83d1436ce40adfde49288e9d53c8b7f63a
-STATUS=MERGED
-```
-
-### PR #26
-
-```text
-HEAD=c337a71256e6472053e8eb412aec779357327972
-CI_RUN=32002194191
-ARTIFACT=9278775965
-MAIN_COMMIT=a76f53a925d9587f9f7a83b1238f071c8416e9b6
-STATUS=MERGED
-```
-
-A sequência de sincronizações pós-RN-02.7 está encerrada.
-
-## MVP-01 — estado técnico implementado
+## MVP-01 — estado materializado
 
 ```text
 MVP01_ISSUE=17
 MVP01_PR=18
-MVP01_APPROVED_HEAD=5388b01883b9198b60be57c1e275cdd9c0d993d6
 MVP01_MAIN_COMMIT=5dfb29d345d30a32eac0da70ee1b94d9dd6127f8
 MVP01_STATUS=MERGED_UAT_DESKTOP_AND_MOBILE_PASS
 SUPABASE_PROJECT=potiguarbd
 SUPABASE_PROJECT_REF=gotzykqvpgjzmzsyvufx
 SUPABASE_REGION=sa-east-1
-SUPABASE_USAGE=MVP01_REUSED_EXISTING_PROJECT
 PRODUCTION_PROMOTION_AUTHORIZED=YES
 PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN_NO_PROVIDER_EVIDENCE_IN_REPOSITORY
 ```
 
-Implementado no escopo MVP-01:
+Materializado no MVP-01: autenticação, perfis básicos, materiais, entradas, saídas, saldo, estoque mínimo, histórico, RLS/funções/migrations do escopo e interface responsiva.
 
-- autenticação por e-mail e senha;
-- membros/perfis `owner`, `operator`, `viewer`;
-- materiais básicos;
-- entrada e saída;
-- saldo atual e bloqueio de saída superior ao saldo;
-- estoque mínimo e alertas;
-- histórico auditável de movimentações;
-- RLS/funções/migrations necessárias ao MVP-01;
-- interface responsiva desktop/mobile;
-- testes de estoque 6/6 PASS;
-- testes de autorização 6/6 PASS;
-- UAT desktop/mobile PASS.
+Continuam fora desse escopo: patrimônio completo, manutenção implementada, obras/eventos/romaneios completos, transferências/inventário/ajustes completos, anexos/QR Code completos, relatórios avançados, IA operacional e modelo físico completo.
 
-Fora do MVP-01:
+## Arquitetura vigente
 
-- patrimônio completo;
-- manutenção implementada;
-- obras/eventos/romaneios completos;
-- transferências/inventário/ajustes completos;
-- anexos/QR Code completos;
-- relatórios avançados;
-- IA operacional;
-- modelo físico completo;
-- política completa de ambientes, backup/restore e produção controlada.
-
-## Segurança transversal
-
-```text
-SECURITY_LAST_ISSUE=22
-SECURITY_LAST_PR=23
-SECURITY_LAST_VALIDATED_HEAD=e6d54340ceb71a2237cfb2260fc46a216246099e
-SECURITY_MAIN_COMMIT=e19da0f3e71b582d9422f65f0bf21cbb80885989
-SECURITY_STATUS=PASS_SEC_02_MERGED_NANOID_3_3_18
-SECURITY_ADVISORY=GHSA-2v37-7h3g-55p8
-```
-
-Resultados de auditoria são temporais e devem ser revalidados quando uma decisão depender do estado atual das dependências.
-
-## Arquitetura vigente — GOV-03
-
-A consolidação aprovada para o GOV-03 adota como arquitetura materializada atual:
+A arquitetura materializada e consolidada pela ADR-002 é:
 
 - Next.js + TypeScript;
 - Vercel;
-- Supabase `potiguarbd` para o escopo materializado;
-- Auth, RLS e migrations versionadas no escopo MVP-01.
+- Supabase `potiguarbd` para a fatia materializada;
+- PostgreSQL/Auth/RLS/migrations e funções do escopo MVP-01.
 
-A topologia ASUS N43SM + FastAPI + PostgreSQL local/Ollama permanece como exploração histórica e não é requisito atual obrigatório.
+A topologia ASUS N43SM + FastAPI + PostgreSQL local/Ollama permanece como exploração histórica, não como requisito atual obrigatório.
 
-ADR-002 define os limites pós-MVP e supersede as premissas factuais obsoletas da ADR-001 sem apagar seu histórico.
+## Limites permanentes pós-Fase 0
 
-## GOV-03 — Checklist formal de saída
-
-Controle:
-
-- GitHub Issue #27;
-- PR #28;
-- branch `docs/gov-03-phase0-exit-checklist`;
-- checklist `docs/governanca/CHECKLIST-ENCERRAMENTO-FASE-0-2026-08-17.md`.
-
-A criação de uma nova issue Linear para GOV-03 foi tentada e recusada por limite do workspace. O fallback previsto na governança foi aplicado e a evidência foi registrada na LEA-117.
-
-Histórico da revisão:
-
-```text
-INITIAL_HEAD=a76f53a925d9587f9f7a83b1238f071c8416e9b6
-INITIAL_DECISION=FAIL_REMEDIABLE
-INITIAL_FINDINGS=GOV_03_F01_TO_F08
-FIRST_REMEDIATION_HEAD=3cffcf6c0f32e081f3e1b0ee56fca57d4fb5d589
-FIRST_REMEDIATION_CI=PASS
-NEW_FINDING=GOV_03_F09
-FINAL_SUBSTANTIVE_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
-FINAL_CI_RUN=32004060411
-FINAL_ARTIFACT=9279392534
-FINAL_THREADS=0
-FINAL_CRITERIA=C01_TO_C20_PASS
-FINAL_DECISION=PASS_AWAITING_HUMAN_GATE
-```
-
-F07 foi reconciliado fechando a GitHub Issue #1 como `completed`, com nota auditável; a RN-01 não foi alterada.
-
-F09 foi registrado antes da correção e remediado na versão 1.1.1 deste estado; o HEAD substantivo `130e4ee...` passou no reteste técnico e de governança.
-
-## Critério de saída da Fase 0
-
-Revisão de saída:
-
-- RN-02.7 integrada — PASS;
-- checklist C01–C20 — PASS;
-- ADR-002 e limites — PASS;
-- CI substantivo — PASS;
-- threads substantivas — 0;
-- HUMAN_GATE de merge — PENDENTE;
-- integração e verificação pós-merge — PENDENTE.
-
-A Fase 0 **ainda não deve ser declarada encerrada na `main`** até que o PR #28 seja autorizado, mesclado e verificado.
-
-## Limites permanentes
-
-O encerramento documental da Fase 0 **não concede autorização geral** para o roadmap futuro.
-
-Exigem escopo/gate próprios conforme o risco:
+O encerramento da Fase 0 **não autoriza automaticamente**:
 
 - código funcional novo;
-- SQL;
-- migrations;
-- alterações de dados reais;
+- SQL ou migrations;
 - mudanças de RLS/Auth;
-- provisionamento ou alteração de Supabase;
+- alterações de dados reais;
+- provisionamento ou mudança de Supabase;
 - deploy/promoção em produção;
 - operações destrutivas;
-- mudanças arquiteturais relevantes ou de custo.
+- mudança arquitetural relevante ou com custo.
+
+Cada frente futura exige escopo e gate próprios conforme o risco.
 
 ## Próxima ação canônica
 
-Solicitar HUMAN_GATE explícito para o merge do PR #28. Antes de executar o merge, revalidar HEAD final, `main`, CI e threads. Após o merge, verificar a integração, fechar Issue #27 e sincronizar Linear/fallback antes de declarar a Fase 0 formalmente encerrada.
+Nenhuma fase técnica foi selecionada automaticamente pelo encerramento da Fase 0.
+
+A próxima ação é **selecionar explicitamente o próximo escopo a partir do Roadmap Mestre Executável**. Somente depois dessa escolha deve ser criado o controle operacional correspondente.
