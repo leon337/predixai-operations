@@ -33,6 +33,9 @@ jobs:
       - name: Verify lockfile is unchanged
         run: git diff --exit-code -- package-lock.json
 
+      - name: Validate environment contract
+        run: npm test
+
       - name: Record dependency tree
         run: npm ls sharp postcss --all > dependency-tree.txt
 
