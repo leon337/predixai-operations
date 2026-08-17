@@ -15,18 +15,19 @@ Este é o **único roadmap operacional mestre**.
 - Fase 0: **CONCLUÍDA — GOV-03 merged e verificado**;
 - RN-00 a RN-02.7: baselines concluídas;
 - ADR-002: arquitetura vigente pós-MVP integrada;
-- GOV-03: C01–C20 PASS;
-- PR #28: merged por squash;
-- commit do evento de encerramento no `main`: `c2608693af2023acb05624fe35845db1d25758ad`;
-- GitHub Issue #27: closed/completed;
-- evidência pós-merge: sincronizada na LEA-117;
 - MVP-01: concluído e integrado;
 - SEC-02: concluída e integrada;
-- arquitetura materializada: Next.js + TypeScript + Vercel + Supabase `potiguarbd`;
-- produção: autorização humana histórica existe, mas promoção efetiva permanece sem comprovação técnica no repositório;
-- nenhuma nova implementação, SQL, migration, alteração de dados ou produção está autorizada de forma geral.
-
-O commit acima é snapshot auditável do evento GOV-03. O HEAD corrente da `main` deve ser resolvido ao vivo.
+- Fase 1 residual: **ATIVA — INFRA-04**;
+- controle: GitHub Issue #30 + fallback Linear LEA-121;
+- R1: concluído em leitura;
+- R2: Opção C vigente — `potiguarbd` permanece `INACTIVE`;
+- R3: **MERGED/VERIFIED**;
+- R4: **MERGED/VERIFIED**;
+- F10: **MERGED/VERIFIED**;
+- PR #32: merged por squash;
+- commit de integração R3/R4/F10: `354e4d76ca89c5215a12058f7af418e275855cf5`;
+- R5, R6 e R7: pendentes;
+- produção: **não tecnicamente confirmada**.
 
 ## Execução acelerada — MVP-01
 
@@ -55,68 +56,121 @@ O MVP-01 não encerra as fases técnicas completas e não libera automaticamente
 
 `COMPLETED — GOV-03`
 
-### Baselines congeladas
+Baselines congeladas: RN-00 a RN-02.7, ADR-001 histórica, ADR-002 vigente e governança auditável.
 
-- RN-00 REV1 — PredixAI Domain Dictionary;
-- RN-01 REV2.1 — Cadastro e Classificação de Materiais;
-- RN-02.1 REV1 — Núcleo Organizacional;
-- RN-02.2 REV1 — Usuários, Perfis, Permissões e Responsabilidades;
-- RN-02.3 REV2 — Materiais, Catálogo, Atributos e Patrimônios;
-- RN-02.4 REV3 — Estoques, Saldos, Localizações e Disponibilidade;
-- RN-02.5 REV1 + errata — Movimentações e Integridade do Estoque;
-- RN-02.6 REV1 + errata — Obras, Eventos e Romaneios;
-- RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial;
-- histórico auditável e política de governança;
-- ADR-001 como decisão arquitetural histórica;
-- ADR-002 como arquitetura vigente pós-MVP-01.
-
-### Critério de saída — resultado
-
-1. RN-02.7 integrada — **PASS**;
-2. checklist GOV-03 — **C01–C20 PASS**;
-3. arquitetura e limites da etapa seguinte — **PASS / ADR-002**;
-4. zero drift bloqueador conhecido no gate — **PASS**;
-5. HUMAN_GATE e merge do GOV-03 — **PASS**;
-6. verificação pós-merge e sincronização — **PASS**.
-
-Documento auditável: `docs/governanca/CHECKLIST-ENCERRAMENTO-FASE-0-2026-08-17.md`.
-
-## Regra pós-Fase 0
-
-Encerrar a Fase 0 significa congelar uma baseline documental suficiente para avançar. **Não significa que todo o domínio esteja implementado.**
-
-Nenhuma fase abaixo é selecionada automaticamente. A escolha do próximo escopo exige decisão explícita e novo controle operacional.
-
-Não existe autorização automática para:
-
-- código funcional novo;
-- SQL/migrations;
-- mudanças de RLS/Auth;
-- alterações de dados reais;
-- mudanças/provisionamento Supabase;
-- deploy/promoção de produção;
-- operações destrutivas;
-- mudanças arquiteturais relevantes ou de custo.
+Encerrar a Fase 0 não significa que todo o domínio esteja implementado.
 
 ## Fase 1 — Infraestrutura e ambientes completos
 
-### Já materializado parcialmente
+### Estado atual
 
-- base Next.js;
-- Vercel utilizada;
-- Supabase `potiguarbd` utilizado;
-- Auth/RLS/migrations do MVP-01;
-- CI de dependências/build.
+`ACTIVE — INFRA-04`
 
-### Pendente para a fase completa
+Relatório consolidado:
 
-- política real de LOCAL/PREVIEW/PRODUÇÃO;
-- isolamento e risco de dados entre ambientes;
-- secrets/variáveis por ambiente;
-- backup, retenção e restore;
-- teste de recuperação proporcional ao risco;
-- confirmação técnica de produção por evidência do provider;
-- observabilidade e rollback aplicáveis.
+`docs/infra/INFRA-04-AUDITORIA-READONLY-2026-08-17.md`
+
+### R1 — Vercel
+
+**READONLY COMPLETED.**
+
+- equipe `PREDIX AI BR` sem projeto PredixAI Operations descoberto;
+- Project ID histórico e slug retornaram 404;
+- GitHub Deployments: 0;
+- nenhuma recriação/reconexão executada.
+
+F01 permanece aberto até reconciliação futura de provider.
+
+### R2 — Supabase remoto
+
+**OPTION C ACTIVE.**
+
+- `potiguarbd` permanece `INACTIVE`;
+- nenhum projeto ativo foi pausado;
+- nenhum restore executado;
+- nenhum plano/custo alterado.
+
+F02/F05 permanecem dependentes de decisão futura de provider/capacidade.
+
+### R3 — contrato de ambiente
+
+**MERGED/VERIFIED no PR #32.**
+
+- URL/chave hardcoded removidas;
+- `NEXT_PUBLIC_SUPABASE_URL`;
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`;
+- `.env.example` local;
+- contrato automatizado no CI.
+
+F03 e F06 remediados para a camada local/repositório.
+
+### R4 — ambiente local isolado
+
+**MERGED/VERIFIED no PR #32.**
+
+- `supabase/config.toml` local;
+- launcher Supabase CLI `2.111.0`;
+- `start`, `status`, `db reset --local`, `stop`;
+- seed desabilitado;
+- CI valida reconstrução local.
+
+F09 remediado localmente.
+
+### F10 — cadeia de migrations
+
+**MERGED/VERIFIED no PR #32.**
+
+A cadeia histórica não reconstruía o banco do zero. Foi adicionada uma migration-base mínima, por TDD, sem alterar as duas migrations históricas do MVP.
+
+Validação final pré-merge:
+
+- HEAD `70f0bc94e47acba46859eb0c6f2095bfb7c9ee6f`;
+- CI `32014358913` — SUCCESS;
+- artefato `9283021725`;
+- 0 review threads.
+
+Integração:
+
+- squash merge `354e4d76ca89c5215a12058f7af418e275855cf5`.
+
+### R5 — Backup e restore
+
+**PENDING.**
+
+Definir antes de qualquer produção controlada:
+
+- método de backup compatível com provider/plano;
+- retenção;
+- responsável;
+- cópia off-site;
+- procedimento de restore;
+- teste de restauração não destrutivo em ambiente isolado.
+
+Qualquer mutação remota exige HUMAN_GATE próprio.
+
+### R6 — CI/CD e rollback
+
+**PENDING.**
+
+- smoke test;
+- preview controlado;
+- promoção manual gated;
+- rollback de aplicação;
+- rollback de banco;
+- evidência de recuperação.
+
+### R7 — Observabilidade
+
+**PENDING.**
+
+- erros/logs por ambiente;
+- critério de saúde;
+- retenção;
+- evidência mínima antes de declarar produção.
+
+### Critério de saída da Fase 1
+
+A Fase 1 só pode ser encerrada quando R5–R7 estiverem suficientemente validados, riscos HIGH remanescentes tratados ou explicitamente aceitos e produção tiver estado técnico inequívoco.
 
 ## Fase 2 — Modelo físico, dados e segurança completos
 
@@ -131,61 +185,34 @@ Pendente:
 - seeds não sensíveis quando necessários;
 - testes ampliados de autorização e integridade.
 
+**Dependência:** não ampliar dados críticos antes de R5 e dos riscos HIGH aplicáveis da INFRA-04.
+
 ## Fase 3 — Experiência e estrutura completa da aplicação
 
 Já antecipado parcialmente: layout autenticado, dashboard de estoque, navegação responsiva e UAT desktop/mobile do MVP-01.
 
-Pendente:
-
-- arquitetura de informação dos módulos ampliados;
-- estados vazios/loading/error consistentes;
-- acessibilidade transversal;
-- design system consolidado;
-- sessão e permissões em todos os módulos.
+Pendente: arquitetura de informação ampliada, estados loading/error, acessibilidade, design system e permissões transversais.
 
 ## Fase 4 — Operação ampliada
 
-Capacidades pendentes principais:
-
-1. empresas/unidades e responsabilidades completas;
-2. catálogo e patrimônios completos;
-3. localizações/WMS leve onde necessário;
-4. transferências, inventário e ajustes;
-5. Obras, Eventos e Romaneios;
-6. Manutenção e Ciclo de Vida Patrimonial;
-7. anexos, documentos e QR Code;
-8. relatórios operacionais;
-9. auditoria transversal.
-
-As regras normativas da Fase 0 orientam essas implementações, mas não as autorizam.
+Pendente: empresas/unidades completas, patrimônios, localizações/WMS, transferências/inventário/ajustes, obras/eventos/romaneios, manutenção, anexos/QR Code, relatórios e auditoria transversal.
 
 ## Fase 5 — Qualidade e homologação
 
-Pendente:
-
-- testes unitários/integração para escopo ampliado;
-- testes RLS/permissões;
-- E2E dos fluxos críticos;
-- acessibilidade/mobile;
-- desempenho;
-- recuperação;
-- homologação operacional controlada;
-- plano de rollback.
-
-A evidência do MVP-01 é válida somente para sua fatia entregue.
+Pendente: testes ampliados, RLS/permissões, E2E críticos, acessibilidade/mobile, desempenho, recuperação, homologação e rollback.
 
 ## Fase 6 — Produção controlada
 
 Pendente:
 
-- confirmar provider/plano/domínio aplicáveis;
+- provider/plano/domínio confirmados;
 - backup inicial e restore testado;
 - observabilidade/alertas;
 - release aprovada;
 - promoção comprovada;
 - operação assistida e critérios de rollback.
 
-`PRODUCTION_PROMOTION_AUTHORIZED=YES` histórico não equivale a `PRODUCTION_PROMOTION_CONFIRMED=YES`.
+Autorização histórica de promoção não equivale a produção tecnicamente confirmada.
 
 ## IA assistiva
 
@@ -201,6 +228,4 @@ GitHub é a fonte documental/técnica. Linear é o controle operacional; quando 
 
 ## Próxima transição
 
-**Nenhuma frente técnica foi selecionada automaticamente.**
-
-A próxima ação canônica é escolher explicitamente um próximo escopo entre as fases acima, definir seus limites e somente então abrir a tarefa/issue correspondente.
+A próxima frente da sequência INFRA-04 é **R5 — Backup e Restore**. Planejamento e leitura podem avançar dentro da sequência aprovada; qualquer alteração em provider, plano, dados ou ambiente remoto continua sujeita a HUMAN_GATE específico.
