@@ -3,20 +3,20 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.7
-UPDATED_AT_UTC=2026-08-17T06:08:30Z
+STATE_VERSION=1.0.8
+UPDATED_AT_UTC=2026-08-17T06:22:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
-PRIMARY_ACTIVE_TASK=LEA-117
-PRIMARY_ACTIVE_SUBTASK=LEA-142
-GOVERNANCE_ACTIVE_TASK=NONE
-ACTIVE_NORMATIVE_PR=13
-ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
-ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
-ACTIVE_NORMATIVE_HEAD_SHA=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
-ACTIVE_NORMATIVE_HEAD_SEMANTICS=LAST_SUBSTANTIVE_LEA142_HEAD_VALIDATED_RESOLVE_LIVE_FOR_CURRENT_STATE_SYNC_HEAD
-LAST_VERIFIED_MAIN=0f92baa42baf3bae6c01458e698f8596a4c76760
+PRIMARY_ACTIVE_TASK=NONE
+PRIMARY_ACTIVE_SUBTASK=NONE
+GOVERNANCE_ACTIVE_TASK=POST_MERGE_SYNC_PR13
+ACTIVE_NORMATIVE_PR=NONE
+ACTIVE_NORMATIVE_BRANCH=NONE
+ACTIVE_NORMATIVE_HEAD_REF=NONE
+ACTIVE_NORMATIVE_HEAD_SHA=NONE
+ACTIVE_NORMATIVE_HEAD_SEMANTICS=RN_02_7_BASELINE_INTEGRATED_TO_MAIN
+LAST_VERIFIED_MAIN=8fbd006a2b49f810adaf0d2d3f18b6be25421d6c
 MVP01_ISSUE=17
 MVP01_PR=18
 MVP01_APPROVED_HEAD=5388b01883b9198b60be57c1e275cdd9c0d993d6
@@ -37,29 +37,35 @@ RECONCILIATION_PR=21
 RECONCILIATION_VALIDATED_HEAD=0794cdcd0294938e472b9cc8f5dfb12c14408dab
 RECONCILIATION_MAIN_COMMIT=9e63129d5c0b138bc2d9b887e17545e839ba3844
 RECONCILIATION_REVIEW_DECISION=PASS_AND_MERGED
+RN027_PR=13
+RN027_AUTHORIZED_HEAD=bf279b7ca395608fe6283bfadf7081b6d9e929c9
+RN027_MAIN_COMMIT=8fbd006a2b49f810adaf0d2d3f18b6be25421d6c
+RN027_STATUS=BASELINE_MERGED
+LEA117_STATUS=DONE
 LEA141_STATUS=PASS_DONE
 LEA141_VALIDATED_HEAD=138fbbefd747f3b2accbfe28c93ea3951e225d11
 LEA141_FINAL_CI_RUN=31998921544
-LEA142_STATUS=PASS_DONE_AWAITING_HUMAN_GATE
+LEA142_STATUS=PASS_DONE
 LEA142_INITIAL_REVIEW_HEAD=3e91752a41930494661039e4a1ef3567892c2990
 LEA142_INITIAL_REVIEW_DECISION=FAIL_REMEDIABLE
 LEA142_FINDINGS=LEA_142_F01_TO_F08
-LEA142_BASELINE_CANDIDATE=docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md
+LEA142_BASELINE=docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md
 LEA142_FIRST_CONSOLIDATION_HEAD=f9adf3b062111d7da30a708a3473cacc05e0f0ca
 LEA142_SUBSTANTIVE_RETEST_HEAD=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
 LEA142_SUBSTANTIVE_REVIEW_DECISION=PASS
 LEA142_SUBSTANTIVE_CI_RUN=32000249139
 LEA142_SECURITY_ARTIFACT=9278131677
-LEA142_PRE_LINEAR_SYNC_CI_RUN=32000365077
+LEA142_FINAL_PR_HEAD=bf279b7ca395608fe6283bfadf7081b6d9e929c9
+LEA142_FINAL_CI_RUN=32000471638
+LEA142_FINAL_SECURITY_ARTIFACT=9278204797
 LEA142_LINEAR_STATUS=DONE
-LEA142_FINAL_STATE_SYNC_CI=VERIFY_LIVE_ON_CURRENT_PR_HEAD
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-MERGE_AUTHORIZED=NO_FOR_PR13_AWAITING_EXPLICIT_HUMAN_GATE
-GITHUB_LINEAR_SYNC=PASS_LEA142_DONE_AWAITING_HUMAN_GATE
-BLOCKERS=HUMAN_GATE_FOR_PR13_MERGE_AFTER_FINAL_STATE_SYNC_CI
-KNOWN_PENDING=PR13_MERGE_GATE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=VERIFY_FINAL_STATE_SYNC_CI_THEN_REQUEST_HUMAN_GATE_TO_MERGE_PR13
+MERGE_AUTHORIZED=PR13_AUTHORIZED_AND_MERGED_NO_OTHER_MERGE_AUTHORIZATION
+GITHUB_LINEAR_SYNC=PASS_LEA117_DONE_PR13_MERGED_POST_MERGE_DOC_SYNC_PENDING
+BLOCKERS=NONE_FOR_PHASE0_EXIT_REVIEW_AFTER_POST_MERGE_SYNC
+KNOWN_PENDING=POST_MERGE_DOC_SYNC_AND_PHASE0_EXIT_CHECKLIST_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=VALIDATE_POST_MERGE_SYNC_PR13_THEN_REQUEST_HUMAN_GATE
 ```
 
 ## Identidade
@@ -101,6 +107,8 @@ O PR #21 foi então retestado no HEAD `0794cdcd0294938e472b9cc8f5dfb12c14408dab`
 
 A verificação pós-merge identificou drift documental nos campos transitórios da própria reconciliação. O PR #24 corrigiu esse estado, passou no CI, recebeu HUMAN_GATE de Leandro e foi mesclado por squash no `main` em `0f92baa42baf3bae6c01458e698f8596a4c76760`.
 
+A LEA-117 foi concluída pelas subtarefas LEA-138 a LEA-142. Após revisão final `FAIL_REMEDIABLE`, remediação dos achados LEA-142-F01..F08 e reteste PASS, Leandro autorizou explicitamente o merge do PR #13. O PR foi mesclado por squash no `main` em `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`. A verificação pós-merge confirmou o PR fechado/merged e a RN-02.7 presente no `main`.
+
 ## Baselines normativas aprovadas
 
 - RN-00 REV1 — PredixAI Domain Dictionary
@@ -111,11 +119,12 @@ A verificação pós-merge identificou drift documental nos campos transitórios
 - RN-02.4 REV3 — Estoques, saldos, localizações e WMS leve
 - RN-02.5 REV1 — Movimentações e Integridade do Estoque
 - RN-02.6 REV1 — Obras, Eventos e Romaneios
+- RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial
 - ADR-001 — Estratégia Vercel e Supabase
 - Histórico Auditável da Fase 0
 - GOV-02 — Checklist permanente e roadmap executável
 
-A RN-02.7 possui candidata canônica tecnicamente aprovada pela LEA-142 no PR #13, mas ainda não integra o `main`. Baseline efetiva depende de merge após HUMAN_GATE explícito.
+A RN-02.7 REV1 está integrada ao `main` no commit `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`. A Fase 0 permanece aberta apenas até o checklist formal de encerramento e a confirmação dos limites arquiteturais da etapa seguinte.
 
 ## Estado técnico implementado
 
@@ -156,7 +165,7 @@ Escopo implementado:
 Fora do MVP-01:
 
 - patrimônio completo;
-- manutenção;
+- manutenção implementada;
 - obras e eventos completos;
 - romaneios completos;
 - relatórios avançados;
@@ -183,20 +192,23 @@ Fora do MVP-01:
 
 O workflow permanente é acionado por Pull Request; não existe evidência de run separado por `push` no `main`. A validação pós-integração distingue o CI verde do PR #23 da verificação direta do conteúdo efetivamente mesclado no `main`.
 
-## Frente normativa ativa
+## Frente normativa concluída
 
 ### LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial
 
-- Estado Linear: In Progress.
-- PR Draft: #13.
-- Branch: `docs/lea-117-rn-02-7-manutencao`.
-- Documento canônico candidato: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
-- HEAD substantivo aprovado da LEA-142: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
+- Estado Linear: Done.
+- PR #13: merged por squash.
+- HEAD autorizado para merge: `bf279b7ca395608fe6283bfadf7081b6d9e929c9`.
+- Commit integrado ao `main`: `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`.
+- Documento canônico: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
 - LEA-138 — Done.
 - LEA-139 — Done / PASS.
 - LEA-140 — Done / PASS.
 - LEA-141 — Done / PASS.
-- LEA-142 — Done / PASS; aguardando HUMAN_GATE específico de merge do PR #13.
+- LEA-142 — Done / PASS.
+- Workflow final do HEAD autorizado: `Dependency Security` run `32000471638` — SUCCESS.
+- Artefato final: `9278204797`.
+- Review threads no gate de merge: 0.
 
 ### LEA-141 — integração normativa concluída
 
@@ -222,12 +234,13 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - HEAD substantivo final: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
 - Decisão do reteste substantivo: PASS.
 - Workflow substantivo: `Dependency Security` run `32000249139` — SUCCESS.
-- Artefato: `9278131677`.
-- Commit de estado anterior à conclusão Linear: `b96db60ec09562e0d7689007eb25a4a0500f7a49`.
-- Workflow desse commit: `32000365077` — SUCCESS.
-- Próximo gate: verificar CI do HEAD corrente desta sincronização final; depois HUMAN_GATE de merge.
+- Artefato substantivo: `9278131677`.
+- HEAD final autorizado: `bf279b7ca395608fe6283bfadf7081b6d9e929c9`.
+- Workflow final: `32000471638` — SUCCESS.
+- Artefato final: `9278204797`.
+- Merge commit: `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`.
 
-Nenhum merge do PR #13 está autorizado. A LEA-142 concluída apenas torna o PR tecnicamente elegível para o gate humano de integração.
+A LEA-142 está encerrada e a RN-02.7 é baseline vigente. O cabeçalho processual pré-merge do documento canônico permanece como evidência do gate em que o arquivo foi validado; o status operacional pós-merge é registrado em `PROJECT_STATE.md` e no documento de sincronização pós-merge.
 
 ## Infraestrutura
 
@@ -280,6 +293,15 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 - Sincronização pós-merge: PR #24 — merged por squash em `0f92baa42baf3bae6c01458e698f8596a4c76760`.
 - Decisão: PASS + HUMAN_GATE + MERGED.
 
+### Integração da RN-02.7
+
+- PR #13 — merged por squash após HUMAN_GATE explícito.
+- HEAD autorizado: `bf279b7ca395608fe6283bfadf7081b6d9e929c9`.
+- Commit no `main`: `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`.
+- LEA-117 — Done.
+- LEA-142 — Done / PASS.
+- Sincronização documental pós-merge: em PR separado, sem autorização de merge herdada.
+
 ## Decisões críticas vigentes
 
 1. GitHub é a fonte documental e técnica oficial.
@@ -291,15 +313,16 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
 9. Vulnerabilidade alta conhecida bloqueia PASS até remediação e reteste; SEC-02 já cumpriu esse ciclo e está encerrada.
-10. A RN-02.7 possui candidata canônica tecnicamente aprovada; integração ao `main` depende de HUMAN_GATE.
-11. IA não executa operação crítica sem confirmação humana compatível com o risco.
-12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
+10. A RN-02.7 REV1 está integrada ao `main` e é baseline normativa vigente.
+11. A conclusão normativa da RN-02.7 não autoriza implementação de manutenção, SQL ou migrations.
+12. IA não executa operação crítica sem confirmação humana compatível com o risco.
+13. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. verificar CI do HEAD corrente após esta sincronização final de estado/Linear;
-2. se PASS, atualizar somente metadados do PR para `PASS_AWAITING_HUMAN_GATE`, sem novo commit;
-3. manter merge do PR #13 bloqueado até autorização explícita de Leandro;
+1. validar a sincronização documental pós-merge do PR #13 em branch/PR próprio;
+2. solicitar HUMAN_GATE separado antes de mesclar essa sincronização documental;
+3. após a sincronização, executar o checklist formal de encerramento da Fase 0 e confirmar os limites arquiteturais da etapa seguinte;
 4. não declarar MVP-01 em produção definitiva sem evidência técnica da Vercel;
 5. tratar futuras implementações, SQL e migrations como novos escopos sujeitos a autorização própria.
 
