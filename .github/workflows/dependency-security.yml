@@ -57,7 +57,7 @@ jobs:
       - name: Build production application
         run: npm run build
 
-      - name: Validate local Supabase reproducibility
+      - name: Validate local Supabase reproducibility and recovery drill
         run: |
           set -euo pipefail
           cleanup() {
@@ -67,6 +67,7 @@ jobs:
           node scripts/supabase-local.mjs start
           node scripts/supabase-local.mjs status
           node scripts/supabase-local.mjs reset
+          node scripts/supabase-local-recovery.mjs
 
       - name: Upload security evidence
         if: always()
@@ -77,5 +78,6 @@ jobs:
             package-lock.json
             npm-audit.json
             dependency-tree.txt
+            r5-recovery-evidence/
           if-no-files-found: error
           retention-days: 14
