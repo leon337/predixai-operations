@@ -24,10 +24,11 @@ Este é o **único roadmap operacional mestre**.
 - R3: **MERGED/VERIFIED**;
 - R4: **MERGED/VERIFIED**;
 - F10: **MERGED/VERIFIED**;
-- PR #32: merged por squash;
-- commit de integração R3/R4/F10: `354e4d76ca89c5215a12058f7af418e275855cf5`;
-- R5, R6 e R7: pendentes;
+- R5: **PLANNING/READ-ONLY ACTIVE**;
+- R6 e R7: pendentes;
 - produção: **não tecnicamente confirmada**.
+
+Baseline atual da Fase 1: `main=e6382b0abfe2d068eb56ca092de72e58f024f863`.
 
 ## Execução acelerada — MVP-01
 
@@ -64,17 +65,18 @@ Encerrar a Fase 0 não significa que todo o domínio esteja implementado.
 
 ### Estado atual
 
-`ACTIVE — INFRA-04`
+`ACTIVE — INFRA-04 / R5 PLANNING READ-ONLY`
 
-Relatório consolidado:
+Relatórios:
 
-`docs/infra/INFRA-04-AUDITORIA-READONLY-2026-08-17.md`
+- `docs/infra/INFRA-04-AUDITORIA-READONLY-2026-08-17.md`;
+- `docs/infra/INFRA-04-R5-BACKUP-RESTORE-PLANO-2026-08-17.md`.
 
 ### R1 — Vercel
 
 **READONLY COMPLETED.**
 
-- equipe `PREDIX AI BR` sem projeto PredixAI Operations descoberto;
+- projeto atual do produto não foi descoberto na conexão;
 - Project ID histórico e slug retornaram 404;
 - GitHub Deployments: 0;
 - nenhuma recriação/reconexão executada.
@@ -88,7 +90,8 @@ F01 permanece aberto até reconciliação futura de provider.
 - `potiguarbd` permanece `INACTIVE`;
 - nenhum projeto ativo foi pausado;
 - nenhum restore executado;
-- nenhum plano/custo alterado.
+- nenhum plano/custo alterado;
+- dois outros projetos da organização permanecem `ACTIVE_HEALTHY`.
 
 F02/F05 permanecem dependentes de decisão futura de provider/capacidade.
 
@@ -97,12 +100,9 @@ F02/F05 permanecem dependentes de decisão futura de provider/capacidade.
 **MERGED/VERIFIED no PR #32.**
 
 - URL/chave hardcoded removidas;
-- `NEXT_PUBLIC_SUPABASE_URL`;
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`;
+- variáveis públicas por ambiente;
 - `.env.example` local;
 - contrato automatizado no CI.
-
-F03 e F06 remediados para a camada local/repositório.
 
 ### R4 — ambiente local isolado
 
@@ -110,43 +110,68 @@ F03 e F06 remediados para a camada local/repositório.
 
 - `supabase/config.toml` local;
 - launcher Supabase CLI `2.111.0`;
-- `start`, `status`, `db reset --local`, `stop`;
-- seed desabilitado;
-- CI valida reconstrução local.
-
-F09 remediado localmente.
+- reconstrução local validada em CI.
 
 ### F10 — cadeia de migrations
 
 **MERGED/VERIFIED no PR #32.**
 
-A cadeia histórica não reconstruía o banco do zero. Foi adicionada uma migration-base mínima, por TDD, sem alterar as duas migrations históricas do MVP.
+Migration-base mínima adicionada por TDD para permitir reconstrução do banco do zero, preservando as duas migrations históricas do MVP.
 
-Validação final pré-merge:
+Integração R3/R4/F10: `354e4d76ca89c5215a12058f7af418e275855cf5`.
 
-- HEAD `70f0bc94e47acba46859eb0c6f2095bfb7c9ee6f`;
-- CI `32014358913` — SUCCESS;
-- artefato `9283021725`;
-- 0 review threads.
+### R5 — Backup e Restore
 
-Integração:
+**PLANNING/READ-ONLY ACTIVE.**
 
-- squash merge `354e4d76ca89c5215a12058f7af418e275855cf5`.
+Achados atuais:
 
-### R5 — Backup e restore
+- plano Free observado não inclui Automatic Backups/PITR como baseline operacional;
+- `potiguarbd` está `INACTIVE`;
+- disponibilidade efetiva de restore/download do projeto inativo não está comprovada pela conexão atual;
+- não existe evidência de backup independente off-provider;
+- não existe restore real testado;
+- RPO/RTO ainda não foram aprovados;
+- backup do banco e objetos físicos do Storage são problemas distintos.
 
-**PENDING.**
+Estratégia proposta:
 
-Definir antes de qualquer produção controlada:
+```text
+Git/migrations
+   -> backup lógico independente
+   -> checksums + cópia criptografada off-provider
+   -> restore local isolado
+   -> recovery drill remoto isolado sob gate futuro
+```
 
-- método de backup compatível com provider/plano;
-- retenção;
-- responsável;
-- cópia off-site;
-- procedimento de restore;
-- teste de restauração não destrutivo em ambiente isolado.
+Retenção inicial proposta, ainda sujeita a aprovação:
 
-Qualquer mutação remota exige HUMAN_GATE próprio.
+```text
+7 daily + 4 weekly + 3 monthly
+pre-change backup obrigatório antes de mudança remota crítica
+SHA-256 + encryption at rest
+```
+
+RPO/RTO candidato para staging/piloto remoto:
+
+```text
+RPO <= 24h
+RTO <= 4h
+```
+
+Produção continua bloqueada até decisão formal de risco/tier.
+
+Direção de tier proposta:
+
+- Free + backup independente: desenvolvimento/piloto, com risco explicitamente aceito;
+- Pro + backup independente: recomendação mínima atual para produção controlada, sujeita a gate de custo;
+- Pro + PITR + backup independente: somente se o requisito de RPO justificar o add-on.
+
+Próximo gate recomendado pelo R5:
+
+**GATE-R5-A — implementar e validar somente um ciclo sintético LOCAL de backup lógico -> destruição local controlada -> restore local -> validação, sem dados reais e sem provider remoto.**
+
+Esse gate ainda **não está autorizado**.
 
 ### R6 — CI/CD e rollback
 
@@ -176,20 +201,11 @@ A Fase 1 só pode ser encerrada quando R5–R7 estiverem suficientemente validad
 
 Já antecipado parcialmente pelo MVP-01: migrations, autenticação, perfis básicos, RLS, movimentações básicas e histórico.
 
-Pendente:
-
-- modelo físico do domínio completo;
-- constraints e índices necessários;
-- políticas RLS para módulos ampliados;
-- auditoria transversal;
-- seeds não sensíveis quando necessários;
-- testes ampliados de autorização e integridade.
+Pendente: modelo físico completo, constraints/índices, RLS ampliada, auditoria transversal, seeds não sensíveis e testes ampliados.
 
 **Dependência:** não ampliar dados críticos antes de R5 e dos riscos HIGH aplicáveis da INFRA-04.
 
 ## Fase 3 — Experiência e estrutura completa da aplicação
-
-Já antecipado parcialmente: layout autenticado, dashboard de estoque, navegação responsiva e UAT desktop/mobile do MVP-01.
 
 Pendente: arquitetura de informação ampliada, estados loading/error, acessibilidade, design system e permissões transversais.
 
@@ -228,4 +244,4 @@ GitHub é a fonte documental/técnica. Linear é o controle operacional; quando 
 
 ## Próxima transição
 
-A próxima frente da sequência INFRA-04 é **R5 — Backup e Restore**. Planejamento e leitura podem avançar dentro da sequência aprovada; qualquer alteração em provider, plano, dados ou ambiente remoto continua sujeita a HUMAN_GATE específico.
+Concluir a revisão documental de R5. O próximo passo técnico recomendado é GATE-R5-A, mas nenhuma implementação, backup remoto, dado real, restore, provider ou custo está autorizado sem HUMAN_GATE específico.
