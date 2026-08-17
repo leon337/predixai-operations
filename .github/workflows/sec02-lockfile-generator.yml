@@ -6,7 +6,7 @@ on:
       - fix/sec-02-nanoid
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   generate:
@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: fix/sec-02-nanoid
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -34,6 +36,18 @@ jobs:
 
       - name: Enforce zero high or critical
         run: node -e "const r=require('./npm-audit.json'); const v=r.metadata?.vulnerabilities||{}; console.log(v); if ((v.high||0)>0 || (v.critical||0)>0) process.exit(1)"
+
+      - name: Commit generated lockfile if changed
+        run: |
+          if git diff --quiet -- package-lock.json; then
+            echo "package-lock.json already current"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package-lock.json
+          git commit -m "fix(sec-02): atualizar nanoid para 3.3.18"
+          git push origin HEAD:fix/sec-02-nanoid
 
       - name: Upload generated evidence
         if: always()
