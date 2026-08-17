@@ -1,120 +1,94 @@
-# PredixAI Operations — Roadmap e Status
+# PredixAI Operations — Roadmap e Status da Fase 0
 
-## Fase atual
+## Status deste arquivo
 
-**Fase 0 — Concepção e Modelagem do Domínio**
+**HISTÓRICO / ÍNDICE DE FASE 0**
 
-## Concluído e aprovado
+Este documento deixou de ser o roadmap operacional principal. O roadmap vigente é:
 
-- visão do produto;
-- arquitetura local inicial;
-- estratégia híbrida de IA;
-- princípio de funcionamento sem dependência de IA;
-- RN-01 REV2.1;
-- RN-02.1 REV1;
-- RN-02.2 REV1;
-- RN-02.3 REV2;
-- RN-02.4 REV3;
-- adoção do RN-00/PDD;
-- adoção de GitHub como fonte oficial e Linear como controle operacional.
+- [`docs/roadmap/ROADMAP-MESTRE-EXECUTAVEL.md`](../roadmap/ROADMAP-MESTRE-EXECUTAVEL.md)
 
-## Em andamento
+O estado canônico é:
 
-- consolidação do RN-00/PDD;
-- publicação da baseline documental;
-- configuração da memória persistente GitHub–Linear.
+- [`PROJECT_STATE.md`](../../PROJECT_STATE.md)
 
-## Próximas regras
+O histórico anterior deste arquivo permanece no Git para auditoria.
 
-1. RN-02.5 — Movimentações
-2. RN-02.6 — Obras, Eventos e Romaneios
-3. RN-02.7 — Compras e Fornecedores
-4. RN-02.8 — Manutenção e Patrimônio
-5. RN-02.9 — Arquivos, Auditoria e Alertas
-6. RN-02.10 — Integridade Global
+## Fase 0 — resultado consolidado
 
-## Itens restantes para encerrar a Fase 0
+A Fase 0 produziu e congelou as seguintes baselines principais:
 
-- regras completas de negócio restantes;
-- modelo conceitual completo;
-- fluxos operacionais;
-- fluxo de cada tela;
-- padrão de navegação;
-- identidade visual;
-- princípios de engenharia consolidados;
-- filosofia oficial da plataforma;
-- revisão cruzada de consistência;
-- aprovação formal de encerramento.
+- RN-00 REV1 — PredixAI Domain Dictionary;
+- RN-01 REV2.1 — Cadastro e Classificação de Materiais;
+- RN-02.1 REV1 — Núcleo Organizacional;
+- RN-02.2 REV1 — Usuários, Perfis, Permissões e Responsabilidades;
+- RN-02.3 REV2 — Materiais, Catálogo, Atributos e Patrimônios;
+- RN-02.4 REV3 — Estoques, Saldos, Localizações e Disponibilidade;
+- RN-02.5 REV1 + errata — Movimentações e Integridade do Estoque;
+- RN-02.6 REV1 + errata — Obras, Eventos e Romaneios;
+- RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial;
+- ADR-001 — decisão arquitetural histórica inicial;
+- ADR-002 — arquitetura vigente pós-MVP-01, quando integrada;
+- política permanente de checklist e próxima ação;
+- histórico auditável da Fase 0.
 
-## Fases posteriores
+A antiga sequência que tratava RN-02.5 em diante como ainda futura e atribuía RN-02.7 a Compras/Fornecedores está supersedida.
 
-### Fase 1 — Especificação Funcional
+## Execução acelerada MVP-01
 
-- casos de uso;
-- histórias de usuário;
-- critérios de aceitação;
-- requisitos funcionais e não funcionais;
-- escopo final do MVP.
+Durante a Fase 0 ocorreu uma execução acelerada explicitamente autorizada que materializou uma fatia vertical do produto:
 
-### Fase 2 — UX e prototipação
+- Next.js + TypeScript;
+- Vercel;
+- Supabase `potiguarbd`;
+- autenticação e perfis básicos;
+- materiais básicos;
+- entradas/saídas;
+- saldo, estoque mínimo e alertas;
+- histórico auditável;
+- RLS/funções/migrations do escopo MVP-01;
+- interface responsiva desktop/mobile.
 
-- arquitetura de informação;
-- wireframes;
-- protótipos mobile e desktop;
-- testes de navegação.
+Essa execução antecipada **não significa que as fases técnicas completas posteriores tenham sido encerradas**.
 
-### Fase 3 — Modelo lógico e físico
+## GOV-03 — saída formal da Fase 0
 
-- tabelas;
-- colunas;
-- constraints;
-- índices;
-- migrations;
-- estratégia de auditoria.
+O encerramento formal é controlado por:
 
-### Fase 4 — Backend
+- GitHub Issue #27 — `GOV-03 — Checklist formal de encerramento da Fase 0`;
+- branch `docs/gov-03-phase0-exit-checklist` durante a remediação;
+- `docs/governanca/CHECKLIST-ENCERRAMENTO-FASE-0-2026-08-17.md`.
 
-- autenticação;
-- autorização;
-- APIs;
-- arquivos;
-- QR Code;
-- operações de estoque.
+Critérios principais:
 
-### Fase 5 — Frontend/PWA
+1. RN-02.7 integrada;
+2. checklist formal aprovado;
+3. arquitetura vigente e limites da etapa seguinte confirmados;
+4. GitHub/Linear ou fallback auditável sincronizados;
+5. nenhum novo escopo funcional implicitamente autorizado.
 
-- dashboard;
-- operação móvel;
-- cadastros;
-- consultas;
-- conferência.
+## Etapas posteriores
 
-### Fase 6 — IA assistiva
+A sequência detalhada passa a ser definida exclusivamente pelo Roadmap Mestre. Em termos de capacidade ainda pendente, permanecem entre outras:
 
-- ferramentas de consulta;
-- roteamento local/externo;
-- proteção contra ações indevidas;
-- avaliação de qualidade.
-
-### Fase 7 — Testes e homologação
-
-- unitários;
-- integração;
-- segurança;
-- regressão;
-- testes operacionais reais.
-
-### Fase 8 — Implantação
-
-- notebook local;
-- backup;
-- observabilidade;
-- migração futura para mini PC, servidor ou nuvem.
+- infraestrutura/ambientes e recuperação completos;
+- modelo físico completo do domínio;
+- UX transversal para módulos futuros;
+- patrimônio completo;
+- transferências/inventário/ajustes completos;
+- obras, eventos e romaneios implementados;
+- manutenção patrimonial implementada;
+- anexos/QR Code completos;
+- relatórios avançados;
+- IA operacional;
+- qualidade/homologação do produto completo;
+- produção controlada com evidência do provider.
 
 ## Política de aprovação
 
-- Documento aprovado torna-se baseline.
-- Alteração exige nova revisão.
-- Entrega normativa usa branch e PR.
-- `PROJECT_STATE.md` só registra conclusão definitiva após merge.
-- Implementação não começa sem autorização explícita.
+- GitHub é a fonte documental/técnica oficial;
+- Linear é o controle operacional; quando o limite do workspace impedir nova issue, GitHub Issue/PR pode controlar o ciclo e uma issue Linear existente recebe a evidência;
+- documento aprovado torna-se baseline somente após integração correspondente;
+- alteração de baseline exige nova revisão;
+- entregas usam branch e PR;
+- novas implementações, SQL, migrations, mudanças de dados e produção exigem autorização própria.
