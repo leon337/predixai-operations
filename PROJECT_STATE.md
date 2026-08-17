@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.6
-UPDATED_AT_UTC=2026-08-17T06:07:00Z
+STATE_VERSION=1.0.7
+UPDATED_AT_UTC=2026-08-17T06:08:30Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -15,7 +15,7 @@ ACTIVE_NORMATIVE_PR=13
 ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_SHA=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
-ACTIVE_NORMATIVE_HEAD_SEMANTICS=LAST_SUBSTANTIVE_LEA142_HEAD_VALIDATED_RESOLVE_LIVE_FOR_STATE_SYNC_HEAD
+ACTIVE_NORMATIVE_HEAD_SEMANTICS=LAST_SUBSTANTIVE_LEA142_HEAD_VALIDATED_RESOLVE_LIVE_FOR_CURRENT_STATE_SYNC_HEAD
 LAST_VERIFIED_MAIN=0f92baa42baf3bae6c01458e698f8596a4c76760
 MVP01_ISSUE=17
 MVP01_PR=18
@@ -40,25 +40,26 @@ RECONCILIATION_REVIEW_DECISION=PASS_AND_MERGED
 LEA141_STATUS=PASS_DONE
 LEA141_VALIDATED_HEAD=138fbbefd747f3b2accbfe28c93ea3951e225d11
 LEA141_FINAL_CI_RUN=31998921544
-LEA142_STATUS=PASS_AWAITING_HUMAN_GATE
+LEA142_STATUS=PASS_DONE_AWAITING_HUMAN_GATE
 LEA142_INITIAL_REVIEW_HEAD=3e91752a41930494661039e4a1ef3567892c2990
 LEA142_INITIAL_REVIEW_DECISION=FAIL_REMEDIABLE
 LEA142_FINDINGS=LEA_142_F01_TO_F08
 LEA142_BASELINE_CANDIDATE=docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md
 LEA142_FIRST_CONSOLIDATION_HEAD=f9adf3b062111d7da30a708a3473cacc05e0f0ca
-LEA142_F08_REMEDIATION_HEAD=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
 LEA142_SUBSTANTIVE_RETEST_HEAD=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
 LEA142_SUBSTANTIVE_REVIEW_DECISION=PASS
 LEA142_SUBSTANTIVE_CI_RUN=32000249139
 LEA142_SECURITY_ARTIFACT=9278131677
-LEA142_STATE_SYNC_CI_STATUS=VERIFY_LIVE_ON_CURRENT_PR_HEAD
+LEA142_PRE_LINEAR_SYNC_CI_RUN=32000365077
+LEA142_LINEAR_STATUS=DONE
+LEA142_FINAL_STATE_SYNC_CI=VERIFY_LIVE_ON_CURRENT_PR_HEAD
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
 MERGE_AUTHORIZED=NO_FOR_PR13_AWAITING_EXPLICIT_HUMAN_GATE
-GITHUB_LINEAR_SYNC=LEA142_PASS_PENDING_LINEAR_DONE_AFTER_FINAL_STATE_SYNC_CI
+GITHUB_LINEAR_SYNC=PASS_LEA142_DONE_AWAITING_HUMAN_GATE
 BLOCKERS=HUMAN_GATE_FOR_PR13_MERGE_AFTER_FINAL_STATE_SYNC_CI
 KNOWN_PENDING=PR13_MERGE_GATE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=VERIFY_STATE_SYNC_CI_THEN_REQUEST_HUMAN_GATE_TO_MERGE_PR13
+NEXT_AUTHORIZED_ACTION=VERIFY_FINAL_STATE_SYNC_CI_THEN_REQUEST_HUMAN_GATE_TO_MERGE_PR13
 ```
 
 ## Identidade
@@ -129,7 +130,7 @@ A RN-02.7 possui candidata canônica tecnicamente aprovada pela LEA-142 no PR #1
 
 - GitHub Issue: #17 — concluída.
 - PR: #18 — merged.
-- HEAD aprovado: `5388b01883b9198d60be57c1e275cdd9c0d993d6`.
+- HEAD aprovado: `5388b01883b9198b60be57c1e275cdd9c0d993d6`.
 - Commit MVP no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`.
 - UAT desktop: PASS.
 - UAT móvel final: PASS.
@@ -189,14 +190,13 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Estado Linear: In Progress.
 - PR Draft: #13.
 - Branch: `docs/lea-117-rn-02-7-manutencao`.
-- HEAD inicial da revisão final: `3e91752a41930494661039e4a1ef3567892c2990`.
 - Documento canônico candidato: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
 - HEAD substantivo aprovado da LEA-142: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
 - LEA-138 — Done.
 - LEA-139 — Done / PASS.
 - LEA-140 — Done / PASS.
 - LEA-141 — Done / PASS.
-- LEA-142 — revisão/remediação concluída; PASS normativo no HEAD substantivo; aguardando validação do commit exclusivamente de estado e HUMAN_GATE de merge.
+- LEA-142 — Done / PASS; aguardando HUMAN_GATE específico de merge do PR #13.
 
 ### LEA-141 — integração normativa concluída
 
@@ -211,9 +211,9 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Linear: Done.
 - Decisão final: PASS.
 
-### LEA-142 — revisão final
+### LEA-142 — revisão final concluída
 
-- Linear: In Progress até validação do commit final de estado.
+- Linear: Done.
 - HEAD inicialmente revisado: `3e91752a41930494661039e4a1ef3567892c2990`.
 - Decisão inicial: `FAIL_REMEDIABLE`.
 - Achados: LEA-142-F01 a F08.
@@ -221,12 +221,13 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - F08: completude/autossuficiência da fonte canônica.
 - HEAD substantivo final: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
 - Decisão do reteste substantivo: PASS.
-- Workflow do HEAD substantivo: `Dependency Security` run `32000249139` — SUCCESS.
+- Workflow substantivo: `Dependency Security` run `32000249139` — SUCCESS.
 - Artefato: `9278131677`.
-- Review threads: 0 no gate substantivo.
-- Próximo gate: CI do commit exclusivamente de sincronização de estado e atualização Linear para Done.
+- Commit de estado anterior à conclusão Linear: `b96db60ec09562e0d7689007eb25a4a0500f7a49`.
+- Workflow desse commit: `32000365077` — SUCCESS.
+- Próximo gate: verificar CI do HEAD corrente desta sincronização final; depois HUMAN_GATE de merge.
 
-Nenhum merge do PR #13 está autorizado. O único passo posterior ao fechamento técnico da LEA-142 será HUMAN_GATE específico para merge.
+Nenhum merge do PR #13 está autorizado. A LEA-142 concluída apenas torna o PR tecnicamente elegível para o gate humano de integração.
 
 ## Infraestrutura
 
@@ -296,8 +297,8 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 
 ## Próximas ações autorizadas
 
-1. verificar CI do HEAD corrente após esta sincronização de estado;
-2. se PASS, concluir LEA-142 no Linear e registrar `PASS_AWAITING_HUMAN_GATE` no PR;
+1. verificar CI do HEAD corrente após esta sincronização final de estado/Linear;
+2. se PASS, atualizar somente metadados do PR para `PASS_AWAITING_HUMAN_GATE`, sem novo commit;
 3. manter merge do PR #13 bloqueado até autorização explícita de Leandro;
 4. não declarar MVP-01 em produção definitiva sem evidência técnica da Vercel;
 5. tratar futuras implementações, SQL e migrations como novos escopos sujeitos a autorização própria.
