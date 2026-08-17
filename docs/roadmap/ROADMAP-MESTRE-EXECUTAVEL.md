@@ -10,16 +10,20 @@ Este roadmap descreve a sequência arquitetural planejada. Em agosto de 2026 oco
 
 Isso não significa que as Fases 1 a 4 estejam concluídas integralmente. Significa apenas que existe uma fatia operacional já integrada ao `main`.
 
-Snapshot reconciliado em 2026-08-16:
+Snapshot reconciliado em 2026-08-17:
 
-- `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`;
+- `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`;
 - MVP-01: GitHub Issue #17 concluída;
 - PR #18: merged;
 - UAT desktop: PASS;
 - UAT móvel final: PASS;
 - Supabase utilizado: `potiguarbd`;
+- SEC-02 / Issue #22: remediada e concluída;
+- PR #23: merged, com `nanoid@3.3.18` integrado;
+- workflow de segurança do PR #23: PASS, `npm audit` 0 vulnerabilidades e build PASS;
 - promoção para produção: autorizada, porém não tecnicamente confirmada no repositório;
-- RN-02.7: ainda em andamento no PR #13.
+- RN-02.7: ainda em andamento no PR #13;
+- reconciliação: PR #21 pendente de novo reteste e HUMAN_GATE.
 
 ## Fase 0 — Domínio e governança
 
@@ -37,7 +41,8 @@ Snapshot reconciliado em 2026-08-16:
 ### Em andamento
 
 - LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial;
-- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6.
+- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6;
+- PR #21 — reconciliação documental pós-MVP-01 e pós-SEC-02.
 
 ### Pendente
 
@@ -60,7 +65,7 @@ Snapshot reconciliado em 2026-08-16:
 - GitHub Issue #17;
 - PR #18;
 - HEAD aprovado: `5388b01883b9198b60be57c1e275cdd9c0d993d6`;
-- merge no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`.
+- commit do MVP no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`.
 
 ### Escopo entregue
 
@@ -83,11 +88,37 @@ Snapshot reconciliado em 2026-08-16:
 - testes de autorização: 6/6 PASS;
 - UAT desktop: PASS;
 - UAT móvel final: PASS;
-- segurança de dependências no gate final: 0 vulnerabilidades.
+- segurança de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento;
+- SEC-02 descoberta posteriormente e remediada no PR #23;
+- segurança do PR #23 em 2026-08-17: 0 vulnerabilidades, build PASS.
 
 ### Limites
 
 O MVP-01 não libera automaticamente as demais funcionalidades do produto e não altera a necessidade de novos gates para futuras implementações, SQL, migrations ou produção.
+
+## Segurança transversal — SEC-02
+
+### Estado
+
+`CONCLUÍDA E INTEGRADA AO MAIN`
+
+### Evidência
+
+- Issue #22 — Closed / Completed;
+- PR #23 — merged por squash;
+- vulnerabilidade original: `nanoid@3.3.17` / High;
+- correção: `nanoid@3.3.18`;
+- HEAD validado: `e6d54340ceb71a2237cfb2260fc46a216246099e`;
+- workflow `Dependency Security` run `31994973803`: SUCCESS;
+- `npm ci`: PASS;
+- lockfile imutável: PASS;
+- `npm audit`: 0 vulnerabilidades;
+- build: PASS;
+- commit integrado: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
+
+### Regra
+
+Resultados de auditoria são temporais. Um PASS histórico não substitui uma nova verificação quando advisories ou dependências mudarem.
 
 ## Fase 1 — Fundação de infraestrutura
 
@@ -102,7 +133,7 @@ O MVP-01 não libera automaticamente as demais funcionalidades do produto e não
 ### Estado após MVP-01
 
 - Vercel: utilizado e validado em preview;
-- CI de dependências/build: parcialmente materializado para o MVP-01;
+- CI de dependências/build: materializado para o MVP-01;
 - Supabase exclusivo novo: **não criado**;
 - decisão operacional aplicada: reutilização do `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
 - LEA-122/143/144/145: caminho original superado e formalmente cancelado por supersessão em 2026-08-16;
@@ -270,11 +301,12 @@ Nenhuma documentação deve converter autorização em confirmação técnica se
 
 ## Próxima sequência canônica após a reconciliação
 
-1. revisar e integrar o PR #21 somente após PASS e gate aplicável;
-2. retomar LEA-141 no PR #13 após a reconciliação;
-3. executar LEA-142 com revisão crítica sobre HEAD exato;
-4. solicitar novo gate antes de merge do PR #13;
-5. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01.
+1. retestar o PR #21 contra o `main` atual e exigir PASS do gate;
+2. solicitar HUMAN_GATE antes do merge do PR #21;
+3. após integração da reconciliação, retomar LEA-141 no PR #13;
+4. executar LEA-142 com revisão crítica sobre HEAD exato;
+5. solicitar novo gate antes de merge do PR #13;
+6. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01.
 
 ## Gates permanentes
 
@@ -283,5 +315,6 @@ Nenhuma documentação deve converter autorização em confirmação técnica se
 - nenhuma operação destrutiva sem autoridade compatível com o risco;
 - novas migrations/SQL exigem escopo autorizado;
 - autorização para produção não equivale a confirmação de deploy;
+- vulnerabilidades High/Critical bloqueiam integração até remediação e reteste;
 - toda etapa deve atualizar Linear, GitHub e `PROJECT_STATE.md` quando alterar o estado oficial;
-- snapshots de provider não substituem verificação ao vivo quando a decisão depende do estado atual.
+- snapshots de provider e auditorias históricas não substituem verificação atual quando a decisão depende do estado presente.
