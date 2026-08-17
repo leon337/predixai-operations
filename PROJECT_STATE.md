@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.4
-UPDATED_AT_UTC=2026-08-17T05:57:08Z
+STATE_VERSION=1.0.5
+UPDATED_AT_UTC=2026-08-17T06:00:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -14,8 +14,8 @@ GOVERNANCE_ACTIVE_TASK=NONE
 ACTIVE_NORMATIVE_PR=13
 ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
-ACTIVE_NORMATIVE_HEAD_SHA=f9adf3b062111d7da30a708a3473cacc05e0f0ca
-ACTIVE_NORMATIVE_HEAD_SEMANTICS=LEA142_CONSOLIDATION_HEAD_BEFORE_STATE_SYNC_RESOLVE_LIVE
+ACTIVE_NORMATIVE_HEAD_SHA=7bf959714592f44b83fbad3b536c13b3d3a931f0
+ACTIVE_NORMATIVE_HEAD_SEMANTICS=LEA142_F08_REMEDIATION_HEAD_BEFORE_STATE_SYNC_RESOLVE_LIVE
 LAST_VERIFIED_MAIN=0f92baa42baf3bae6c01458e698f8596a4c76760
 MVP01_ISSUE=17
 MVP01_PR=18
@@ -43,16 +43,17 @@ LEA141_FINAL_CI_RUN=31998921544
 LEA142_STATUS=IN_PROGRESS_FAIL_REMEDIABLE
 LEA142_INITIAL_REVIEW_HEAD=3e91752a41930494661039e4a1ef3567892c2990
 LEA142_INITIAL_REVIEW_DECISION=FAIL_REMEDIABLE
-LEA142_FINDINGS=LEA_142_F01_TO_F07
+LEA142_FINDINGS=LEA_142_F01_TO_F08
 LEA142_BASELINE_CANDIDATE=docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md
-LEA142_CONSOLIDATION_HEAD=f9adf3b062111d7da30a708a3473cacc05e0f0ca
+LEA142_FIRST_CONSOLIDATION_HEAD=f9adf3b062111d7da30a708a3473cacc05e0f0ca
+LEA142_F08_REMEDIATION_HEAD=7bf959714592f44b83fbad3b536c13b3d3a931f0
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
 MERGE_AUTHORIZED=NO_FOR_PR13_UNTIL_LEA142_REVIEW_PASS_AND_HUMAN_GATE
-GITHUB_LINEAR_SYNC=PASS_LEA142_IN_PROGRESS
-BLOCKERS=LEA142_RETEST_AND_HUMAN_GATE_FOR_PR13_MERGE
+GITHUB_LINEAR_SYNC=PASS_LEA142_IN_PROGRESS_F08_REMEDIATED
+BLOCKERS=LEA142_FINAL_RETEST_AND_HUMAN_GATE_FOR_PR13_MERGE
 KNOWN_PENDING=RN_02_7_LEA142_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=REVIEW_AND_RETEST_LEA142_BASELINE_CANDIDATE
+NEXT_AUTHORIZED_ACTION=RETEST_LEA142_EXACT_HEAD
 ```
 
 ## Identidade
@@ -108,7 +109,7 @@ A verificação pós-merge identificou drift documental nos campos transitórios
 - Histórico Auditável da Fase 0
 - GOV-02 — Checklist permanente e roadmap executável
 
-A RN-02.7 ainda não é baseline integrada ao `main`. A LEA-142 está produzindo e retestando a candidata canônica `RN-02.7-REV1-COMPLETA.md`; mesmo após PASS, o merge continuará sujeito a HUMAN_GATE explícito.
+A RN-02.7 ainda não é baseline integrada ao `main`. A LEA-142 está retestando a candidata canônica `RN-02.7-REV1-COMPLETA.md`; mesmo após PASS, o merge continuará sujeito a HUMAN_GATE explícito.
 
 ## Estado técnico implementado
 
@@ -183,14 +184,15 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Estado Linear: In Progress.
 - PR Draft: #13.
 - Branch: `docs/lea-117-rn-02-7-manutencao`.
-- HEAD inicial da revisão final LEA-142: `3e91752a41930494661039e4a1ef3567892c2990`.
+- HEAD inicial da revisão final: `3e91752a41930494661039e4a1ef3567892c2990`.
 - Primeiro HEAD de consolidação: `f9adf3b062111d7da30a708a3473cacc05e0f0ca`.
+- HEAD remediado após F08: `7bf959714592f44b83fbad3b536c13b3d3a931f0`.
 - Documento canônico candidato: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
 - LEA-138 — Done.
 - LEA-139 — Done / PASS.
 - LEA-140 — Done / PASS.
 - LEA-141 — Done / PASS.
-- LEA-142 — In Progress; revisão inicial `FAIL_REMEDIABLE`, achados F01..F07 em remediação/reteste.
+- LEA-142 — In Progress; revisão inicial `FAIL_REMEDIABLE`, achados F01..F08 remediados e aguardando reteste final.
 
 ### LEA-141 — integração normativa concluída
 
@@ -210,10 +212,12 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Linear: In Progress.
 - HEAD inicialmente revisado: `3e91752a41930494661039e4a1ef3567892c2990`.
 - Decisão inicial: `FAIL_REMEDIABLE`.
-- Achados: LEA-142-F01 a LEA-142-F07.
-- Baseline candidata criada: `RN-02.7-REV1-COMPLETA.md`.
+- Achados iniciais: LEA-142-F01 a F07.
+- F08 identificado durante reteste da primeira consolidação: perda de campos mínimos obrigatórios na fonte canônica.
+- Baseline candidata: `RN-02.7-REV1-COMPLETA.md`.
 - Primeiro commit de consolidação: `f9adf3b062111d7da30a708a3473cacc05e0f0ca`.
-- Próximo gate: revisão da consolidação, remediação adicional se necessária e reteste sobre HEAD exato.
+- Remediação autossuficiente de F08: `7bf959714592f44b83fbad3b536c13b3d3a931f0`.
+- Próximo gate: reteste normativo e CI sobre HEAD exato após esta sincronização.
 
 Nenhum merge do PR #13 está autorizado. PASS técnico/normativo da LEA-142 apenas habilitará solicitação de HUMAN_GATE específico de merge.
 
@@ -279,16 +283,16 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
 9. Vulnerabilidade alta conhecida bloqueia PASS até remediação e reteste; SEC-02 já cumpriu esse ciclo e está encerrada.
-10. A RN-02.7 permanece como frente normativa principal; LEA-142 está em revisão/remediação final.
+10. A RN-02.7 permanece como frente normativa principal; LEA-142 está em reteste final.
 11. IA não executa operação crítica sem confirmação humana compatível com o risco.
 12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. revisar a candidata `RN-02.7-REV1-COMPLETA.md` contra os achados F01..F07 e as baselines vigentes;
-2. remediar qualquer novo conflito e retestar sobre HEAD exato;
-3. manter o merge do PR #13 bloqueado até LEA-142 + PASS + autorização explícita de merge;
-4. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel;
+1. retestar a candidata `RN-02.7-REV1-COMPLETA.md` contra F01..F08 e baselines vigentes;
+2. confirmar CI, escopo do diff, review threads e sincronização Linear/GitHub;
+3. manter merge do PR #13 bloqueado até LEA-142 + PASS + autorização explícita de merge;
+4. não declarar MVP-01 em produção definitiva sem evidência técnica da Vercel;
 5. tratar futuras implementações, SQL e migrations como novos escopos sujeitos a autorização própria.
 
 ## Regra de leitura de HEAD e provider
