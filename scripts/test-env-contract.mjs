@@ -28,8 +28,8 @@ check(
   "app deve ler NEXT_PUBLIC_SUPABASE_URL",
 );
 check(
-  app.includes("process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY"),
-  "app deve ler NEXT_PUBLIC_SUPABASE_ANON_KEY",
+  app.includes("process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"),
+  "app deve ler NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
 );
 
 const envExample = readIfExists(".env.example");
@@ -38,8 +38,8 @@ check(
   ".env.example deve apontar por padrão somente para Supabase local",
 );
 check(
-  /^NEXT_PUBLIC_SUPABASE_ANON_KEY=local-anon-key-from-supabase-status$/m.test(envExample),
-  ".env.example deve usar placeholder explícito para a chave local",
+  /^NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_local_from_supabase_status$/m.test(envExample),
+  ".env.example deve usar placeholder explícito para a chave publishable local",
 );
 check(
   !envExample.includes("gotzykqvpgjzmzsyvufx"),
