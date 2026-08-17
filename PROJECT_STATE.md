@@ -3,8 +3,8 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.5
-UPDATED_AT_UTC=2026-08-17T06:00:00Z
+STATE_VERSION=1.0.6
+UPDATED_AT_UTC=2026-08-17T06:07:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
@@ -14,8 +14,8 @@ GOVERNANCE_ACTIVE_TASK=NONE
 ACTIVE_NORMATIVE_PR=13
 ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
-ACTIVE_NORMATIVE_HEAD_SHA=7bf959714592f44b83fbad3b536c13b3d3a931f0
-ACTIVE_NORMATIVE_HEAD_SEMANTICS=LEA142_F08_REMEDIATION_HEAD_BEFORE_STATE_SYNC_RESOLVE_LIVE
+ACTIVE_NORMATIVE_HEAD_SHA=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
+ACTIVE_NORMATIVE_HEAD_SEMANTICS=LAST_SUBSTANTIVE_LEA142_HEAD_VALIDATED_RESOLVE_LIVE_FOR_STATE_SYNC_HEAD
 LAST_VERIFIED_MAIN=0f92baa42baf3bae6c01458e698f8596a4c76760
 MVP01_ISSUE=17
 MVP01_PR=18
@@ -40,20 +40,25 @@ RECONCILIATION_REVIEW_DECISION=PASS_AND_MERGED
 LEA141_STATUS=PASS_DONE
 LEA141_VALIDATED_HEAD=138fbbefd747f3b2accbfe28c93ea3951e225d11
 LEA141_FINAL_CI_RUN=31998921544
-LEA142_STATUS=IN_PROGRESS_FAIL_REMEDIABLE
+LEA142_STATUS=PASS_AWAITING_HUMAN_GATE
 LEA142_INITIAL_REVIEW_HEAD=3e91752a41930494661039e4a1ef3567892c2990
 LEA142_INITIAL_REVIEW_DECISION=FAIL_REMEDIABLE
 LEA142_FINDINGS=LEA_142_F01_TO_F08
 LEA142_BASELINE_CANDIDATE=docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md
 LEA142_FIRST_CONSOLIDATION_HEAD=f9adf3b062111d7da30a708a3473cacc05e0f0ca
-LEA142_F08_REMEDIATION_HEAD=7bf959714592f44b83fbad3b536c13b3d3a931f0
+LEA142_F08_REMEDIATION_HEAD=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
+LEA142_SUBSTANTIVE_RETEST_HEAD=d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c
+LEA142_SUBSTANTIVE_REVIEW_DECISION=PASS
+LEA142_SUBSTANTIVE_CI_RUN=32000249139
+LEA142_SECURITY_ARTIFACT=9278131677
+LEA142_STATE_SYNC_CI_STATUS=VERIFY_LIVE_ON_CURRENT_PR_HEAD
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-MERGE_AUTHORIZED=NO_FOR_PR13_UNTIL_LEA142_REVIEW_PASS_AND_HUMAN_GATE
-GITHUB_LINEAR_SYNC=PASS_LEA142_IN_PROGRESS_F08_REMEDIATED
-BLOCKERS=LEA142_FINAL_RETEST_AND_HUMAN_GATE_FOR_PR13_MERGE
-KNOWN_PENDING=RN_02_7_LEA142_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=RETEST_LEA142_EXACT_HEAD
+MERGE_AUTHORIZED=NO_FOR_PR13_AWAITING_EXPLICIT_HUMAN_GATE
+GITHUB_LINEAR_SYNC=LEA142_PASS_PENDING_LINEAR_DONE_AFTER_FINAL_STATE_SYNC_CI
+BLOCKERS=HUMAN_GATE_FOR_PR13_MERGE_AFTER_FINAL_STATE_SYNC_CI
+KNOWN_PENDING=PR13_MERGE_GATE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=VERIFY_STATE_SYNC_CI_THEN_REQUEST_HUMAN_GATE_TO_MERGE_PR13
 ```
 
 ## Identidade
@@ -109,7 +114,7 @@ A verificação pós-merge identificou drift documental nos campos transitórios
 - Histórico Auditável da Fase 0
 - GOV-02 — Checklist permanente e roadmap executável
 
-A RN-02.7 ainda não é baseline integrada ao `main`. A LEA-142 está retestando a candidata canônica `RN-02.7-REV1-COMPLETA.md`; mesmo após PASS, o merge continuará sujeito a HUMAN_GATE explícito.
+A RN-02.7 possui candidata canônica tecnicamente aprovada pela LEA-142 no PR #13, mas ainda não integra o `main`. Baseline efetiva depende de merge após HUMAN_GATE explícito.
 
 ## Estado técnico implementado
 
@@ -124,7 +129,7 @@ A RN-02.7 ainda não é baseline integrada ao `main`. A LEA-142 está retestando
 
 - GitHub Issue: #17 — concluída.
 - PR: #18 — merged.
-- HEAD aprovado: `5388b01883b9198b60be57c1e275cdd9c0d993d6`.
+- HEAD aprovado: `5388b01883b9198d60be57c1e275cdd9c0d993d6`.
 - Commit MVP no `main`: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`.
 - UAT desktop: PASS.
 - UAT móvel final: PASS.
@@ -185,14 +190,13 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - PR Draft: #13.
 - Branch: `docs/lea-117-rn-02-7-manutencao`.
 - HEAD inicial da revisão final: `3e91752a41930494661039e4a1ef3567892c2990`.
-- Primeiro HEAD de consolidação: `f9adf3b062111d7da30a708a3473cacc05e0f0ca`.
-- HEAD remediado após F08: `7bf959714592f44b83fbad3b536c13b3d3a931f0`.
 - Documento canônico candidato: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
+- HEAD substantivo aprovado da LEA-142: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
 - LEA-138 — Done.
 - LEA-139 — Done / PASS.
 - LEA-140 — Done / PASS.
 - LEA-141 — Done / PASS.
-- LEA-142 — In Progress; revisão inicial `FAIL_REMEDIABLE`, achados F01..F08 remediados e aguardando reteste final.
+- LEA-142 — revisão/remediação concluída; PASS normativo no HEAD substantivo; aguardando validação do commit exclusivamente de estado e HUMAN_GATE de merge.
 
 ### LEA-141 — integração normativa concluída
 
@@ -207,19 +211,22 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Linear: Done.
 - Decisão final: PASS.
 
-### LEA-142 — revisão final em execução
+### LEA-142 — revisão final
 
-- Linear: In Progress.
+- Linear: In Progress até validação do commit final de estado.
 - HEAD inicialmente revisado: `3e91752a41930494661039e4a1ef3567892c2990`.
 - Decisão inicial: `FAIL_REMEDIABLE`.
-- Achados iniciais: LEA-142-F01 a F07.
-- F08 identificado durante reteste da primeira consolidação: perda de campos mínimos obrigatórios na fonte canônica.
-- Baseline candidata: `RN-02.7-REV1-COMPLETA.md`.
+- Achados: LEA-142-F01 a F08.
 - Primeiro commit de consolidação: `f9adf3b062111d7da30a708a3473cacc05e0f0ca`.
-- Remediação autossuficiente de F08: `7bf959714592f44b83fbad3b536c13b3d3a931f0`.
-- Próximo gate: reteste normativo e CI sobre HEAD exato após esta sincronização.
+- F08: completude/autossuficiência da fonte canônica.
+- HEAD substantivo final: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`.
+- Decisão do reteste substantivo: PASS.
+- Workflow do HEAD substantivo: `Dependency Security` run `32000249139` — SUCCESS.
+- Artefato: `9278131677`.
+- Review threads: 0 no gate substantivo.
+- Próximo gate: CI do commit exclusivamente de sincronização de estado e atualização Linear para Done.
 
-Nenhum merge do PR #13 está autorizado. PASS técnico/normativo da LEA-142 apenas habilitará solicitação de HUMAN_GATE específico de merge.
+Nenhum merge do PR #13 está autorizado. O único passo posterior ao fechamento técnico da LEA-142 será HUMAN_GATE específico para merge.
 
 ## Infraestrutura
 
@@ -283,20 +290,20 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
 9. Vulnerabilidade alta conhecida bloqueia PASS até remediação e reteste; SEC-02 já cumpriu esse ciclo e está encerrada.
-10. A RN-02.7 permanece como frente normativa principal; LEA-142 está em reteste final.
+10. A RN-02.7 possui candidata canônica tecnicamente aprovada; integração ao `main` depende de HUMAN_GATE.
 11. IA não executa operação crítica sem confirmação humana compatível com o risco.
 12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. retestar a candidata `RN-02.7-REV1-COMPLETA.md` contra F01..F08 e baselines vigentes;
-2. confirmar CI, escopo do diff, review threads e sincronização Linear/GitHub;
-3. manter merge do PR #13 bloqueado até LEA-142 + PASS + autorização explícita de merge;
+1. verificar CI do HEAD corrente após esta sincronização de estado;
+2. se PASS, concluir LEA-142 no Linear e registrar `PASS_AWAITING_HUMAN_GATE` no PR;
+3. manter merge do PR #13 bloqueado até autorização explícita de Leandro;
 4. não declarar MVP-01 em produção definitiva sem evidência técnica da Vercel;
 5. tratar futuras implementações, SQL e migrations como novos escopos sujeitos a autorização própria.
 
 ## Regra de leitura de HEAD e provider
 
-O SHA do próprio commit não deve ser gravado autorreferencialmente. Para PR ativo, resolver o HEAD ao vivo e registrar separadamente o último HEAD validado.
+O SHA do próprio commit não deve ser gravado autorreferencialmente. Para PR ativo, resolver o HEAD ao vivo e registrar separadamente o último HEAD substantivo validado.
 
 Deployment, promoção, saúde do provider, advisories e aliases são estados voláteis. Uma autorização humana ou um snapshot documental não substitui evidência atual do provider ou dos gates de segurança.
