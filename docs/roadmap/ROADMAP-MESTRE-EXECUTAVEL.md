@@ -12,7 +12,7 @@ Isso não significa que as Fases 1 a 4 estejam concluídas integralmente. Signif
 
 Snapshot reconciliado em 2026-08-17:
 
-- `main` verificado após a reconciliação: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
+- `main` verificado após a integração da RN-02.7: `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`;
 - MVP-01: GitHub Issue #17 concluída;
 - PR #18: merged;
 - UAT desktop: PASS;
@@ -22,42 +22,52 @@ Snapshot reconciliado em 2026-08-17:
 - PR #23: merged, com `nanoid@3.3.18` integrado;
 - workflow de segurança do PR #23: PASS, `npm audit` 0 vulnerabilidades e build PASS;
 - reconciliação documental PR #21: retestada, autorizada e merged por squash;
-- workflow final do PR #21: `31995301015` — SUCCESS;
+- sincronização pós-reconciliação PR #24: merged;
+- RN-02.7 REV1: concluída e integrada pelo PR #13;
+- LEA-117: Done;
+- LEA-138 a LEA-142: Done;
+- workflow final do PR #13: `32000471638` — SUCCESS;
 - promoção para produção: autorizada, porém não tecnicamente confirmada no repositório;
-- RN-02.7: ainda em andamento no PR #13;
-- próxima subtarefa normativa: LEA-141.
+- próxima etapa de governança: sincronização documental pós-merge e checklist formal de encerramento da Fase 0.
 
 ## Fase 0 — Domínio e governança
 
 ### Concluído
 
-- RN-00 a RN-02.6;
+- RN-00 a RN-02.7;
 - histórico auditável;
 - ADR Vercel/Supabase;
 - base Next.js e Preview Vercel;
 - política de checklist e roadmap;
 - reconciliação documental pós-MVP-01 — PR #21 merged;
+- sincronização pós-reconciliação — PR #24 merged;
 - LEA-138 — RN-02.7 entidades e ciclo de estados;
 - LEA-139 — execução, peças, serviços, custos e garantias;
-- LEA-140 — falhas, reincidência e decisões de ciclo de vida.
+- LEA-140 — falhas, reincidência e decisões de ciclo de vida;
+- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6;
+- LEA-142 — revisão crítica final, remediação, reteste e consolidação;
+- LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial — Done;
+- PR #13 — merged por squash no `main` em `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`.
 
 ### Em andamento
 
-- LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial.
+- sincronização documental pós-merge do PR #13 em PR próprio.
 
-### Próxima subtarefa
+### Próxima etapa
 
-- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6.
+- executar o checklist formal de encerramento da Fase 0;
+- confirmar arquitetura e limites autorizáveis da etapa seguinte antes de qualquer nova implementação.
 
-### Pendente
+### Pendente para saída formal da Fase 0
 
-- LEA-142 — revisão crítica final, remediação, reteste e congelamento da baseline.
+- checklist de encerramento da Fase 0 aprovado;
+- arquitetura e limites das próximas implementações confirmados.
 
 ### Critério de saída
 
-- RN-02.7 integrada;
-- checklist de encerramento da Fase 0 aprovado;
-- arquitetura e limites das próximas implementações confirmados.
+- RN-02.7 integrada — **ATENDIDO**;
+- checklist de encerramento da Fase 0 aprovado — **PENDENTE**;
+- arquitetura e limites das próximas implementações confirmados — **PENDENTE**.
 
 ## Entrega acelerada — MVP-01 Almoxarifado Inteligente
 
@@ -142,18 +152,47 @@ Resultados de auditoria são temporais. Um PASS histórico não substitui uma no
 - build: PASS;
 - quatro arquivos Markdown no diff;
 - review threads pendentes: zero;
-- commit integrado no `main`: `9e63129d5c0b138bc2d9b887e17545e839ba3844`.
+- commit integrado no `main`: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
+- PR #24 de sincronização pós-merge integrado em `0f92baa42baf3bae6c01458e698f8596a4c76760`.
 
 ### Resultado
 
-O estado canônico agora reconhece simultaneamente:
+O estado canônico reconhece simultaneamente:
 
-- Fase 0 normativa ainda aberta;
+- Fase 0 com todas as baselines RN-00 a RN-02.7 integradas, mas ainda aguardando checklist formal de saída;
 - MVP-01 já integrado;
 - SEC-02 resolvida;
 - caminho Supabase antigo cancelado por supersessão;
 - produção autorizada, porém ainda sem confirmação técnica de promoção;
-- LEA-141 como próxima subtarefa normativa.
+- RN-02.7 integrada pelo PR #13 e LEA-117 concluída.
+
+## RN-02.7 — Manutenção e Ciclo de Vida Patrimonial
+
+### Estado
+
+`CONCLUÍDA E INTEGRADA AO MAIN`
+
+### Evidência
+
+- tarefa principal: LEA-117 — Done;
+- LEA-138 — Done;
+- LEA-139 — Done / PASS;
+- LEA-140 — Done / PASS;
+- LEA-141 — Done / PASS;
+- LEA-142 — Done / PASS;
+- revisão inicial LEA-142: `FAIL_REMEDIABLE` sobre `3e91752a41930494661039e4a1ef3567892c2990`;
+- achados LEA-142-F01..F08: remediados;
+- HEAD substantivo final: `d14bfc3fe202a04c27f6ead81a7efa9d6e57d06c`;
+- HEAD final autorizado: `bf279b7ca395608fe6283bfadf7081b6d9e929c9`;
+- workflow final `Dependency Security` run `32000471638`: SUCCESS;
+- artefato final: `9278204797`;
+- PR #13: merged por squash após HUMAN_GATE explícito de Leandro;
+- commit integrado: `8fbd006a2b49f810adaf0d2d3f18b6be25421d6c`;
+- documento canônico: `docs/fase-0/regras-negocio/RN-02.7-REV1-COMPLETA.md`.
+
+### Limite
+
+A conclusão da baseline RN-02.7 não significa que o módulo de manutenção esteja implementado. Implementação, SQL, migrations e integrações reais continuam sujeitos a escopo e autorização próprios.
 
 ## Fase 1 — Fundação de infraestrutura
 
@@ -266,7 +305,7 @@ A cobertura de UX ainda não é considerada completa para todos os módulos futu
 - catálogo e patrimônios completos;
 - transferências, inventário e ajustes completos;
 - obras, eventos e romaneios;
-- manutenção patrimonial;
+- manutenção patrimonial implementada;
 - anexos e QR Code completos;
 - auditoria transversal completa.
 
@@ -336,10 +375,10 @@ Nenhuma documentação deve converter autorização em confirmação técnica se
 
 ## Próxima sequência canônica
 
-1. executar LEA-141 no PR #13, resolvendo o HEAD ao vivo antes da primeira alteração;
-2. executar LEA-142 com revisão crítica sobre HEAD exato, remediação, reteste e congelamento da baseline;
-3. solicitar novo HUMAN_GATE antes de qualquer merge do PR #13;
-4. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01;
+1. validar a sincronização documental pós-merge do PR #13 em branch/PR próprio;
+2. solicitar HUMAN_GATE separado antes de integrar essa sincronização documental;
+3. após a sincronização, executar o checklist formal de encerramento da Fase 0;
+4. confirmar arquitetura, escopo e limites da etapa seguinte antes de autorizar qualquer nova implementação, SQL ou migration;
 5. tratar a promoção de produção como não confirmada até existir evidência atual do provider.
 
 ## Gates permanentes
