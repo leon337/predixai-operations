@@ -1,0 +1,47 @@
+name: SEC02 Lockfile Generator
+
+on:
+  push:
+    branches:
+      - fix/sec-02-nanoid
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - name: Update only nanoid in lockfile
+        run: npm update nanoid --package-lock-only --ignore-scripts
+
+      - name: Verify nanoid resolution
+        run: node -e "const l=require('./package-lock.json'); const p=l.packages['node_modules/nanoid']; console.log(p.version, p.resolved); if (!p || p.version !== '3.3.18') process.exit(1)"
+
+      - name: Audit generated lockfile
+        run: npm audit --package-lock-only --json > npm-audit.json || true
+
+      - name: Enforce zero high or critical
+        run: node -e "const r=require('./npm-audit.json'); const v=r.metadata?.vulnerabilities||{}; console.log(v); if ((v.high||0)>0 || (v.critical||0)>0) process.exit(1)"
+
+      - name: Upload generated evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sec02-lockfile-generated
+          path: |
+            package-lock.json
+            npm-audit.json
+          if-no-files-found: error
+          retention-days: 1
