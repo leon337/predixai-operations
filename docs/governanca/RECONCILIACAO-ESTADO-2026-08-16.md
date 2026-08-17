@@ -23,12 +23,15 @@ Depois disso, Leandro solicitou que a equipe assumisse o projeto e colocasse o A
 
 - `main` no início da reconciliação: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`;
 - `main` após a remediação SEC-02: `e19da0f3e71b582d9422f65f0bf21cbb80885989`;
+- `main` após a integração da reconciliação: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
 - GitHub Issue #17 — MVP-01: fechada como concluída;
 - PR #18 — merged;
 - HEAD aprovado do PR #18: `5388b01883b9198b60be57c1e275cdd9c0d993d6`;
 - PR #13 — aberto em Draft;
-- HEAD do PR #13 observado durante a reconciliação: `c122fa84e096d49ede3ccad805d0059a47f22ac6`;
-- PR #21 — reconciliação documental, Draft;
+- HEAD do PR #13 verificado em 2026-08-17: `c122fa84e096d49ede3ccad805d0059a47f22ac6`;
+- PR #21 — reconciliação documental, merged por squash;
+- HEAD validado do PR #21: `0794cdcd0294938e472b9cc8f5dfb12c14408dab`;
+- workflow final do PR #21: `Dependency Security` run `31995301015` — SUCCESS;
 - Issue #22 — SEC-02, fechada como concluída após o merge do PR #23;
 - PR #23 — SEC-02, merged por squash;
 - guia do MVP: `docs/mvp/MVP-ONLINE-GUIA-DE-USO.md`;
@@ -125,6 +128,28 @@ A correção mínima foi executada no PR #23:
 
 Leandro autorizou o merge do PR #23. O squash merge produziu `e19da0f3e71b582d9422f65f0bf21cbb80885989` no `main`, e a Issue #22 foi fechada automaticamente como concluída. Verificação direta do `package-lock.json` no `main` confirma `nanoid@3.3.18`.
 
+### 2026-08-17 — reteste e merge da reconciliação
+
+Após a SEC-02 entrar no `main`, o PR #21 foi atualizado e retestado no HEAD `0794cdcd0294938e472b9cc8f5dfb12c14408dab`.
+
+O merge virtual verificado combinou esse HEAD com o `main` pós-SEC-02. O workflow `Dependency Security` run `31995301015` terminou em SUCCESS:
+
+- `npm ci`: PASS;
+- lockfile inalterado: PASS;
+- auditoria: PASS;
+- gate High/Critical: PASS;
+- build: PASS;
+- arquivos do PR: exatamente quatro documentos Markdown;
+- review threads pendentes: zero.
+
+Leandro autorizou o merge. O PR #21 foi marcado Ready for Review e mesclado por squash, produzindo `9e63129d5c0b138bc2d9b887e17545e839ba3844` no `main`.
+
+### Sincronização pós-merge
+
+A leitura do `PROJECT_STATE.md` no `main` após o merge identificou campos transitórios que ainda diziam `PENDING_RETEST` e `PR21_PENDING_MERGE`. Esse drift não altera o conteúdo funcional integrado, mas precisava ser corrigido para que o estado canônico refletisse a decisão já executada.
+
+A sincronização pós-merge corrige somente documentação e deixa LEA-141 como próxima subtarefa normativa.
+
 ### Incidente operacional durante SEC-02
 
 Durante a preparação da branch SEC-02, um arquivo placeholder `SEC02-NOOP.md` foi criado indevidamente no `main` e imediatamente removido em commit subsequente.
@@ -182,7 +207,13 @@ O resultado de 0 vulnerabilidades de 2026-08-04 deixou de representar o estado a
 
 **Correção:** preservar o PASS histórico, registrar SEC-02, remediar sem relaxar gate e atualizar o estado após integração do PR #23.
 
-## Arquivos reconciliados nesta branch
+### DRIFT-08 — campos transitórios após o merge do PR #21
+
+O PR #21 foi corretamente mesclado, mas os documentos carregavam campos de preparação do próprio gate.
+
+**Correção:** registrar `PASS_AND_MERGED`, o commit `9e63129d5c0b138bc2d9b887e17545e839ba3844` e LEA-141 como próxima ação normativa.
+
+## Arquivos reconciliados
 
 - `PROJECT_STATE.md`;
 - `README.md`;
@@ -208,9 +239,10 @@ A SEC-02 foi tratada em PR independente (#23) e já está integrada no `main`.
 ```text
 FASE_NORMATIVA=FASE_0_AINDA_ABERTA
 MVP01=MERGED
-MAIN=e19da0f3e71b582d9422f65f0bf21cbb80885989
+MAIN=9e63129d5c0b138bc2d9b887e17545e839ba3844
 RN_02_7=IN_PROGRESS
 RN_02_7_NEXT=LEA_141
+PR_13_HEAD_VERIFIED=c122fa84e096d49ede3ccad805d0059a47f22ac6
 SUPABASE=potiguarbd_REUSED_BY_MVP01
 OLD_SUPABASE_CREATION_PATH=CANCELED_AS_SUPERSEDED
 SEC_02=CLOSED_REMEDIATED_MERGED
@@ -219,9 +251,12 @@ SECURITY_PR23_CI=PASS
 PRODUCTION_AUTHORIZATION=YES
 PRODUCTION_TECHNICAL_CONFIRMATION=UNKNOWN
 NEW_IMPLEMENTATION_AUTHORIZATION=REQUIRED_PER_SCOPE
-RECONCILIATION_PR=21_PENDING_RETEST_AND_HUMAN_GATE
+RECONCILIATION_PR=21_MERGED
+RECONCILIATION_HEAD=0794cdcd0294938e472b9cc8f5dfb12c14408dab
+RECONCILIATION_CI=PASS
+RECONCILIATION_MAIN_COMMIT=9e63129d5c0b138bc2d9b887e17545e839ba3844
 ```
 
-## Próxima ação após merge desta reconciliação
+## Próxima ação após a reconciliação
 
-Retomar a LEA-141 no PR #13, reconstruindo o HEAD ao vivo antes de qualquer alteração e mantendo o merge bloqueado até a LEA-142, revisão final e gate aplicável.
+Retomar a LEA-141 no PR #13, reconstruindo o HEAD ao vivo antes de qualquer alteração e mantendo o merge bloqueado até a LEA-142, revisão final, PASS e HUMAN_GATE aplicável.

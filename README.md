@@ -9,7 +9,7 @@ O projeto continua com a **Fase 0 — Concepção e Modelagem do Domínio** aber
 Estado técnico resumido:
 
 - MVP-01: merged no PR #18;
-- `main` verificado: `e19da0f3e71b582d9422f65f0bf21cbb80885989`;
+- `main` verificado após a reconciliação: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
 - autenticação, materiais, entradas, saídas, saldo, estoque mínimo, histórico, RLS e interface responsiva: implementados no escopo do MVP-01;
 - Supabase utilizado pelo MVP-01: `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
 - UAT desktop: PASS;
@@ -17,11 +17,11 @@ Estado técnico resumido:
 - segurança de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento;
 - SEC-02 / Issue #22: remediada pelo PR #23 e integrada ao `main` com `nanoid@3.3.18`;
 - workflow oficial do PR #23: PASS, com `npm audit` em 0 vulnerabilidades e build PASS;
+- reconciliação documental: PR #21 validado, autorizado por Leandro e merged por squash;
+- workflow final do PR #21: `Dependency Security` run `31995301015` — SUCCESS;
 - promoção para produção: autorizada por Leandro em 2026-08-04, mas a promoção efetiva não está tecnicamente comprovada no repositório e não deve ser inferida.
 
-A frente normativa ativa permanece a **LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial**, no PR Draft #13. LEA-138, LEA-139 e LEA-140 estão concluídas; LEA-141 e LEA-142 permanecem pendentes.
-
-A reconciliação de estado está no **PR Draft #21** e deve passar novamente pelo CI contra o `main` atual antes de qualquer gate de merge.
+A frente normativa ativa permanece a **LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial**, no PR Draft #13. LEA-138, LEA-139 e LEA-140 estão concluídas; **LEA-141 é a próxima subtarefa** e LEA-142 permanece pendente.
 
 ## Inicialização obrigatória
 
@@ -54,9 +54,18 @@ A SEC-02 foi encerrada:
 - lockfile imutável: PASS;
 - `npm audit`: 0 vulnerabilidades;
 - `npm run build`: PASS;
-- commit no `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
+- commit de segurança no `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
 
 O gate de segurança não deve ser relaxado. Novos advisories devem ser tratados como estado volátil e revalidados quando houver decisão operacional dependente de segurança.
+
+## Reconciliação pós-MVP-01
+
+- PR #21: merged por squash;
+- HEAD validado: `0794cdcd0294938e472b9cc8f5dfb12c14408dab`;
+- workflow final: `31995301015` — SUCCESS;
+- commit no `main`: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
+- Linear: LEA-122/143/144/145 canceladas por supersessão do caminho antigo de criação de outro Supabase;
+- próximo trabalho normativo: LEA-141 no PR #13.
 
 ## Documentação principal
 

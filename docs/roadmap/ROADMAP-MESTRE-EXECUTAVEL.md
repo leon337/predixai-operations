@@ -12,7 +12,7 @@ Isso não significa que as Fases 1 a 4 estejam concluídas integralmente. Signif
 
 Snapshot reconciliado em 2026-08-17:
 
-- `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`;
+- `main` verificado após a reconciliação: `9e63129d5c0b138bc2d9b887e17545e839ba3844`;
 - MVP-01: GitHub Issue #17 concluída;
 - PR #18: merged;
 - UAT desktop: PASS;
@@ -21,9 +21,11 @@ Snapshot reconciliado em 2026-08-17:
 - SEC-02 / Issue #22: remediada e concluída;
 - PR #23: merged, com `nanoid@3.3.18` integrado;
 - workflow de segurança do PR #23: PASS, `npm audit` 0 vulnerabilidades e build PASS;
+- reconciliação documental PR #21: retestada, autorizada e merged por squash;
+- workflow final do PR #21: `31995301015` — SUCCESS;
 - promoção para produção: autorizada, porém não tecnicamente confirmada no repositório;
 - RN-02.7: ainda em andamento no PR #13;
-- reconciliação: PR #21 pendente de novo reteste e HUMAN_GATE.
+- próxima subtarefa normativa: LEA-141.
 
 ## Fase 0 — Domínio e governança
 
@@ -34,15 +36,18 @@ Snapshot reconciliado em 2026-08-17:
 - ADR Vercel/Supabase;
 - base Next.js e Preview Vercel;
 - política de checklist e roadmap;
+- reconciliação documental pós-MVP-01 — PR #21 merged;
 - LEA-138 — RN-02.7 entidades e ciclo de estados;
 - LEA-139 — execução, peças, serviços, custos e garantias;
 - LEA-140 — falhas, reincidência e decisões de ciclo de vida.
 
 ### Em andamento
 
-- LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial;
-- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6;
-- PR #21 — reconciliação documental pós-MVP-01 e pós-SEC-02.
+- LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial.
+
+### Próxima subtarefa
+
+- LEA-141 — integração com RN-02.3, RN-02.5 e RN-02.6.
 
 ### Pendente
 
@@ -119,6 +124,36 @@ O MVP-01 não libera automaticamente as demais funcionalidades do produto e não
 ### Regra
 
 Resultados de auditoria são temporais. Um PASS histórico não substitui uma nova verificação quando advisories ou dependências mudarem.
+
+## Reconciliação documental pós-MVP-01
+
+### Estado
+
+`CONCLUÍDA E INTEGRADA AO MAIN`
+
+### Evidência
+
+- PR #21 — merged por squash;
+- HEAD validado: `0794cdcd0294938e472b9cc8f5dfb12c14408dab`;
+- merge virtual validado sobre o `main` pós-SEC-02;
+- workflow `Dependency Security` run `31995301015`: SUCCESS;
+- `npm ci`: PASS;
+- auditoria e gate High/Critical: PASS;
+- build: PASS;
+- quatro arquivos Markdown no diff;
+- review threads pendentes: zero;
+- commit integrado no `main`: `9e63129d5c0b138bc2d9b887e17545e839ba3844`.
+
+### Resultado
+
+O estado canônico agora reconhece simultaneamente:
+
+- Fase 0 normativa ainda aberta;
+- MVP-01 já integrado;
+- SEC-02 resolvida;
+- caminho Supabase antigo cancelado por supersessão;
+- produção autorizada, porém ainda sem confirmação técnica de promoção;
+- LEA-141 como próxima subtarefa normativa.
 
 ## Fase 1 — Fundação de infraestrutura
 
@@ -299,14 +334,13 @@ Nenhuma documentação deve converter autorização em confirmação técnica se
 - RFID, Digital Twin e manutenção preditiva;
 - otimização logística.
 
-## Próxima sequência canônica após a reconciliação
+## Próxima sequência canônica
 
-1. retestar o PR #21 contra o `main` atual e exigir PASS do gate;
-2. solicitar HUMAN_GATE antes do merge do PR #21;
-3. após integração da reconciliação, retomar LEA-141 no PR #13;
-4. executar LEA-142 com revisão crítica sobre HEAD exato;
-5. solicitar novo gate antes de merge do PR #13;
-6. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01.
+1. executar LEA-141 no PR #13, resolvendo o HEAD ao vivo antes da primeira alteração;
+2. executar LEA-142 com revisão crítica sobre HEAD exato, remediação, reteste e congelamento da baseline;
+3. solicitar novo HUMAN_GATE antes de qualquer merge do PR #13;
+4. tratar futuras implementações como novos escopos autorizados, sem herdar automaticamente a autorização do MVP-01;
+5. tratar a promoção de produção como não confirmada até existir evidência atual do provider.
 
 ## Gates permanentes
 
