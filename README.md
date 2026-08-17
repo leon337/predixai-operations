@@ -9,18 +9,19 @@ O projeto continua com a **Fase 0 — Concepção e Modelagem do Domínio** aber
 Estado técnico resumido:
 
 - MVP-01: merged no PR #18;
-- `main` verificado na reconciliação: `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`;
+- `main` verificado: `e19da0f3e71b582d9422f65f0bf21cbb80885989`;
 - autenticação, materiais, entradas, saídas, saldo, estoque mínimo, histórico, RLS e interface responsiva: implementados no escopo do MVP-01;
 - Supabase utilizado pelo MVP-01: `potiguarbd` (`gotzykqvpgjzmzsyvufx`);
 - UAT desktop: PASS;
 - UAT móvel final: PASS;
 - segurança de dependências no gate de 2026-08-04: 0 vulnerabilidades naquele momento;
-- segurança atual em 2026-08-16: **BLOCKED** pela SEC-02 / Issue #22, após o `npm audit` detectar `nanoid@3.3.17` com severidade alta;
+- SEC-02 / Issue #22: remediada pelo PR #23 e integrada ao `main` com `nanoid@3.3.18`;
+- workflow oficial do PR #23: PASS, com `npm audit` em 0 vulnerabilidades e build PASS;
 - promoção para produção: autorizada por Leandro em 2026-08-04, mas a promoção efetiva não está tecnicamente comprovada no repositório e não deve ser inferida.
 
 A frente normativa ativa permanece a **LEA-117 — RN-02.7 Manutenção e Ciclo de Vida Patrimonial**, no PR Draft #13. LEA-138, LEA-139 e LEA-140 estão concluídas; LEA-141 e LEA-142 permanecem pendentes.
 
-A reconciliação de estado está no **PR Draft #21** e não deve ser mesclada enquanto o gate de segurança estiver vermelho.
+A reconciliação de estado está no **PR Draft #21** e deve passar novamente pelo CI contra o `main` atual antes de qualquer gate de merge.
 
 ## Inicialização obrigatória
 
@@ -40,15 +41,22 @@ O MVP-01 não representa a conclusão do produto inteiro. Patrimônio completo, 
 
 ## Segurança atual
 
-A GitHub Issue #22 (`SEC-02`) registra a vulnerabilidade alta descoberta no reteste da reconciliação:
+A SEC-02 foi encerrada:
 
-- `nanoid@3.3.17`;
-- transitivo de `postcss@8.5.23`;
-- advisory `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`;
-- versão 3.x corrigida indicada pelo advisory: `3.3.18`;
-- workflow run que bloqueou o PR #21: `31936473582`.
+- Issue #22: Closed / Completed;
+- PR #23: merged por squash;
+- vulnerabilidade original: `nanoid@3.3.17` com severidade alta;
+- correção integrada: `nanoid@3.3.18`;
+- advisory: `GHSA-2v37-7h3g-55p8` / `CVE-2026-67213`;
+- HEAD validado do PR #23: `e6d54340ceb71a2237cfb2260fc46a216246099e`;
+- workflow `Dependency Security` run `31994973803`: SUCCESS;
+- `npm ci`: PASS;
+- lockfile imutável: PASS;
+- `npm audit`: 0 vulnerabilidades;
+- `npm run build`: PASS;
+- commit no `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
 
-O gate de segurança não deve ser relaxado. A remediação e o reteste são obrigatórios antes de PASS e merge do PR #21.
+O gate de segurança não deve ser relaxado. Novos advisories devem ser tratados como estado volátil e revalidados quando houver decisão operacional dependente de segurança.
 
 ## Documentação principal
 
