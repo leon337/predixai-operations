@@ -2,136 +2,90 @@
 
 ## Status
 
-PROPOSTA PARA APROVAÇÃO
+**HISTÓRICA — SUPERSEDIDA EM PARTE PELA ADR-002**
 
-## Contexto
+Esta ADR registra a estratégia de infraestrutura aprovada no início técnico do PredixAI Operations. Algumas premissas factuais foram superadas pela execução autorizada do MVP-01.
 
-O PredixAI Operations está na Fase 0 de concepção e modelagem. O repositório ainda não contém aplicação executável. A equipe Vercel `PREDIX AI BR` está conectada e não possui projeto para este produto. A organização Supabase `leon337's Org` está conectada e não possui projeto específico chamado PredixAI Operations.
+A decisão arquitetural vigente pós-MVP é a [`ADR-002 — Arquitetura Vigente Pós-MVP-01`](ADR-002-ARQUITETURA-VIGENTE-POS-MVP01.md), quando presente na `main`.
 
-## Decisão proposta
+O conteúdo integral anterior desta ADR permanece preservado no histórico Git.
 
-### 1. Frontend e Vercel
+## Contexto histórico
 
-- adotar aplicação web mobile-first/PWA;
-- framework preferencial: Next.js com TypeScript;
-- hospedar previews e produção na Vercel;
-- cada pull request de implementação deverá gerar Preview Deploy;
-- `main` será a origem de produção após gate explícito;
-- nenhuma publicação funcional ocorrerá durante a Fase 0 documental.
+Quando esta decisão foi elaborada:
 
-### 2. Supabase
+- o projeto estava na Fase 0 documental;
+- ainda não havia aplicação executável integrada;
+- Next.js + TypeScript era a preferência para o frontend;
+- Vercel era a plataforma proposta para previews/produção;
+- Supabase era a plataforma proposta para PostgreSQL, Auth, Storage e RLS;
+- a criação de tabelas de domínio ainda estava bloqueada;
+- reutilizar um projeto Supabase existente havia sido rejeitado naquele momento.
 
-Utilizar Supabase como plataforma gerenciada para:
+Posteriormente, o MVP-01 materializou uma solução diferente em pontos relevantes:
 
-- PostgreSQL;
-- autenticação;
-- Storage para imagens e documentos;
-- políticas RLS;
-- logs e recursos auxiliares compatíveis com o plano contratado.
+- aplicação Next.js/TypeScript passou a existir;
+- Vercel passou a ser utilizada;
+- o projeto Supabase existente `potiguarbd` (`gotzykqvpgjzmzsyvufx`) foi reutilizado;
+- migrations, Auth e RLS foram aplicadas ao escopo do MVP-01.
 
-Realtime e Edge Functions não são obrigatórios no MVP e dependerão de necessidade comprovada.
+Esses fatos são reconciliados pela ADR-002.
 
-### 3. Ambientes
+## Princípios da ADR-001 que continuam válidos
 
-```text
-LOCAL
-→ desenvolvimento no Linux Mint
+### Frontend e hospedagem
 
-PREVIEW
-→ Vercel por pull request
-→ projeto Supabase de desenvolvimento ou ambiente isolado aprovado
+- aplicação web mobile-first;
+- Next.js com TypeScript como base materializada;
+- PRs de implementação sujeitos a build/CI e Preview quando aplicável;
+- integração na `main` não deve ser confundida com promoção tecnicamente comprovada em produção.
 
-PRODUÇÃO
-→ Vercel ligada à main
-→ projeto Supabase de produção separado
-```
-
-Não será permitido compartilhar tabelas de produção com testes ou previews.
-
-### 4. Região
-
-Região preferencial do Supabase: `sa-east-1`, por proximidade com a operação brasileira e alinhamento com os projetos existentes da organização.
-
-### 5. Secrets
+### Secrets
 
 - secrets nunca entram no GitHub;
-- `NEXT_PUBLIC_SUPABASE_URL` e chave pública anon podem ser variáveis públicas controladas;
-- service role e segredos administrativos ficam apenas em ambientes de servidor autorizados;
-- chaves devem ser separadas por ambiente;
-- rotação será obrigatória em caso de exposição.
+- credenciais administrativas ficam fora do cliente;
+- chaves e variáveis respeitam menor privilégio;
+- exposição de credencial exige rotação.
 
-### 6. Banco e migrations
+### Banco e migrations
 
-- nenhuma tabela de domínio será criada antes do encerramento da Fase 0 e autorização explícita;
-- migrations deverão ser versionadas no GitHub;
-- mudanças manuais de produção serão proibidas, salvo procedimento emergencial documentado;
-- cada migration deverá possuir revisão, rollback ou estratégia compensatória e evidência de aplicação.
+- migrations devem ser versionadas;
+- mudanças relevantes de banco exigem revisão e evidência;
+- SQL/migrations novas não são autorizadas por esta ADR nem pelo encerramento da Fase 0;
+- operação manual excepcional deve ser formalmente documentada.
 
-### 7. Backups e recuperação
+### Backups e recuperação
 
-Antes de produção deverão ser definidos:
+Antes da maturidade de produção devem ser definidos, de forma compatível com o provider/plano real:
 
-- capacidade de backup do plano Supabase escolhido;
-- periodicidade de exportação adicional;
-- teste de restauração;
-- política de retenção;
-- responsáveis pelo procedimento.
+- mecanismo de backup;
+- retenção;
+- restauração;
+- teste de restore;
+- responsabilidade operacional.
 
-### 8. Coexistência local e nuvem
+### Portabilidade
 
-A aplicação poderá continuar operando localmente durante o desenvolvimento. A nuvem será usada para previews, testes compartilhados e produção futura. O domínio não poderá depender exclusivamente de recursos proprietários que impeçam exportação dos dados PostgreSQL.
+O domínio não deve depender de mecanismos que impeçam exportação e recuperação dos dados PostgreSQL de forma razoável.
 
-## Alternativas consideradas
+## Premissas explicitamente superadas
 
-1. Reutilizar projeto Supabase existente: rejeitado por misturar produtos e permissões.
-2. Criar Supabase imediatamente com tabelas: rejeitado enquanto SQL e migrations permanecem bloqueados.
-3. Criar projeto Vercel vazio: rejeitado por não existir aplicação executável.
-4. Manter tudo apenas local: rejeitado como estratégia permanente, mas aceito durante a Fase 0 e início técnico.
+A ADR-002 supersede as seguintes afirmações históricas:
 
-## Custos e gate de provisionamento
+1. inexistência de aplicação executável;
+2. inexistência de projeto Vercel utilizado pelo produto;
+3. rejeição definitiva à reutilização de Supabase existente;
+4. inexistência de migrations/tabelas de domínio no escopo do MVP-01;
+5. separação LOCAL/PREVIEW/PRODUÇÃO como fato já implementado.
 
-O provisionamento só poderá ocorrer após:
+## Regra de leitura
 
-1. confirmação do plano Supabase e eventual custo mensal;
-2. confirmação do plano Vercel aplicável à equipe;
-3. autorização explícita do responsável;
-4. criação de tarefas separadas de provisionamento;
-5. definição dos nomes oficiais dos ambientes.
+Para decisões atuais, consultar na ordem:
 
-## Checklist de provisionamento futuro
+1. código e arquivos reais da `main`;
+2. `PROJECT_STATE.md`;
+3. ADR-002;
+4. Roadmap Mestre;
+5. esta ADR como histórico e fonte dos princípios ainda não superados.
 
-### Supabase
-
-- [ ] confirmar organização;
-- [ ] confirmar nome do projeto;
-- [ ] confirmar região;
-- [ ] confirmar plano e custo;
-- [ ] gerar senha forte fora do repositório;
-- [ ] criar projeto sem tabelas de domínio;
-- [ ] configurar owners e acesso mínimo;
-- [ ] documentar URL e identificadores não secretos;
-- [ ] registrar política de backup;
-- [ ] criar tarefa de migrations somente após autorização.
-
-### Vercel
-
-- [ ] confirmar equipe;
-- [ ] criar base executável do frontend;
-- [ ] conectar repositório;
-- [ ] definir root directory;
-- [ ] cadastrar variáveis por ambiente;
-- [ ] executar primeiro Preview Deploy;
-- [ ] validar logs e rollback;
-- [ ] manter produção bloqueada até aprovação.
-
-## Consequências
-
-- separação clara entre documentação, infraestrutura e implementação;
-- menor risco de mistura de dados;
-- previews rastreáveis por PR;
-- custos e recursos externos condicionados a aprovação;
-- migrations adiadas até o domínio estar suficientemente congelado.
-
-## Critério de aceite da LEA-121
-
-A LEA-121 estará concluída quando esta ADR for revisada e integrada, os custos forem verificados e as tarefas de provisionamento forem criadas, permanecendo bloqueadas até autorização explícita.
+Nenhuma implementação, SQL, migration, deploy ou mudança de provider é autorizada por este documento.
