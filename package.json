@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node scripts/test-env-contract.mjs",
     "audit:security": "npm audit --audit-level=high"
   },
   "dependencies": {
