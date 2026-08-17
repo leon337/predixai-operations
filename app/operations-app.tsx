@@ -2,8 +2,8 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
 
-const SUPABASE_URL = "https://gotzykqvpgjzmzsyvufx.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdvdHp5a3F2cGdqem16c3l2dWZ4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc5MDY2OTEsImV4cCI6MjA3MzQ4MjY5MX0.a8rX72uIOFBbzaR3UMKSE7RiTaTAm8-6A4hdKqpDS6s";
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/+$/, "") ?? "";
+const SUPABASE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "";
 const SESSION_KEY = "predixai-operations-session-v1";
 
 type Session = {
@@ -118,14 +118,25 @@ function errorMessage(body: unknown, fallback: string): string {
   return fallback;
 }
 
+function assertSupabaseConfiguration(): void {
+  if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
+    throw new Error(
+      "Configuração Supabase ausente. Defina NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY no ambiente.",
+    );
+  }
+}
+
 async function supabaseRequest<T>(
   path: string,
   options: RequestInit = {},
   token?: string,
 ): Promise<T> {
+  assertSupabaseConfiguration();
+
   const headers = new Headers(options.headers);
-  headers.set("apikey", SUPABASE_ANON_KEY);
-  headers.set("Authorization", `Bearer ${token ?? SUPABASE_ANON_KEY}`);
+  headers.set("apikey", SUPABASE_PUBLISHABLE_KEY);
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+  else headers.delete("Authorization");
   if (options.body && !headers.has("Content-Type")) headers.set("Content-Type", "application/json");
 
   const response = await fetch(`${SUPABASE_URL}${path}`, { ...options, headers });
