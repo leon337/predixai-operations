@@ -14,7 +14,7 @@ permissions:
 jobs:
   audit-and-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -35,6 +35,17 @@ jobs:
 
       - name: Validate environment contract
         run: npm test
+
+      - name: Validate local Supabase reproducibility
+        run: |
+          set -euo pipefail
+          cleanup() {
+            node scripts/supabase-local.mjs stop || true
+          }
+          trap cleanup EXIT
+          node scripts/supabase-local.mjs start
+          node scripts/supabase-local.mjs status
+          node scripts/supabase-local.mjs reset
 
       - name: Record dependency tree
         run: npm ls sharp postcss --all > dependency-tree.txt
