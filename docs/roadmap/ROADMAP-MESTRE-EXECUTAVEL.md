@@ -22,11 +22,12 @@ Este é o roadmap operacional mestre. Estados voláteis de `main`, PR, Issue, CI
 - R3: **MERGED/VERIFIED**;
 - R4: **MERGED/VERIFIED**;
 - F10: **MERGED/VERIFIED**;
-- R5: política aprovada; **GATE-R5-A PASS LOCAL/SINTÉTICO**; recuperação remota real ainda não provada;
-- R6 e R7: pendentes;
+- R5: política + GATE-R5-A **MERGED/VERIFIED LOCAL/SINTÉTICO**; R5-B/C/D continuam separados;
+- R6: **PLANNING/READONLY ACTIVE — IMPLEMENTATION NOT AUTHORIZED**;
+- R7: pendente;
 - produção: **BLOCKED / não tecnicamente confirmada**.
 
-Baseline da `main` na abertura do R5: `e6382b0abfe2d068eb56ca092de72e58f024f863`.
+Baseline da `main` na abertura do R6: `82dcbe2b461d0aa5389a75b57c7f0bb49728ff4b`.
 
 ## Fase 0 — Domínio, governança e arquitetura suficiente
 
@@ -58,9 +59,9 @@ Produção atual continua não comprovada tecnicamente.
 
 ### R1 — Vercel
 
-**READONLY COMPLETED.**
+**READONLY COMPLETED / TARGET STILL NOT DISCOVERED.**
 
-Projeto atual do produto não foi descoberto pela conexão disponível. Criação/reconexão continua sujeita a HUMAN_GATE.
+A equipe conectada continua listando 0 projetos em 2026-08-17. Criação/reconexão continua sujeita a HUMAN_GATE.
 
 ### R2 — Supabase remoto
 
@@ -100,11 +101,13 @@ Integração R3/R4/F10: `354e4d76ca89c5215a12058f7af418e275855cf5`.
 
 ### R5 — Backup e Restore
 
-**POLICY APPROVED / GATE-R5-A PASS LOCAL SYNTHETIC / REMOTE RECOVERY PENDING.**
+**POLICY APPROVED / GATE-R5-A MERGED VERIFIED LOCAL SYNTHETIC / REMOTE GATES PENDING.**
 
 Documento canônico:
 
 `docs/infra/INFRA-04-R5-BACKUP-RESTORE-PLANO-2026-08-17.md`
+
+Integração R5-A: `d9f71dd28321fb4e89dd05da8cce35f62c4ee219`.
 
 #### Política aprovada
 
@@ -137,19 +140,13 @@ Direção de tier:
 
 #### GATE-R5-A — resultado
 
-Autorizado por Leandro apenas para Supabase local e dados sintéticos.
-
-TDD:
-
 - RED `32025588744` — recovery script ausente;
-- integração inicial `32025751982` — encontrou F09 no encaminhamento do stdin ao `psql`;
+- integração inicial `32025751982` — encontrou F09 no stdin do `psql`;
 - remediação mínima aplicada;
-- GREEN `32026196294` — **SUCCESS**.
-
-Artifact GREEN:
-
-- ID `9287251450`;
-- digest `sha256:df04c8a58bb4027a92d941fb790b9eefd518d45ca9a64beec3ebd7e3f88988af`.
+- GREEN `32026196294` — SUCCESS;
+- HEAD final pré-merge `6716eb3da2fc3eb4de7d8589046aa7d542b21a78`;
+- CI final `32027547854` — SUCCESS;
+- merge verificado em `d9f71dd28321fb4e89dd05da8cce35f62c4ee219`.
 
 Validação:
 
@@ -159,18 +156,7 @@ afterDestroy=ABSENT
 afterRestore=1|1|1|7
 ```
 
-O CI gera `roles.sql`, `schema.sql`, `data.sql`, manifest/checksums, destrói somente `public` no Postgres local e restaura schema/dados sintéticos. Os hashes SHA-256 permanecem estáveis.
-
-Isso **não** comprova:
-
-- backup real do `potiguarbd`;
-- restore/download do projeto inativo;
-- cópia off-provider real;
-- Auth remoto;
-- Storage físico real;
-- recovery drill hospedado;
-- RTO real de staging/produção;
-- produção.
+Isso não comprova backup/restore remoto real, Auth remoto, Storage físico real, cópia off-provider real, recovery hospedado, RTO real ou produção.
 
 #### Gates R5 seguintes
 
@@ -178,13 +164,59 @@ Isso **não** comprova:
 - **R5-C:** recovery drill em alvo remoto novo/isolado;
 - **R5-D:** decisão de plano/tier/custo.
 
-Todos exigem novo HUMAN_GATE.
+Todos exigem HUMAN_GATE próprio.
 
 ### R6 — CI/CD e rollback
 
-**PENDING.**
+**PLANNING/READONLY ACTIVE — IMPLEMENTATION NOT AUTHORIZED.**
 
-Pendente: smoke test, preview controlado, promoção manual gated, rollback de aplicação e banco e evidência de recuperação.
+Documento canônico de planejamento:
+
+`docs/infra/INFRA-04-R6-CICD-ROLLBACK-PLANO-2026-08-17.md`
+
+Auditoria read-only encontrou:
+
+- apenas um workflow CI versionado;
+- nenhum workflow de deploy/Preview/Production/rollback;
+- 0 GitHub Deployment records;
+- equipe Vercel conectada com 0 projetos descobertos;
+- `main` sem branch protection/required status checks;
+- nenhum health endpoint/smoke remoto;
+- migrations forward-only, sem mecanismo automático de down migration;
+- trigger de push do CI ainda aponta para branch histórica `feat/mvp-01-online-almoxarifado`.
+
+Arquitetura proposta:
+
+```text
+PR
+-> CI HEAD exato
+-> HUMAN_GATE merge
+-> main verificada
+-> Preview isolado somente após provider reconciliado
+-> smoke/health
+-> release evidence
+-> HUMAN_GATE promoção
+-> Production
+-> smoke + R7
+-> rollback manual de aplicação se necessário
+```
+
+Regra crítica:
+
+```text
+APPLICATION ROLLBACK != DATABASE ROLLBACK
+```
+
+Gates planejados:
+
+- **R6-A:** CI hardening + health/smoke + release evidence somente repo/local;
+- **R6-B:** branch protection/required checks — mutation GitHub separada;
+- **R6-C:** Preview remoto isolado — somente após provider reconciliado;
+- **R6-D:** promoção manual — Production gate separado;
+- **R6-E:** rollback drill primeiro em Preview/staging isolado;
+- **R6-F:** coupling com banco/recovery — sem rollback automático de schema/dados.
+
+Nenhum gate R6 de implementação ou provider está autorizado nesta rodada.
 
 ### R7 — Observabilidade
 
@@ -235,4 +267,4 @@ IA é camada auxiliar e não recebe autoridade irrestrita para executar operaç�
 
 ## Próxima transição
 
-Finalizar a validação do HEAD exato do PR #34. Se permanecer PASS, o próximo ato é um HUMAN_GATE de integração do PR #34. Os gates R5-B/C/D continuam separados e nenhuma operação remota está implicitamente autorizada.
+Concluir a validação documental do planejamento R6. Se o plano permanecer consistente, a próxima decisão humana deve escolher explicitamente se autoriza ou não o **GATE-R6-A — CI hardening + health/smoke + release evidence somente repo/local**. R6-B/C/D/E/F e toda mutação remota continuam separados.
