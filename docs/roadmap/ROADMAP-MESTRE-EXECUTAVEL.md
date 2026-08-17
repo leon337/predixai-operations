@@ -2,227 +2,222 @@
 
 ## Objetivo final
 
-Entregar um sistema operacional de almoxarifado inteligente, auditável e seguro, com frontend web/mobile, backend de dados controlado, materiais, patrimônios, estoques, movimentações, obras, eventos, romaneios, manutenção e relatórios, preservando decisão humana em operações críticas.
+Entregar um sistema operacional de almoxarifado inteligente, auditável e seguro, com frontend web/mobile, backend de dados controlado e evolução progressiva dos módulos de materiais, patrimônios, estoques, movimentações, obras, eventos, romaneios, manutenção e relatórios.
 
 ## Regra de leitura
 
-Este é o **único roadmap operacional mestre**.
-
-`docs/fase-0/ROADMAP-E-STATUS.md` é histórico. Estados voláteis de `main`, PR, Issue, CI, provider e deploy devem ser verificados ao vivo.
+Este é o roadmap operacional mestre. Estados voláteis de `main`, PR, Issue, CI, provider e deploy devem ser verificados ao vivo.
 
 ## Estado consolidado — 2026-08-17
 
-- Fase 0: **CONCLUÍDA — GOV-03 merged e verificado**;
-- RN-00 a RN-02.7: baselines concluídas;
-- ADR-002: arquitetura vigente pós-MVP integrada;
-- MVP-01: concluído e integrado;
-- SEC-02: concluída e integrada;
+- Fase 0: **CONCLUÍDA — GOV-03**;
+- RN-00 a RN-02.7: baselines congeladas;
+- ADR-002: vigente;
+- MVP-01: integrado;
+- SEC-02: integrada;
 - Fase 1 residual: **ATIVA — INFRA-04**;
 - controle: GitHub Issue #30 + fallback Linear LEA-121;
-- R1: concluído em leitura;
+- R1: leitura concluída;
 - R2: Opção C vigente — `potiguarbd` permanece `INACTIVE`;
 - R3: **MERGED/VERIFIED**;
 - R4: **MERGED/VERIFIED**;
 - F10: **MERGED/VERIFIED**;
-- R5: **PLANNING/READ-ONLY ACTIVE**;
+- R5: política aprovada; **GATE-R5-A PASS LOCAL/SINTÉTICO**; recuperação remota real ainda não provada;
 - R6 e R7: pendentes;
-- produção: **não tecnicamente confirmada**.
+- produção: **BLOCKED / não tecnicamente confirmada**.
 
-Baseline atual da Fase 1: `main=e6382b0abfe2d068eb56ca092de72e58f024f863`.
-
-## Execução acelerada — MVP-01
-
-Em agosto de 2026 uma execução acelerada autorizada antecipou uma fatia vertical originalmente distribuída por fases técnicas posteriores.
-
-### Entregue
-
-- autenticação por e-mail e senha;
-- perfis `owner`, `operator`, `viewer`;
-- cadastro/edição de materiais;
-- entradas e saídas;
-- saldo atual;
-- bloqueio de saída superior ao saldo;
-- estoque mínimo e alertas;
-- histórico auditável;
-- RLS/funções/migrations do escopo;
-- interface responsiva desktop/mobile;
-- CI de dependências/build;
-- UAT desktop/mobile.
-
-O MVP-01 não encerra as fases técnicas completas e não libera automaticamente o restante do produto.
+Baseline da `main` na abertura do R5: `e6382b0abfe2d068eb56ca092de72e58f024f863`.
 
 ## Fase 0 — Domínio, governança e arquitetura suficiente
 
-### Estado
+`COMPLETED — GOV-03`.
 
-`COMPLETED — GOV-03`
+Baselines: RN-00 a RN-02.7, ADR-001 histórica, ADR-002 vigente e governança auditável.
 
-Baselines congeladas: RN-00 a RN-02.7, ADR-001 histórica, ADR-002 vigente e governança auditável.
+Encerrar Fase 0 não significa que todo o domínio esteja implementado.
 
-Encerrar a Fase 0 não significa que todo o domínio esteja implementado.
+## MVP-01 — fatia materializada
+
+Já entregue:
+
+- autenticação por e-mail/senha;
+- `owner`, `operator`, `viewer`;
+- materiais;
+- entradas/saídas;
+- saldo atual;
+- bloqueio de saída acima do saldo;
+- estoque mínimo;
+- histórico;
+- RLS/funções/migrations do MVP;
+- UI responsiva;
+- CI e UAT desktop/mobile.
+
+Produção atual continua não comprovada tecnicamente.
 
 ## Fase 1 — Infraestrutura e ambientes completos
-
-### Estado atual
-
-`ACTIVE — INFRA-04 / R5 PLANNING READ-ONLY`
-
-Relatórios:
-
-- `docs/infra/INFRA-04-AUDITORIA-READONLY-2026-08-17.md`;
-- `docs/infra/INFRA-04-R5-BACKUP-RESTORE-PLANO-2026-08-17.md`.
 
 ### R1 — Vercel
 
 **READONLY COMPLETED.**
 
-- projeto atual do produto não foi descoberto na conexão;
-- Project ID histórico e slug retornaram 404;
-- GitHub Deployments: 0;
-- nenhuma recriação/reconexão executada.
-
-F01 permanece aberto até reconciliação futura de provider.
+Projeto atual do produto não foi descoberto pela conexão disponível. Criação/reconexão continua sujeita a HUMAN_GATE.
 
 ### R2 — Supabase remoto
 
 **OPTION C ACTIVE.**
 
-- `potiguarbd` permanece `INACTIVE`;
+- `potiguarbd` = `INACTIVE`;
 - nenhum projeto ativo foi pausado;
-- nenhum restore executado;
+- nenhum restore remoto executado;
 - nenhum plano/custo alterado;
-- dois outros projetos da organização permanecem `ACTIVE_HEALTHY`.
-
-F02/F05 permanecem dependentes de decisão futura de provider/capacidade.
+- dois outros projetos da organização foram observados `ACTIVE_HEALTHY`.
 
 ### R3 — contrato de ambiente
 
-**MERGED/VERIFIED no PR #32.**
+**MERGED/VERIFIED — PR #32.**
 
-- URL/chave hardcoded removidas;
-- variáveis públicas por ambiente;
+- URL/chave remota hardcoded removidas;
+- variáveis por ambiente;
 - `.env.example` local;
-- contrato automatizado no CI.
+- contrato automatizado.
 
-### R4 — ambiente local isolado
+### R4 — Supabase local isolado
 
-**MERGED/VERIFIED no PR #32.**
+**MERGED/VERIFIED — PR #32.**
 
 - `supabase/config.toml` local;
-- launcher Supabase CLI `2.111.0`;
-- reconstrução local validada em CI.
+- Supabase CLI `2.111.0` fixada;
+- `start/status/db reset --local/stop`;
+- CI reconstrói o banco local.
 
-### F10 — cadeia de migrations
+### F10 — migration-base
 
-**MERGED/VERIFIED no PR #32.**
+**MERGED/VERIFIED — PR #32.**
 
-Migration-base mínima adicionada por TDD para permitir reconstrução do banco do zero, preservando as duas migrations históricas do MVP.
+Migration-base mínima tornou a cadeia de migrations reproduzível do zero sem reescrever as migrations históricas.
 
 Integração R3/R4/F10: `354e4d76ca89c5215a12058f7af418e275855cf5`.
 
 ### R5 — Backup e Restore
 
-**PLANNING/READ-ONLY ACTIVE.**
+**POLICY APPROVED / GATE-R5-A PASS LOCAL SYNTHETIC / REMOTE RECOVERY PENDING.**
 
-Achados atuais:
+Documento canônico:
 
-- plano Free observado não inclui Automatic Backups/PITR como baseline operacional;
-- `potiguarbd` está `INACTIVE`;
-- disponibilidade efetiva de restore/download do projeto inativo não está comprovada pela conexão atual;
-- não existe evidência de backup independente off-provider;
-- não existe restore real testado;
-- RPO/RTO ainda não foram aprovados;
-- backup do banco e objetos físicos do Storage são problemas distintos.
+`docs/infra/INFRA-04-R5-BACKUP-RESTORE-PLANO-2026-08-17.md`
 
-Estratégia proposta:
+#### Política aprovada
 
 ```text
-Git/migrations
-   -> backup lógico independente
-   -> checksums + cópia criptografada off-provider
-   -> restore local isolado
-   -> recovery drill remoto isolado sob gate futuro
+backup lógico independente
+-> SHA-256
+-> cópia criptografada off-provider
+-> restore isolado
+-> recovery drill remoto sob gate futuro
 ```
 
-Retenção inicial proposta, ainda sujeita a aprovação:
+Retenção:
 
 ```text
-7 daily + 4 weekly + 3 monthly
-pre-change backup obrigatório antes de mudança remota crítica
-SHA-256 + encryption at rest
+7 daily + 4 weekly + 3 monthly + pre-change
 ```
 
-RPO/RTO candidato para staging/piloto remoto:
+Targets de staging/piloto:
 
 ```text
 RPO <= 24h
 RTO <= 4h
 ```
 
-Produção continua bloqueada até decisão formal de risco/tier.
+Direção de tier:
 
-Direção de tier proposta:
+- Free: desenvolvimento/piloto com risco aceito;
+- Pro + backup independente: recomendação mínima para futura produção controlada, sujeita a gate de custo;
+- PITR: somente se requisito de RPO justificar.
 
-- Free + backup independente: desenvolvimento/piloto, com risco explicitamente aceito;
-- Pro + backup independente: recomendação mínima atual para produção controlada, sujeita a gate de custo;
-- Pro + PITR + backup independente: somente se o requisito de RPO justificar o add-on.
+#### GATE-R5-A — resultado
 
-Próximo gate recomendado pelo R5:
+Autorizado por Leandro apenas para Supabase local e dados sintéticos.
 
-**GATE-R5-A — implementar e validar somente um ciclo sintético LOCAL de backup lógico -> destruição local controlada -> restore local -> validação, sem dados reais e sem provider remoto.**
+TDD:
 
-Esse gate ainda **não está autorizado**.
+- RED `32025588744` — recovery script ausente;
+- integração inicial `32025751982` — encontrou F09 no encaminhamento do stdin ao `psql`;
+- remediação mínima aplicada;
+- GREEN `32026196294` — **SUCCESS**.
+
+Artifact GREEN:
+
+- ID `9287251450`;
+- digest `sha256:df04c8a58bb4027a92d941fb790b9eefd518d45ca9a64beec3ebd7e3f88988af`.
+
+Validação:
+
+```text
+before=1|1|1|7
+afterDestroy=ABSENT
+afterRestore=1|1|1|7
+```
+
+O CI gera `roles.sql`, `schema.sql`, `data.sql`, manifest/checksums, destrói somente `public` no Postgres local e restaura schema/dados sintéticos. Os hashes SHA-256 permanecem estáveis.
+
+Isso **não** comprova:
+
+- backup real do `potiguarbd`;
+- restore/download do projeto inativo;
+- cópia off-provider real;
+- Auth remoto;
+- Storage físico real;
+- recovery drill hospedado;
+- RTO real de staging/produção;
+- produção.
+
+#### Gates R5 seguintes
+
+- **R5-B:** acesso/exportação de backup remoto real;
+- **R5-C:** recovery drill em alvo remoto novo/isolado;
+- **R5-D:** decisão de plano/tier/custo.
+
+Todos exigem novo HUMAN_GATE.
 
 ### R6 — CI/CD e rollback
 
 **PENDING.**
 
-- smoke test;
-- preview controlado;
-- promoção manual gated;
-- rollback de aplicação;
-- rollback de banco;
-- evidência de recuperação.
+Pendente: smoke test, preview controlado, promoção manual gated, rollback de aplicação e banco e evidência de recuperação.
 
 ### R7 — Observabilidade
 
 **PENDING.**
 
-- erros/logs por ambiente;
-- critério de saúde;
-- retenção;
-- evidência mínima antes de declarar produção.
+Pendente: logs/erros por ambiente, saúde, retenção e evidência mínima antes de produção.
 
 ### Critério de saída da Fase 1
 
-A Fase 1 só pode ser encerrada quando R5–R7 estiverem suficientemente validados, riscos HIGH remanescentes tratados ou explicitamente aceitos e produção tiver estado técnico inequívoco.
+Fase 1 só encerra quando R5–R7 estiverem suficientemente validados, riscos HIGH tratados/aceitos e produção possuir estado técnico inequívoco.
 
 ## Fase 2 — Modelo físico, dados e segurança completos
 
-Já antecipado parcialmente pelo MVP-01: migrations, autenticação, perfis básicos, RLS, movimentações básicas e histórico.
+Já antecipado parcialmente pelo MVP-01. Pendente: domínio ampliado, constraints/índices, RLS ampliada, auditoria transversal, seeds não sensíveis e testes de autorização/integridade.
 
-Pendente: modelo físico completo, constraints/índices, RLS ampliada, auditoria transversal, seeds não sensíveis e testes ampliados.
+## Fase 3 — Experiência completa
 
-**Dependência:** não ampliar dados críticos antes de R5 e dos riscos HIGH aplicáveis da INFRA-04.
-
-## Fase 3 — Experiência e estrutura completa da aplicação
-
-Pendente: arquitetura de informação ampliada, estados loading/error, acessibilidade, design system e permissões transversais.
+Pendente: arquitetura de informação ampliada, loading/error, acessibilidade, design system e permissões transversais.
 
 ## Fase 4 — Operação ampliada
 
-Pendente: empresas/unidades completas, patrimônios, localizações/WMS, transferências/inventário/ajustes, obras/eventos/romaneios, manutenção, anexos/QR Code, relatórios e auditoria transversal.
+Pendente: empresas/unidades completas, patrimônios, localizações/WMS, transferências/inventário/ajustes, obras/eventos/romaneios, manutenção, anexos/QR, relatórios e auditoria transversal.
 
 ## Fase 5 — Qualidade e homologação
 
-Pendente: testes ampliados, RLS/permissões, E2E críticos, acessibilidade/mobile, desempenho, recuperação, homologação e rollback.
+Pendente: testes ampliados, RLS/permissões, E2E, acessibilidade/mobile, desempenho, recuperação, homologação e rollback.
 
 ## Fase 6 — Produção controlada
 
 Pendente:
 
 - provider/plano/domínio confirmados;
-- backup inicial e restore testado;
+- backup remoto real e restore isolado comprovados;
 - observabilidade/alertas;
 - release aprovada;
 - promoção comprovada;
@@ -232,16 +227,12 @@ Autorização histórica de promoção não equivale a produção tecnicamente c
 
 ## IA assistiva
 
-IA é camada auxiliar e não recebe autoridade irrestrita para alterar estoque, dar baixa, aprovar saída, liberar patrimônio, confirmar movimentação/custódia ou executar ação destrutiva.
+IA é camada auxiliar e não recebe autoridade irrestrita para executar operações críticas ou destrutivas.
 
 ## Governança executável
 
-Toda entrega relevante segue, quando aplicável:
-
 `controle operacional → branch → PR → HEAD revisado → achados → remediação → reteste → CI → HUMAN_GATE → merge → verificação pós-merge → sincronização`
-
-GitHub é a fonte documental/técnica. Linear é o controle operacional; quando o workspace impedir nova issue, GitHub Issue/PR pode controlar o ciclo com evidência registrada no Linear existente.
 
 ## Próxima transição
 
-Concluir a revisão documental de R5. O próximo passo técnico recomendado é GATE-R5-A, mas nenhuma implementação, backup remoto, dado real, restore, provider ou custo está autorizado sem HUMAN_GATE específico.
+Finalizar a validação do HEAD exato do PR #34. Se permanecer PASS, o próximo ato é um HUMAN_GATE de integração do PR #34. Os gates R5-B/C/D continuam separados e nenhuma operação remota está implicitamente autorizada.
