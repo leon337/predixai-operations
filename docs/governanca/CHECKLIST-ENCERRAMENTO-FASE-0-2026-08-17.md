@@ -3,190 +3,201 @@
 **Data:** 2026-08-17  
 **Repositório:** `leon337/predixai-operations`  
 **Issue de controle:** GitHub #27  
-**Branch de remediação:** `docs/gov-03-phase0-exit-checklist`
+**PR de integração:** #28  
+**Branch:** `docs/gov-03-phase0-exit-checklist`
 
 ## 1. Objetivo
 
-Executar o gate formal de saída da Fase 0 — Concepção e Modelagem do Domínio, confirmando que as baselines de domínio, a governança, a arquitetura vigente e os limites da etapa seguinte estão coerentes e auditáveis.
+Executar o gate formal de saída da Fase 0 — Concepção e Modelagem do Domínio, confirmando que as baselines, a governança, a arquitetura vigente e os limites da etapa seguinte estão coerentes e auditáveis.
 
-Este checklist não autoriza implementação, SQL, migration, alteração de dados, mudança de Supabase, deploy ou produção.
+Este checklist **não autoriza** implementação, SQL, migration, alteração de dados, mudança de Supabase, deploy ou produção.
 
-## 2. Base de revisão inicial
+## 2. Revisão inicial
 
 ```text
 INITIAL_MAIN=a76f53a925d9587f9f7a83b1238f071c8416e9b6
 INITIAL_PROJECT_STATE=1.0.9
 INITIAL_DECISION=FAIL_REMEDIABLE
-FINDINGS=GOV_03_F01_TO_F08
+INITIAL_FINDINGS=GOV_03_F01_TO_F08
 ```
 
-A revisão inicial confirmou que as baselines RN-00 a RN-02.7 existiam, mas identificou divergências de arquitetura, navegação e estado processual que impediam o PASS formal.
+A revisão inicial confirmou a existência das baselines RN-00 a RN-02.7, mas encontrou fontes arquiteturais e de navegação em conflito.
 
-## 3. Achados da revisão inicial
+## 3. Achados e remediação
 
-### GOV-03-F01 — arquitetura inicial apresentada como vigente
+### GOV-03-F01 — arquitetura local inicial apresentada como vigente
 
-`docs/fase-0/00-VISAO-E-ARQUITETURA.md` ainda apresentava ASUS N43SM + FastAPI + PostgreSQL local/offline como arquitetura principal, em conflito com a aplicação Next.js/Vercel/Supabase materializada.
+**Remediação:** `00-VISAO-E-ARQUITETURA.md` passou a separar explicitamente visão durável, arquitetura materializada e topologia local histórica.
+
+**Estado:** `PASS`.
 
 ### GOV-03-F02 — ADR-001 com premissas superadas
 
-ADR-001 ainda dizia `PROPOSTA PARA APROVAÇÃO`, afirmava não existir aplicação executável/projeto Vercel e rejeitava reutilizar Supabase existente.
+**Remediação:** ADR-001 foi marcada como histórica/supersedida em parte; ADR-002 consolida o estado pós-MVP.
+
+**Estado:** `PASS`.
 
 ### GOV-03-F03 — índice RN-02 obsoleto
 
-O índice ainda parava em RN-02.4 e atribuía números/temas incompatíveis com RN-02.5, RN-02.6 e RN-02.7 vigentes.
+**Remediação:** índice atualizado para RN-02.1→RN-02.7, removendo a numeração histórica conflitante de Compras/Fornecedores e Manutenção.
+
+**Estado:** `PASS`.
 
 ### GOV-03-F04 — roadmap antigo concorrente
 
-`docs/fase-0/ROADMAP-E-STATUS.md` continuava aparentando ser roadmap operacional vigente, com sequência já superada.
+**Remediação:** `docs/fase-0/ROADMAP-E-STATUS.md` foi reclassificado como histórico e aponta o Roadmap Mestre como única fonte operacional de roadmap.
 
-### GOV-03-F05 — README/Roadmap Mestre com estado transitório
+**Estado:** `PASS`.
 
-Fontes de navegação ainda mencionavam sincronização pós-PR #13 como pendente depois dos PRs #25 e #26.
+### GOV-03-F05 — README/Roadmap Mestre com estado transitório encerrado
 
-### GOV-03-F06 — metadados pré-merge dentro da RN-02.7
+**Remediação:** README e Roadmap Mestre agora registram PRs #25/#26 concluídos e GOV-03 como gate atual.
 
-O cabeçalho processual da RN-02.7 preservava o estado em que o arquivo foi validado antes do merge, embora a baseline já estivesse integrada.
+**Estado:** `PASS`.
 
-### GOV-03-F07 — Issue #1 aberta apesar da RN-01 aprovada
+### GOV-03-F06 — cabeçalho processual pré-merge da RN-02.7
 
-O backlog do GitHub aparentava uma pendência inexistente.
+**Remediação:** as regras normativas da RN-02.7 foram preservadas sem reescrita. `PROJECT_STATE.md`, o índice RN-02 e `STATUS-POS-MERGE-RN-02.7-2026-08-17.md` definem explicitamente que `CANDIDATA À BASELINE` / `merge não autorizado` no cabeçalho são snapshot histórico do HEAD validado antes do merge. O estado operacional vigente é `BASELINE_MERGED`.
 
-### GOV-03-F08 — ausência de decisão arquitetural pós-MVP única
+**Justificativa:** reescrever uma baseline consolidada de mais de 1.200 linhas somente para mudar metadados processuais elevaria o risco de alteração normativa acidental. A precedência documental e a trilha Git tornam a leitura atual determinística.
 
-Era necessário inferir arquitetura e limites combinando várias fontes; o critério de saída exige confirmação explícita.
+**Estado:** `PASS`.
 
-## 4. Estratégia de remediação aprovada
+### GOV-03-F07 — GitHub Issue #1 aberta apesar de RN-01 aprovada
 
-Leandro aprovou a alternativa **B — Consolidação controlada**.
+**Remediação:** Issue #1 recebeu notas auditáveis e foi encerrada como `completed` em 2026-08-17. A RN-01 não foi alterada.
 
-Princípios da remediação:
+**Estado:** `PASS`.
 
-- não apagar histórico;
-- manter ADR-001 e arquitetura local inicial como registros históricos;
-- criar ADR-002 como decisão arquitetural pós-MVP;
-- atualizar fontes de navegação de alta visibilidade;
-- preservar byte a byte as regras normativas da RN-02.7 sempre que possível;
-- tratar o cabeçalho processual pré-merge da RN-02.7 como snapshot histórico, já que Git e a trilha de revisão preservam o contexto;
-- manter novas implementações e operações externas bloqueadas por gates próprios.
+### GOV-03-F08 — ausência de fonte única para arquitetura pós-MVP
 
-## 5. Critérios formais de saída
+**Remediação:** criação da `ADR-002-ARQUITETURA-VIGENTE-POS-MVP01.md`, definindo stack materializada, papel de Vercel/`potiguarbd`, limites de ambientes, backup/restore, produção e novos gates.
 
-### C01 — RN-00 presente e adotada
+**Estado:** `PASS`.
 
-Estado alvo: `PASS`.
+### GOV-03-F09 — regressão criada durante a própria remediação
 
-### C02 — RN-01 REV2.1 presente e aprovada
+Na primeira compactação do `PROJECT_STATE.md`, campos mínimos exigidos por `PREDIXAI_OPERATIONS_PROJECT_INSTRUCTIONS.md` foram removidos acidentalmente.
 
-Estado alvo: `PASS`.
+**HEAD em que foi detectado:** `3cffcf6c0f32e081f3e1b0ee56fca57d4fb5d589`.
 
-### C03 — RN-02.1 REV1 presente e aprovada
+**CI desse HEAD:** `32003899554` — PASS técnico, mas insuficiente para decisão final.
 
-Estado alvo: `PASS`.
+**Remediação:** `PROJECT_STATE.md` v1.1.1 restaurou `ACTIVE_TASK`, `LAST_VERIFIED_HEAD`, `ACTIVE_BASELINE`, `APPROVED_BASELINES`, `GITHUB_LINEAR_SYNC`, `REVIEW_DECISION` e demais campos mínimos/compatíveis.
 
-### C04 — RN-02.2 REV1 presente e aprovada
+**HEAD substantivo retestado:** `130e4ee4649d707b8521a53b9ae17a5f16e0d34a`.
 
-Estado alvo: `PASS`.
+**Estado:** `PASS`.
 
-### C05 — RN-02.3 REV2 presente e aprovada
+## 4. Critérios formais de saída
 
-Estado alvo: `PASS`.
+| Critério | Resultado | Evidência resumida |
+|---|---|---|
+| C01 — RN-00 presente/adotada | PASS | baseline no `main` |
+| C02 — RN-01 REV2.1 aprovada | PASS | baseline + Issue #1 reconciliada |
+| C03 — RN-02.1 REV1 | PASS | baseline presente |
+| C04 — RN-02.2 REV1 | PASS | baseline presente |
+| C05 — RN-02.3 REV2 | PASS | baseline presente |
+| C06 — RN-02.4 REV3 | PASS | baseline presente |
+| C07 — RN-02.5 REV1 + errata | PASS | baseline + errata presentes |
+| C08 — RN-02.6 REV1 + errata | PASS | baseline + errata presentes |
+| C09 — RN-02.7 REV1 vigente | PASS | PR #13 merged / LEA-117 Done |
+| C10 — GitHub/Linear auditáveis | PASS | GitHub oficial + fallback Issue #27 registrado na LEA-117 |
+| C11 — arquitetura vigente confirmada | PASS | ADR-002 |
+| C12 — baseline ≠ implementação | PASS | ADR-002, README, roadmap e estado distinguem escopos |
+| C13 — sem autorização implícita | PASS | limites explícitos em todas as fontes novas |
+| C14 — SQL/migrations/dados com gate próprio | PASS | ADR-002 + PROJECT_STATE |
+| C15 — produção exige evidência provider | PASS | `PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN` preservado |
+| C16 — backup/restore reconhecido como pendência técnica | PASS | ADR-002 / Fase 1 |
+| C17 — navegação não usa roadmap antigo | PASS | roadmap antigo marcado histórico; Mestre vigente |
+| C18 — pendência histórica falsa conhecida reconciliada | PASS | Issue #1 closed/completed |
+| C19 — HEAD substantivo retestado | PASS | `130e4ee...`, CI `32004060411` |
+| C20 — merge exige HUMAN_GATE separado | PASS | PR #28 permanece Draft e `MERGE_AUTHORIZED=NO` |
 
-### C06 — RN-02.4 REV3 presente e aprovada
+## 5. Arquitetura e limites confirmados
 
-Estado alvo: `PASS`.
+A arquitetura materializada vigente é:
 
-### C07 — RN-02.5 REV1 + errata presentes e aprovadas
+```text
+Next.js + TypeScript
+        │
+        ├── Vercel
+        └── Supabase potiguarbd
+            ├── PostgreSQL
+            ├── Auth
+            ├── RLS
+            └── migrations/funções do MVP-01
+```
 
-Estado alvo: `PASS`.
+A arquitetura local ASUS N43SM/FastAPI/PostgreSQL/Ollama é histórica e pode ser reavaliada futuramente, mas não é requisito atual obrigatório.
 
-### C08 — RN-02.6 REV1 + errata presentes e aprovadas
+Ainda não estão concluídos para o produto inteiro:
 
-Estado alvo: `PASS`.
-
-### C09 — RN-02.7 REV1 integrada e vigente
-
-Estado alvo: `PASS`.
-
-### C10 — GitHub como fonte documental/técnica e Linear como controle operacional
-
-Estado alvo: `PASS`, com fallback documentado para GitHub Issue quando o workspace Linear impedir nova issue.
-
-### C11 — arquitetura vigente confirmada
-
-Estado alvo: `PASS` após ADR-002 e reconciliação das fontes históricas.
-
-### C12 — separação entre baseline normativa e funcionalidade implementada
-
-Estado alvo: `PASS`.
-
-### C13 — nenhuma autorização implícita de implementação
-
-Estado alvo: `PASS`.
-
-### C14 — SQL/migrations/alterações de dados continuam sujeitos a autorização própria
-
-Estado alvo: `PASS`.
-
-### C15 — produção não é declarada sem evidência técnica do provider
-
-Estado alvo: `PASS`.
-
-### C16 — política de backup/restore reconhecida como requisito técnico posterior
-
-Estado alvo: `PASS`; a política completa não precisa estar implementada para fechar a fase documental, mas não pode ser ocultada nem considerada concluída.
-
-### C17 — fontes de navegação não induzem ao roadmap antigo
-
-Estado alvo: `PASS`.
-
-### C18 — backlog da Fase 0 não contém pendência histórica falsa conhecida
-
-Estado alvo: `PASS` após reconciliação da Issue #1.
-
-### C19 — remediação validada no HEAD exato do PR
-
-Estado alvo: `PASS` após revisão do diff, CI e reteste.
-
-### C20 — merge condicionado a HUMAN_GATE separado
-
-Estado alvo: `PASS` antes do merge; nenhum HUMAN_GATE de desenho equivale a autorização de integração.
+- política completa de ambientes;
+- backup/retenção/restore testado;
+- produção tecnicamente confirmada;
+- modelo físico completo;
+- patrimônio/manutenção/obras/eventos/romaneios completos;
+- IA operacional.
 
 ## 6. Limites da etapa seguinte
 
-Após a Fase 0, o projeto pode avançar para planejamento/execução das frentes técnicas do roadmap, mas cada frente deve declarar escopo e riscos.
+O encerramento da Fase 0 permite avançar para **seleção e planejamento do próximo escopo**, não concede autorização geral de implementação.
 
-Não existe autorização geral para:
+Exigem autorização própria conforme o risco:
 
-- implementar patrimônio completo;
-- implementar manutenção;
-- implementar obras/eventos/romaneios;
-- criar modelo físico completo;
-- criar SQL/migrations novas;
-- alterar dados reais ou RLS;
-- provisionar/mudar recursos Supabase;
-- promover produção;
-- realizar operação destrutiva.
+- código funcional novo;
+- SQL e migrations;
+- mudanças de RLS/Auth;
+- alterações de dados reais;
+- provisionamento ou alteração de Supabase;
+- deploy/promoção para produção;
+- operações destrutivas;
+- mudança arquitetural relevante/custo.
 
-## 7. Resultado do reteste
+## 7. Reteste substantivo
 
 ```text
-FINAL_RETEST_HEAD=RESOLVE_FROM_PR_METADATA
-CI=REQUIRED
-REVIEW_THREADS=REQUIRED_ZERO_BLOCKING
-FINAL_DECISION=PENDING_RETEST
+FINAL_SUBSTANTIVE_RETEST_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
+DEPENDENCY_SECURITY_RUN=32004060411
+DEPENDENCY_SECURITY_ARTIFACT=9279392534
+NPM_CI=PASS
+LOCKFILE_UNCHANGED=PASS
+DEPENDENCY_TREE=PASS
+AUDIT=PASS
+HIGH_CRITICAL_GATE=PASS
+BUILD=PASS
+EVIDENCE_UPLOAD=PASS
+REVIEW_THREADS=0
+CRITERIA=C01_TO_C20_PASS
+FINAL_DECISION=PASS_AWAITING_HUMAN_GATE
 MERGE_AUTHORIZED=NO
 ```
 
-Este bloco deve ser atualizado no mesmo PR depois do reteste do HEAD final.
+## 8. Estado da Fase 0
 
-## 8. Regra de encerramento
+A revisão documental/técnica necessária para o encerramento está em **PASS**, porém a Fase 0 ainda não é declarada integrada/encerrada enquanto o PR #28 não receber HUMAN_GATE específico, for mesclado e o `main` pós-merge não for verificado.
 
-A Fase 0 somente poderá ser declarada formalmente encerrada quando:
+Portanto:
 
-1. C01–C20 estiverem em PASS;
-2. o PR de GOV-03 tiver CI verde e zero thread bloqueadora;
-3. o HEAD exato tiver sido revisado;
-4. houver HUMAN_GATE explícito para o merge;
-5. o merge for verificado na `main`;
-6. GitHub e Linear/fallback estiverem sincronizados.
+```text
+PHASE0_EXIT_REVIEW=PASS
+PHASE0_EXIT_INTEGRATION=PENDING_HUMAN_GATE
+```
+
+## 9. Regra de integração
+
+Antes do merge:
+
+1. resolver o HEAD final do PR ao vivo;
+2. confirmar que mudanças posteriores ao HEAD substantivo são apenas estado/checklist;
+3. exigir CI verde no HEAD final;
+4. exigir zero thread bloqueadora;
+5. obter HUMAN_GATE explícito para o PR #28.
+
+Após o merge:
+
+1. verificar `main`;
+2. fechar Issue #27 como completed;
+3. sincronizar a evidência no Linear/fallback;
+4. só então declarar formalmente a Fase 0 encerrada e iniciar seleção do próximo escopo.
