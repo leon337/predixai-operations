@@ -3,19 +3,19 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.0.1
-UPDATED_AT_UTC=2026-08-17T04:38:00Z
+STATE_VERSION=1.0.2
+UPDATED_AT_UTC=2026-08-17T05:00:00Z
 REPOSITORY=leon337/predixai-operations
 CURRENT_PHASE=FASE_0_CONCEPCAO_E_MODELAGEM_DO_DOMINIO
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
 PRIMARY_ACTIVE_TASK=LEA-117
 PRIMARY_ACTIVE_SUBTASK=LEA-141
-GOVERNANCE_ACTIVE_TASK=RECONCILIACAO_ESTADO_2026_08_16
+GOVERNANCE_ACTIVE_TASK=NONE
 ACTIVE_NORMATIVE_PR=13
 ACTIVE_NORMATIVE_BRANCH=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_REF=docs/lea-117-rn-02-7-manutencao
 ACTIVE_NORMATIVE_HEAD_SHA=c122fa84e096d49ede3ccad805d0059a47f22ac6
-LAST_VERIFIED_MAIN=e19da0f3e71b582d9422f65f0bf21cbb80885989
+LAST_VERIFIED_MAIN=9e63129d5c0b138bc2d9b887e17545e839ba3844
 MVP01_ISSUE=17
 MVP01_PR=18
 MVP01_APPROVED_HEAD=5388b01883b9198b60be57c1e275cdd9c0d993d6
@@ -32,14 +32,17 @@ SECURITY_LAST_VALIDATED_HEAD=e6d54340ceb71a2237cfb2260fc46a216246099e
 SECURITY_MAIN_COMMIT=e19da0f3e71b582d9422f65f0bf21cbb80885989
 SECURITY_STATUS=PASS_SEC_02_MERGED_NANOID_3_3_18
 SECURITY_ADVISORY=GHSA-2v37-7h3g-55p8
-RECONCILIATION_REVIEW_DECISION=PENDING_RETEST_AFTER_SEC_02_MERGE
+RECONCILIATION_PR=21
+RECONCILIATION_VALIDATED_HEAD=0794cdcd0294938e472b9cc8f5dfb12c14408dab
+RECONCILIATION_MAIN_COMMIT=9e63129d5c0b138bc2d9b887e17545e839ba3844
+RECONCILIATION_REVIEW_DECISION=PASS_AND_MERGED
 IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_FUTURE_SCOPE_REQUIRES_NEW_AUTHORIZATION
 DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-MERGE_AUTHORIZED=NO_FOR_PR13_AND_NO_FOR_PR21_PENDING_RETEST_GATE
-GITHUB_LINEAR_SYNC=LINEAR_SUPERSESSION_APPLIED_PR21_PENDING_MERGE
-RECONCILIATION_PR=21
-BLOCKERS=RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=RETEST_PR_21_THEN_REQUEST_HUMAN_GATE
+MERGE_AUTHORIZED=NO_FOR_PR13_UNTIL_LEA142_REVIEW_PASS_AND_HUMAN_GATE
+GITHUB_LINEAR_SYNC=PASS_RECONCILIATION_MERGED_LEA141_NEXT
+BLOCKERS=NONE_FOR_LEA_141
+KNOWN_PENDING=RN_02_7_INCOMPLETE_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
+NEXT_AUTHORIZED_ACTION=EXECUTE_LEA_141_ON_PR13
 ```
 
 ## Identidade
@@ -75,9 +78,11 @@ A solicitação direta de Leandro originou o MVP-01 para colocar o Almoxarifado 
 
 O PR #18 foi aprovado por Leandro e mesclado por squash no `main` em `5dfb29d345d30a32eac0da70ee1b94d9dd6127f8`. Essa autorização histórica não constitui autorização geral para novas implementações, SQL ou migrations de domínio.
 
-A reconciliação está registrada no PR Draft #21. O caminho Linear antigo de criação de um novo Supabase foi sincronizado como cancelado por supersessão.
-
 Durante o primeiro reteste do PR #21, o workflow `Dependency Security` detectou uma vulnerabilidade alta em `nanoid@3.3.17`, registrada como SEC-02 / Issue #22. A remediação foi executada no PR #23, validada pelo workflow oficial no HEAD `e6d54340ceb71a2237cfb2260fc46a216246099e` com `npm ci`, lockfile imutável, auditoria e build em PASS. O PR #23 foi autorizado por Leandro e mesclado por squash no `main` em `e19da0f3e71b582d9422f65f0bf21cbb80885989`; a Issue #22 foi fechada automaticamente como concluída.
+
+O PR #21 foi então retestado no HEAD `0794cdcd0294938e472b9cc8f5dfb12c14408dab` sobre o `main` pós-SEC-02. O workflow `Dependency Security` run `31995301015` terminou em SUCCESS, sem threads pendentes. Após HUMAN_GATE de Leandro, o PR #21 foi mesclado por squash e produziu `9e63129d5c0b138bc2d9b887e17545e839ba3844` no `main`.
+
+A verificação pós-merge identificou somente um drift documental: campos transitórios do gate do próprio PR #21 ainda constavam no `PROJECT_STATE.md`, README, roadmap e relatório de reconciliação. Esta sincronização pós-merge corrige esses campos sem alterar código funcional, SQL, migrations ou dados.
 
 ## Baselines normativas aprovadas
 
@@ -159,7 +164,7 @@ Fora do MVP-01:
 - Commit integrado ao `main`: `e19da0f3e71b582d9422f65f0bf21cbb80885989`.
 - `main` verificado contém `nanoid@3.3.18`.
 
-O workflow permanente é acionado por Pull Request; não existe evidência de run separado por `push` no `main`. A validação pós-integração deve, portanto, distinguir o CI verde do PR #23 da verificação direta do conteúdo efetivamente mesclado no `main`.
+O workflow permanente é acionado por Pull Request; não existe evidência de run separado por `push` no `main`. A validação pós-integração distingue o CI verde do PR #23 da verificação direta do conteúdo efetivamente mesclado no `main`.
 
 ## Frente normativa ativa
 
@@ -168,14 +173,14 @@ O workflow permanente é acionado por Pull Request; não existe evidência de ru
 - Estado Linear: In Progress.
 - PR Draft: #13.
 - Branch: `docs/lea-117-rn-02-7-manutencao`.
-- HEAD observado na reconciliação: `c122fa84e096d49ede3ccad805d0059a47f22ac6`.
+- HEAD verificado em 2026-08-17: `c122fa84e096d49ede3ccad805d0059a47f22ac6`.
 - LEA-138 — Done.
 - LEA-139 — Done.
 - LEA-140 — Done.
-- LEA-141 — Todo.
-- LEA-142 — Todo.
+- LEA-141 — Todo; próxima subtarefa normativa.
+- LEA-142 — Todo; bloqueada por LEA-141.
 
-O próximo trabalho normativo é a LEA-141, após a reconciliação PR #21 sair do gate. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo gate aplicável.
+A reconciliação já está integrada. O próximo trabalho normativo é a LEA-141. Nenhum merge do PR #13 está autorizado antes da LEA-142, revisão final, PASS e novo HUMAN_GATE aplicável.
 
 ## Infraestrutura
 
@@ -219,6 +224,14 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 - LEA-136: Done.
 - LEA-137: Done.
 
+### Reconciliação pós-MVP-01
+
+- PR: #21 — merged por squash.
+- HEAD validado: `0794cdcd0294938e472b9cc8f5dfb12c14408dab`.
+- Workflow final: `Dependency Security` run `31995301015` — SUCCESS.
+- Commit no `main`: `9e63129d5c0b138bc2d9b887e17545e839ba3844`.
+- Decisão: PASS + HUMAN_GATE + MERGED.
+
 ## Decisões críticas vigentes
 
 1. GitHub é a fonte documental e técnica oficial.
@@ -230,17 +243,17 @@ Essas tarefas representam o caminho original superado pelo reaproveitamento do `
 7. Novas implementações, SQL e migrations exigem escopo e autorização próprios.
 8. A autorização humana para promoção do MVP-01 existiu, mas a promoção efetiva para produção permanece `UNKNOWN` até evidência de provider.
 9. Vulnerabilidade alta conhecida bloqueia PASS até remediação e reteste; SEC-02 já cumpriu esse ciclo e está encerrada.
-10. A RN-02.7 permanece como frente normativa principal após a reconciliação.
+10. A RN-02.7 permanece como frente normativa principal; LEA-141 é a próxima subtarefa.
 11. IA não executa operação crítica sem confirmação humana compatível com o risco.
 12. Histórico antigo não deve ser apagado para corrigir drift; a correção deve ser auditável.
 
 ## Próximas ações autorizadas
 
-1. retestar o HEAD atualizado do PR #21 contra o `main` já corrigido pela SEC-02;
-2. somente após PASS, solicitar HUMAN_GATE para merge do PR #21;
-3. após a integração da reconciliação, retomar LEA-141 no PR #13;
-4. manter o merge do PR #13 bloqueado até LEA-142 + revisão final + autorização aplicável;
-5. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel.
+1. executar LEA-141 no PR #13, resolvendo o HEAD ao vivo antes da primeira alteração;
+2. após LEA-141, executar LEA-142 com revisão crítica, remediação, reteste e preparação da baseline;
+3. manter o merge do PR #13 bloqueado até LEA-142 + PASS + autorização explícita;
+4. não declarar o MVP-01 em produção definitiva sem evidência técnica da Vercel;
+5. tratar futuras implementações, SQL e migrations como novos escopos sujeitos a autorização própria.
 
 ## Regra de leitura de HEAD e provider
 
