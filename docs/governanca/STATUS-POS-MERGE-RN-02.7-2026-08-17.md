@@ -38,17 +38,32 @@ Para preservar o histórico sem alterar retrospectivamente a evidência validada
 3. para estado operacional atual, prevalecem o `main` real, `PROJECT_STATE.md`, o Linear e este registro pós-merge;
 4. nenhuma regra normativa da RN-02.7 é modificada por esta correção de estado.
 
-## 5. Limites
+## 5. Sincronização documental pós-merge
 
-Esta sincronização:
+O drift documental identificado após o PR #13 foi tratado no PR #25:
 
-- não implementa manutenção;
-- não cria SQL ou migrations;
-- não altera Supabase;
-- não promove deploy;
-- não autoriza nova implementação;
-- não autoriza automaticamente o merge do PR de sincronização pós-merge.
+- HEAD validado: `2c79656cb87f0cd83f491d9141ed7d31d782a696`;
+- workflow `Dependency Security` run `32001611306`: `SUCCESS`;
+- artefato: `9278583724`;
+- review threads no gate: `0`;
+- HUMAN_GATE específico: concedido por Leandro;
+- método: squash merge;
+- commit no `main`: `21d3dc83d1436ce40adfde49288e9d53c8b7f63a`;
+- PR #25: `merged=true`, `state=closed`.
 
-## 6. Próxima etapa
+A sincronização pós-RN-02.7 está encerrada. Campos de SHA armazenados em documentos são snapshots auditáveis; estado atual de `main`, PR, CI ou provider deve ser resolvido ao vivo quando necessário.
 
-Após validação e HUMAN_GATE específico para a sincronização documental, executar o checklist formal de encerramento da Fase 0 e confirmar arquitetura, escopo e limites da etapa seguinte.
+## 6. Limites
+
+A integração normativa e sua sincronização documental:
+
+- não implementam manutenção;
+- não criam SQL ou migrations;
+- não alteram Supabase;
+- não promovem deploy;
+- não autorizam nova implementação;
+- não concedem autorização permanente para merges futuros.
+
+## 7. Próxima etapa
+
+Executar o checklist formal de encerramento da Fase 0 e confirmar arquitetura, escopo e limites da etapa seguinte antes de qualquer nova implementação.
