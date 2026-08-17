@@ -35,7 +35,37 @@ npm ci
 node scripts/supabase-local.mjs start
 ```
 
-O `supabase start` aplica as migrations versionadas em `supabase/migrations/` ao banco local. Nenhuma migration de domínio nova foi adicionada pela INFRA-04 R3/R4.
+O `supabase start` aplica as migrations versionadas em `supabase/migrations/` ao banco local.
+
+## INFRA-04-F10 — migration-base mínima do MVP
+
+A auditoria de reprodutibilidade detectou que as duas migrations históricas do MVP eram incrementais e pressupunham `public.sectors`, `public.inventory_items` e `public.inventory_moves` já existentes.
+
+Com HUMAN_GATE específico de Leandro para a **Opção A — baseline mínima de compatibilidade**, foi adicionada:
+
+```text
+20260803140000_mvp_inventory_schema_base.sql
+```
+
+Ela cria somente o schema-base já materializado pelo MVP-01:
+
+- `public.sectors`;
+- `public.inventory_items`;
+- `public.inventory_moves`;
+- FK `inventory_moves.item_id -> inventory_items.id`;
+- FK opcional `inventory_moves.sector_id -> sectors.id`.
+
+Ela **não** implementa o modelo completo da Fase 0 e não duplica RLS, autoria, funções, saldo ou controle de membros. Essas regras permanecem nas migrations históricas subsequentes:
+
+1. `20260803143000_mvp_inventory_online.sql`;
+2. `20260803145000_mvp_inventory_member_access.sql`.
+
+O contrato automatizado está em `scripts/test-migration-baseline.mjs` e é executado por `npm test`.
+
+TDD registrado:
+
+- RED: CI `32013264506` falhou exatamente por ausência da migration-base;
+- GREEN: CI `32013369612` aplicou o contrato, build/security e `db reset --local` com sucesso no HEAD `f2bec2275f7e02e6dbc6a3efd7605a8bf6cbe74c`.
 
 ## Configuração da aplicação
 
@@ -69,13 +99,15 @@ NEXT_PUBLIC_SUPABASE_URL=http://127.0.0.1:54321
 
 ## Reprodutibilidade do banco local
 
-Para destruir e recriar **somente o banco local** a partir das migrations existentes:
+Para destruir e recriar **somente o banco local** a partir da cadeia versionada de migrations:
 
 ```bash
 node scripts/supabase-local.mjs reset
 ```
 
 O launcher traduz esse comando para `supabase db reset --local`.
+
+A reconstrução esperada aplica, em ordem, a migration-base F10 e as duas migrations históricas do MVP.
 
 Seed permanece desabilitado no `supabase/config.toml` até existir seed não sensível explicitamente aprovado.
 
@@ -89,7 +121,7 @@ A aplicação passa a usar exclusivamente as variáveis `NEXT_PUBLIC_SUPABASE_UR
 
 ## Verificações
 
-Contrato estático:
+Contratos estáticos, incluindo ambiente e migration-base:
 
 ```bash
 npm test
@@ -101,9 +133,18 @@ Build:
 npm run build
 ```
 
+Reprodutibilidade local:
+
+```bash
+node scripts/supabase-local.mjs start
+node scripts/supabase-local.mjs status
+node scripts/supabase-local.mjs reset
+node scripts/supabase-local.mjs stop
+```
+
 ## Estado remoto
 
-Durante R3/R4:
+Durante R3/R4/F10:
 
 - `potiguarbd` deve permanecer `INACTIVE`;
 - nenhum projeto Supabase ativo deve ser pausado;
