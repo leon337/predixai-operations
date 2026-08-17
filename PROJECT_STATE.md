@@ -3,51 +3,70 @@
 ## Metadados de estado
 
 ```text
-STATE_VERSION=1.2.0
-UPDATED_AT_UTC=2026-08-17T07:12:33Z
+STATE_VERSION=1.2.7
+UPDATED_AT_UTC=2026-08-17T09:15:45Z
 REPOSITORY=leon337/predixai-operations
-CURRENT_PHASE=POST_PHASE0_TRANSITION
+CURRENT_PHASE=FASE_1_RESIDUAL_INFRAESTRUTURA
 PHASE0_EXIT_STATUS=COMPLETED_GOV03_MERGED_AND_VERIFIED
 DELIVERY_TRACK=MVP_01_ACCELERATED_IMPLEMENTATION_MERGED
-ACTIVE_TASK=NONE
-PRIMARY_ACTIVE_TASK=NONE
-PRIMARY_ACTIVE_SUBTASK=NONE
+ACTIVE_TASK=INFRA_04_R3_R4_LOCAL_IMPLEMENTATION
+PRIMARY_ACTIVE_TASK=INFRA_04
+PRIMARY_ACTIVE_SUBTASK=R3_R4_F10_PASS_AWAITING_HUMAN_GATE
 GOVERNANCE_ACTIVE_TASK=NONE
-CONTROL_GITHUB_ISSUE=27_COMPLETED
-ACTIVE_PR=NONE
-ACTIVE_BRANCH=NONE
-ACTIVE_HEAD_SHA=NONE
-LAST_VERIFIED_HEAD=2a09f58a2a55a7dbbc9b6a23ced48b5e7e827e6a
-LAST_VERIFIED_HEAD_SEMANTICS=AUTHORIZED_PR28_HEAD
-LAST_VERIFIED_MAIN=c2608693af2023acb05624fe35845db1d25758ad
-LAST_VERIFIED_MAIN_SEMANTICS=GOV03_INTEGRATION_EVENT_SNAPSHOT_RESOLVE_CURRENT_MAIN_LIVE
-ACTIVE_BASELINE=PHASE0_BASELINE_FROZEN
+CONTROL_GITHUB_ISSUE=30
+ACTIVE_PR=32
+ACTIVE_BRANCH=feat/infra-04-local-env-isolation
+ACTIVE_HEAD_SHA=RESOLVE_FROM_PR_METADATA
+LAST_VERIFIED_HEAD=09e529275d90502986d072099a9e454f23e931ce
+LAST_VERIFIED_HEAD_SEMANTICS=FINAL_RETESTED_HEAD_BEFORE_PASS_STATE_SYNC
+LAST_VERIFIED_MAIN=5260caeea80471c9c9be9c74795a57e8fafc8851
+LAST_VERIFIED_MAIN_SEMANTICS=INFRA04_IMPLEMENTATION_BASELINE
+ACTIVE_BASELINE=PHASE0_BASELINE_FROZEN_PLUS_ADR002
 APPROVED_BASELINES=RN00_REV1;RN01_REV2_1;RN021_REV1;RN022_REV1;RN023_REV2;RN024_REV3;RN025_REV1_PLUS_ERRATA;RN026_REV1_PLUS_ERRATA;RN027_REV1;ADR002_POST_MVP01
-GOV03_INITIAL_DECISION=FAIL_REMEDIABLE
-GOV03_FINDINGS=GOV_03_F01_TO_F09
-GOV03_REMEDIATION_STRATEGY=B_CONTROLLED_CONSOLIDATION
-GOV03_CRITERIA=C01_TO_C20_PASS
-GOV03_SUBSTANTIVE_HEAD=130e4ee4649d707b8521a53b9ae17a5f16e0d34a
-GOV03_SUBSTANTIVE_CI_RUN=32004060411
-GOV03_FINAL_PR_HEAD=2a09f58a2a55a7dbbc9b6a23ced48b5e7e827e6a
-GOV03_FINAL_CI_RUN=32004213895
-GOV03_FINAL_SECURITY_ARTIFACT=9279441855
-GOV03_REVIEW_THREADS=0
-GOV03_PR=28
-GOV03_MAIN_COMMIT=c2608693af2023acb05624fe35845db1d25758ad
-GOV03_ISSUE=27_COMPLETED
-GOV03_LINEAR_SYNC=PASS_EVIDENCE_RECORDED_IN_LEA117
-REVIEW_DECISION=PASS_MERGED_VERIFIED
-GITHUB_LINEAR_SYNC=PASS_GOV03_COMPLETED
-IMPLEMENTATION_AUTHORIZED=MVP01_SCOPE_COMPLETED_NO_FUTURE_SCOPE_AUTHORIZED
-DOMAIN_SQL_AUTHORIZED=NO_NEW_DOMAIN_SQL
-DATA_CHANGE_AUTHORIZED=NO
-SUPABASE_CHANGE_AUTHORIZED=NO
+INFRA04_SELECTION_HUMAN_GATE=APPROVED_OPTION_A
+INFRA04_SEQUENCE_HUMAN_GATE=APPROVED_R1_TO_R7_WITH_PROVIDER_MUTATION_BLOCKED
+INFRA04_R1_STATUS=READONLY_RECONCILIATION_COMPLETED_NO_CURRENT_VERCEL_PROJECT_EVIDENCE
+INFRA04_R2_DECISION=OPTION_C_KEEP_POTIGUARBD_INACTIVE_BUILD_LOCAL_FIRST
+INFRA04_R3_R4_HUMAN_GATE=AUTHORIZED_LOCAL_REPOSITORY_ONLY
+INFRA04_F10_HUMAN_GATE=APPROVED_OPTION_A_MINIMAL_COMPATIBILITY_BASELINE_LOCAL_ONLY
+INFRA04_R3_STATUS=PASS_IMPLEMENTED_AND_VALIDATED
+INFRA04_R4_STATUS=PASS_LOCAL_REPRODUCIBILITY_VALIDATED
+INFRA04_FINDINGS=INFRA_04_F01_TO_F10
+INFRA04_F10=PASS_REMEDIATED_MINIMAL_SCHEMA_BASELINE_VERSIONED_LOCAL_ONLY
+INFRA04_DOC_AUDIT_PR=31_OPEN_DRAFT_UNMERGED
+INFRA04_IMPLEMENTATION_PR=32_OPEN_DRAFT_UNMERGED
+INFRA04_SUPABASE_PROJECT=potiguarbd
+INFRA04_SUPABASE_STATUS=INACTIVE
+INFRA04_REMOTE_PROVIDER_MUTATION=NONE_AUTHORIZED_NONE_EXECUTED
+INFRA04_ENVIRONMENT_CONTRACT=PASS_NEXT_PUBLIC_SUPABASE_URL_AND_PUBLISHABLE_KEY_NO_REMOTE_HARDCODE
+INFRA04_LOCAL_SUPABASE=CONFIG_AND_LAUNCHER_IMPLEMENTED_CLI_2_111_0
+INFRA04_R3_VALIDATION_RUN=32009420428
+INFRA04_R4_BLOCKING_RUN=32009174273
+INFRA04_R4_BLOCKING_ERROR=SQLSTATE_42P01_PUBLIC_INVENTORY_ITEMS_DOES_NOT_EXIST
+INFRA04_F10_RED_RUN=32013264506
+INFRA04_F10_GREEN_RUN=32013369612
+INFRA04_F10_GREEN_ARTIFACT=9282661880
+INFRA04_F10_GREEN_ARTIFACT_DIGEST=sha256:b37b5e352416a3fbb0ac724902dce368b7ea8c0fd70212249f6a89c2b3ef89c9
+INFRA04_FINAL_RETEST_RUN=32013813496
+INFRA04_FINAL_RETEST_ARTIFACT=9282817213
+INFRA04_FINAL_RETEST_ARTIFACT_DIGEST=sha256:4f2b241f7f97fc98cb1551bae61ca310480de4eb57709536358a0db982d7c30d
+INFRA04_BACKUP_RESTORE=NOT_PROVEN_R5_PENDING
+INFRA04_PRODUCTION_CONFIRMED=NO
+REVIEW_DECISION=PASS_AWAITING_HUMAN_GATE
+GITHUB_LINEAR_SYNC=PASS_F10_EVIDENCE_ISSUE30_COMMENT_5314100298_LINEAR_COMMENT_02a2a244_0aa5_4ea7_a65b_0224d0b29932
+IMPLEMENTATION_AUTHORIZED=YES_R3_R4_F10_LOCAL_REPOSITORY_ONLY
+DOMAIN_SQL_AUTHORIZED=YES_F10_MINIMAL_INITIAL_SCHEMA_MIGRATION_ONLY_NO_OTHER_DOMAIN_SQL
+LOCAL_MIGRATION_REPLAY_AUTHORIZED=YES_VERSIONED_CHAIN_LOCAL_ONLY
+INITIAL_SCHEMA_MIGRATION_AUTHORIZED=YES_F10_MINIMAL_BASELINE_LOCAL_ONLY
+DATA_CHANGE_AUTHORIZED=NO_REMOTE_DATA_AND_NO_REAL_DATA
+SUPABASE_CHANGE_AUTHORIZED=NO_REMOTE_PROVIDER_CHANGE_LOCAL_STACK_ONLY
+VERCEL_CHANGE_AUTHORIZED=NO
 PRODUCTION_CHANGE_AUTHORIZED=NO
-MERGE_AUTHORIZED=NO_OPEN_MERGE_AUTHORIZATION
-BLOCKERS=NONE_FOR_NEXT_SCOPE_SELECTION
-KNOWN_PENDING=NEXT_SCOPE_SELECTION_AND_PRODUCTION_PROMOTION_NOT_TECHNICALLY_CONFIRMED
-NEXT_AUTHORIZED_ACTION=SELECT_NEXT_SCOPE_FROM_ROADMAP
+COST_CHANGE_AUTHORIZED=NO
+MERGE_AUTHORIZED=NO_FOR_PR31_AND_PR32_UNTIL_EXPLICIT_HUMAN_GATE
+BLOCKERS=NONE_FOR_R3_R4_F10_TECHNICAL_SCOPE
+KNOWN_PENDING=HUMAN_GATE_PR32_MERGE;R5_BACKUP_RESTORE;R6_CICD_ROLLBACK;R7_OBSERVABILITY;PRODUCTION_NOT_CONFIRMED
+NEXT_AUTHORIZED_ACTION=REQUEST_HUMAN_GATE_FOR_PR32_MERGE
 ```
 
 ## Identidade e autoridade
@@ -68,38 +87,9 @@ Ordem de precedência:
 6. resumos/histórico;
 7. contexto do chat.
 
-## Fase 0 — encerramento formal
+## Fase 0 — estado congelado
 
-A Fase 0 — Concepção e Modelagem do Domínio foi encerrada pelo GOV-03 após:
-
-- revisão inicial `FAIL_REMEDIABLE`;
-- achados GOV-03-F01 a F09 registrados e remediados;
-- critérios C01 a C20 em PASS;
-- ADR-002 consolidada como arquitetura vigente pós-MVP-01;
-- HEAD final do PR #28 validado com CI `32004213895` em SUCCESS e zero threads;
-- HUMAN_GATE explícito de Leandro para o merge do PR #28;
-- squash merge do PR #28;
-- verificação pós-merge do `main` em `c2608693af2023acb05624fe35845db1d25758ad`;
-- GitHub Issue #27 encerrado como `completed`;
-- evidência pós-merge sincronizada na LEA-117.
-
-O SHA acima é o snapshot auditável do evento de integração do GOV-03. Para o HEAD corrente da `main`, consultar o GitHub ao vivo.
-
-## Baselines congeladas da Fase 0
-
-- RN-00 REV1 — PredixAI Domain Dictionary;
-- RN-01 REV2.1 — Cadastro e Classificação de Materiais;
-- RN-02.1 REV1 — Núcleo Organizacional;
-- RN-02.2 REV1 — Usuários, Perfis, Permissões e Responsabilidades;
-- RN-02.3 REV2 — Materiais, Catálogo, Atributos e Patrimônios;
-- RN-02.4 REV3 — Estoques, Saldos, Localizações e Disponibilidade;
-- RN-02.5 REV1 + errata LEA-58 F01–F05 — Movimentações e Integridade do Estoque;
-- RN-02.6 REV1 + errata LEA-64 F01–F05 — Obras, Eventos e Romaneios;
-- RN-02.7 REV1 — Manutenção e Ciclo de Vida Patrimonial;
-- ADR-002 — Arquitetura Vigente Pós-MVP-01;
-- políticas e histórico auditável da Fase 0.
-
-A conclusão normativa de um domínio não significa que sua funcionalidade esteja implementada.
+A Fase 0 está formalmente encerrada pelo GOV-03. Permanecem congeladas RN-00 a RN-02.7 e ADR-002. Conclusão normativa não equivale a implementação automática.
 
 ## MVP-01 — estado materializado
 
@@ -111,42 +101,94 @@ MVP01_STATUS=MERGED_UAT_DESKTOP_AND_MOBILE_PASS
 SUPABASE_PROJECT=potiguarbd
 SUPABASE_PROJECT_REF=gotzykqvpgjzmzsyvufx
 SUPABASE_REGION=sa-east-1
-PRODUCTION_PROMOTION_AUTHORIZED=YES
-PRODUCTION_PROMOTION_CONFIRMED=UNKNOWN_NO_PROVIDER_EVIDENCE_IN_REPOSITORY
+PRODUCTION_PROMOTION_AUTHORIZED=YES_HISTORICAL
+PRODUCTION_PROMOTION_CONFIRMED=NO_CURRENT_PROVIDER_EVIDENCE
 ```
 
-Materializado no MVP-01: autenticação, perfis básicos, materiais, entradas, saídas, saldo, estoque mínimo, histórico, RLS/funções/migrations do escopo e interface responsiva.
+## INFRA-04 — Fase 1 residual
 
-Continuam fora desse escopo: patrimônio completo, manutenção implementada, obras/eventos/romaneios completos, transferências/inventário/ajustes completos, anexos/QR Code completos, relatórios avançados, IA operacional e modelo físico completo.
+Controle:
 
-## Arquitetura vigente
+- GitHub Issue #30;
+- fallback Linear na LEA-121;
+- PR #31 — auditoria/documentação, Draft, não mesclado;
+- PR #32 — implementação local R3/R4/F10, Draft, não mesclado.
 
-A arquitetura materializada e consolidada pela ADR-002 é:
+### R1 — Vercel somente leitura
 
-- Next.js + TypeScript;
-- Vercel;
-- Supabase `potiguarbd` para a fatia materializada;
-- PostgreSQL/Auth/RLS/migrations e funções do escopo MVP-01.
+Concluído no limite da conexão atual: equipe `PREDIX AI BR` com 0 projetos listados, Project ID histórico e slug do produto em 404 e 0 GitHub Deployments. Isso não prova deleção definitiva.
 
-A topologia ASUS N43SM + FastAPI + PostgreSQL local/Ollama permanece como exploração histórica, não como requisito atual obrigatório.
+### R2 — decisão C
 
-## Limites permanentes pós-Fase 0
+Leandro aprovou manter `potiguarbd` INACTIVE, sem pausar outros projetos e sem alterar plano/custo, priorizando ambiente local isolado.
 
-O encerramento da Fase 0 **não autoriza automaticamente**:
+### R3 — contrato de ambiente
 
-- código funcional novo;
-- SQL ou migrations;
-- mudanças de RLS/Auth;
-- alterações de dados reais;
-- provisionamento ou mudança de Supabase;
-- deploy/promoção em produção;
-- operações destrutivas;
-- mudança arquitetural relevante ou com custo.
+Implementado na branch PR #32:
 
-Cada frente futura exige escopo e gate próprios conforme o risco.
+- URL remota hardcoded removida do frontend;
+- JWT/anon legado hardcoded removido;
+- `NEXT_PUBLIC_SUPABASE_URL`;
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`;
+- chave publishable enviada em `apikey`;
+- `Authorization: Bearer` usado somente quando existe JWT de usuário;
+- `.env.example` aponta por padrão para `http://127.0.0.1:54321` e não contém ref remoto;
+- teste de contrato integrado ao CI.
+
+Estado R3: `PASS_IMPLEMENTED_AND_VALIDATED`, ainda não integrado ao `main`.
+
+### R4 — Supabase local isolado
+
+Materializado na branch:
+
+- `supabase/config.toml` com `project_id=predixai-operations-local` e endpoints locais;
+- seed desabilitado;
+- launcher `scripts/supabase-local.mjs` fixado em Supabase CLI `2.111.0`;
+- launcher disponibiliza somente `start`, `status`, `db reset --local` e `stop`;
+- documentação local em `docs/infra/INFRA-04-DESENVOLVIMENTO-LOCAL.md`.
+
+### INFRA-04-F10 — migration-base inicial
+
+A falha original de R4 foi reproduzida no CI com `SQLSTATE 42P01` porque a primeira migration histórica era incremental e pressupunha `inventory_items`, `inventory_moves` e `sectors` já existentes.
+
+Leandro aprovou a **Opção A — baseline mínima de compatibilidade**, limitada ao repositório/local, sem consultar ou alterar providers remotos e sem dados reais.
+
+Ciclo TDD:
+
+1. `scripts/test-migration-baseline.mjs` foi criado antes do SQL;
+2. CI RED `32013264506` falhou exatamente pela ausência de `20260803140000_mvp_inventory_schema_base.sql`;
+3. foi criada somente a migration-base mínima do schema já materializado pelo MVP;
+4. as migrations históricas `20260803143000_mvp_inventory_online.sql` e `20260803145000_mvp_inventory_member_access.sql` não foram reescritas;
+5. CI GREEN `32013369612` passou por lockfile, contratos, dependency/security gate, build e `db reset --local` completo;
+6. sincronização documental foi retestada no HEAD `09e529275d90502986d072099a9e454f23e931ce` pelo CI `32013813496`, também SUCCESS;
+7. evidência registrada no Issue #30 (`5314100298`) e na LEA-121 (`02a2a244-0aa5-4ea7-a65b-0224d0b29932`).
+
+A migration-base cria somente:
+
+- `public.sectors`;
+- `public.inventory_items`;
+- `public.inventory_moves`;
+- relacionamentos mínimos já exigidos pelo MVP.
+
+Ela não materializa o modelo completo RN-02.1–RN-02.5 e não duplica autoria, RLS, funções, saldo ou membros das migrations subsequentes.
+
+Estado técnico de R4/F10: `PASS_LOCAL_REPRODUCIBILITY_VALIDATED`.
+
+## Limites vigentes
+
+Continuam não autorizados:
+
+- qualquer mutação no Supabase remoto;
+- restore/pause de `potiguarbd` ou outros projetos;
+- alteração Vercel;
+- plano/custo;
+- deploy/produção;
+- dados reais;
+- qualquer SQL/migration além da migration-base mínima F10 já autorizada;
+- mudança RLS/Auth remota;
+- operação destrutiva remota;
+- merge dos PRs #31 e #32.
 
 ## Próxima ação canônica
 
-Nenhuma fase técnica foi selecionada automaticamente pelo encerramento da Fase 0.
-
-A próxima ação é **selecionar explicitamente o próximo escopo a partir do Roadmap Mestre Executável**. Somente depois dessa escolha deve ser criado o controle operacional correspondente.
+O HEAD corrente do PR #32 deve ser verificado ao vivo no GitHub. Com o estado técnico R3/R4/F10 em PASS, a próxima ação autorizada é solicitar HUMAN_GATE específico para o merge do PR #32. Nenhum merge está autorizado por este documento.

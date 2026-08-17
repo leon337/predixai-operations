@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --check scripts/supabase-local.mjs && node scripts/test-env-contract.mjs && node scripts/test-migration-baseline.mjs",
     "audit:security": "npm audit --audit-level=high"
   },
   "dependencies": {

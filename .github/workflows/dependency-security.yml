@@ -14,7 +14,7 @@ permissions:
 jobs:
   audit-and-build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -32,6 +32,9 @@ jobs:
 
       - name: Verify lockfile is unchanged
         run: git diff --exit-code -- package-lock.json
+
+      - name: Validate environment contract
+        run: npm test
 
       - name: Record dependency tree
         run: npm ls sharp postcss --all > dependency-tree.txt
@@ -53,6 +56,17 @@ jobs:
 
       - name: Build production application
         run: npm run build
+
+      - name: Validate local Supabase reproducibility
+        run: |
+          set -euo pipefail
+          cleanup() {
+            node scripts/supabase-local.mjs stop || true
+          }
+          trap cleanup EXIT
+          node scripts/supabase-local.mjs start
+          node scripts/supabase-local.mjs status
+          node scripts/supabase-local.mjs reset
 
       - name: Upload security evidence
         if: always()
