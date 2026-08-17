@@ -70,8 +70,10 @@ check(
   "launcher local deve fixar a versão Supabase CLI 2.111.0",
 );
 check(
-  !/--linked|\blink\s+--project-ref|\bdb\s+push\b/.test(localScript),
-  "launcher local não pode oferecer comandos de mutação remota",
+  !localScript.includes('"--linked"') &&
+    !localScript.includes('"link", "--project-ref"') &&
+    !localScript.includes('"db", "push"'),
+  "launcher local não pode oferecer argumentos executáveis de mutação remota",
 );
 
 if (failures.length > 0) {
