@@ -3,10 +3,14 @@ name: Dependency Security
 on:
   push:
     branches:
-      - feat/mvp-01-online-almoxarifado
+      - main
   pull_request:
     branches:
       - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -57,6 +61,25 @@ jobs:
       - name: Build production application
         run: npm run build
 
+      - name: Run local health smoke
+        run: |
+          set -euo pipefail
+          npm run start -- -H 127.0.0.1 -p 3000 > next-health.log 2>&1 &
+          app_pid=$!
+          cleanup_app() {
+            kill "$app_pid" 2>/dev/null || true
+            wait "$app_pid" 2>/dev/null || true
+          }
+          trap cleanup_app EXIT
+          npm run smoke:local
+
+      - name: Generate release candidate evidence
+        env:
+          R6_GIT_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          R6_BUILD_RESULT: PASS
+          R6_SMOKE_RESULT: PASS
+        run: npm run release:evidence
+
       - name: Validate local Supabase reproducibility and recovery drill
         run: |
           set -euo pipefail
@@ -78,6 +101,8 @@ jobs:
             package-lock.json
             npm-audit.json
             dependency-tree.txt
+            next-health.log
+            release-evidence/release-evidence.json
             r5-recovery-evidence/
           if-no-files-found: error
           retention-days: 14
